@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>First_Label__c</fullName>
+    <defaultValue>&apos;Mins&apos;</defaultValue>
+    <externalId>false</externalId>
+    <inlineHelpText>Label for the 1st Score Value</inlineHelpText>
+    <label>First Label</label>
+    <length>36</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

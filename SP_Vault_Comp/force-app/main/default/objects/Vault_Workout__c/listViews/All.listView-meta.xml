@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>Workout_Date__c</columns>
+    <columns>Order__c</columns>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Goal__c</columns>
+    <columns>Goal_Low_Value__c</columns>
+    <columns>Goal_High_Value__c</columns>
+    <columns>Round_Value__c</columns>
+    <columns>RX_Weight_Male__c</columns>
+    <columns>First_Label__c</columns>
+    <columns>Second_Label__c</columns>
+    <columns>Is_Only_Reps__c</columns>
+    <columns>Is_Goal_Time__c</columns>
+    <columns>Is_Dumbbell__c</columns>
+    <columns>URL__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>
