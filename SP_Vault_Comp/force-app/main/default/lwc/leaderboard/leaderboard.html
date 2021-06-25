@@ -1,15 +1,77 @@
+<!-- https://youtu.be/udAc-zCkv5w -->
 <template>
-    <div class="header">
+    <div class="leaderboard">
+        <div class="header">
+            <h1><i>Leader Board</i></h1>
+            <img class="topImage" src={keyLogo}/>
+            <nav>
+                <a href="" class="active">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit">Submit</a>
+                <a href="">Workouts</a>
+            </nav>
+        </div>
         <table>
-            <th width="110px"></th>
-            <th width="240px"><h1> Athlete Name </h1></th>
-            <th width="120px"><h1> Score </h1></th>
-            <th width="120px"><h1> Week 1 </h1></th>
-            <th width="120px"><h1> Week 2 </h1></th>
-            <th width="120px"><h1> Week 3 </h1></th>
+            <thead>
+                <tr>
+                    <th class="rank"></th>
+                    <th class="name">Athlete</th>
+                    <th class="score">Score</th>
+                    <!-- <th class="avg">Avg</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- will be iterated through -->
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1500</td>
+                </tr>
+                <tr>
+                    <td class="rank">2</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1400</td>
+                </tr>
+                <tr>
+                    <td class="rank">3</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1300</td>
+                </tr>
+                <tr>
+                    <td class="rank">4</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1200</td>
+                </tr>
+                <tr>
+                    <td class="rank">5</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1100</td>
+                </tr>
+                <tr>
+                    <td class="rank">6</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">1000</td>
+                </tr>
+                <tr>
+                    <td class="rank">7</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">900</td>
+                </tr>
+                <tr>
+                    <td class="rank">8</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">800</td>
+                </tr>
+                <tr>
+                    <td class="rank">9</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">700</td>
+                </tr>
+                <tr>
+                    <td class="rank">10</td>
+                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
+                    <td class="score">600</td>
+                </tr>
+            </tbody>
         </table>
-      </div>
-    <c-athlete-scoresheet></c-athlete-scoresheet>
-    <c-athlete-scoresheet></c-athlete-scoresheet>
-    <c-athlete-scoresheet></c-athlete-scoresheet>
+    </div>
 </template>
