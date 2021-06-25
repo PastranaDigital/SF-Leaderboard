@@ -1,9 +1,150 @@
-.header {
-    background-color: #dec328;
-    margin-bottom: .5rem;
-}
+/* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
 
-h1 {
-    font-size: .8rem;
-    /* font-color: #969696; */
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .leaderboard {
+    /* max-width: 25rem; */
+    /* margin: 5rem auto; */
+    margin-top: 1.5rem;
+    border-radius: 1rem;
+    /* box-shadow: 0px 0px 6px 1px rgb(102, 102, 102); */
+    box-shadow: 0px 0px 6px 1px rgb(29, 29, 29);
+    font-family: sans-serif;
+    /* font-family: 'Rajdhani', sans-serif; */
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .header {
+    /* background-color: #ff7500; */
+    /* background-color: #dec328; */
+    background: linear-gradient(to top, #946f00, #cc9900);
+    color: white;
+    text-transform: uppercase;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    height: 14rem;
+    position: relative;
+  }
+  
+  h1 {
+    /* font-family: 'Oswald', sans-serif; */
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    position: absolute;
+    margin-left: 2rem;
+    top: 4rem;
+    max-width: 60%;
+  }
+  
+  .topImage {
+    height: 16rem;
+    position: absolute;
+    bottom: 0;
+    right: .5rem;
+  }
+
+  .athleteImage {
+      height: 2rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+  }
+  
+  nav {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.75rem;
+    /* background: linear-gradient( 
+      to bottom,
+      transparent,
+      transparent 5%,
+      rgba(22, 22, 22, 0.5)
+    ); */
+    
+  }
+  
+  nav a {
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  nav a.active {
+    border-bottom: 8px solid #d3d3d3;
+  }
+  
+  nav a:first-child {
+    margin-left: 3rem;
+  }
+  
+  nav a + a {
+    margin-left: 2rem;
+  }
+  
+  table {
+    background-color: #16181e;
+    color: #999;
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    overflow: hidden;
+  }
+  
+  thead {
+    font-size: 0.7rem;
+    color: #555;
+    text-transform: uppercase;
+  }
+  
+  tbody .name {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  tbody tr:nth-child(2n) {
+    background-color: #1f232c;
+  }
+  
+  .name {
+    text-align: left;
+  }
+  
+  .rank,
+  .score,
+  .avg {
+    text-align: right;
+  }
+  
+  .rank {
+    width: 4ch;
+    padding-left: 1rem;
+  }
+  
+  .score,
+  .avg {
+    width: 8ch;
+  }
+
+  tbody .score {
+      font-size:1.2rem;
+  }
+  
+  th {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+  
+  td {
+    padding: 1rem 1rem;
+  }
