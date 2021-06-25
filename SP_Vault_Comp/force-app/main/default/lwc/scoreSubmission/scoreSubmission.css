@@ -1,10 +1,117 @@
-h1 {
-    font-size: 1rem;
+/* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .leaderboard {
+    margin-top: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 6px 1px rgb(29, 29, 29);
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .header {
+    background: linear-gradient(to top, #946f00, #cc9900);
+    color: white;
+    text-transform: uppercase;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    height: 14rem;
+    position: relative;
+  }
+
+  .workout {
+    background-color: #16181e;
+    color: #999;
+    padding: 2rem 1rem;
+  }
+
+  .submissionForm {
+    background-color: #1f232c;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    position: absolute;
+    margin-left: 2rem;
+    top: 4rem;
+    max-width: 60%;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: Georgia, serif;
+  }
+
+  .workoutDetails {
+    font-size: .8rem;  
+  }
+
+  .date {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #946f00;
+  }
+  
+  .topImage {
+    height: 16rem;
+    position: absolute;
+    bottom: 0;
+    right: .5rem;
+  }
+  
+  nav {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.75rem;    
+  }
+  
+  nav a {
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  nav a.active {
+    border-bottom: 8px solid #d3d3d3;
+  }
+  
+  nav a:first-child {
+    margin-left: 3rem;
+  }
+  
+  nav a + a {
+    margin-left: 2rem;
+  }
+  
+  table {
+    color: #555;
+    border-collapse: collapse;
 }
 
-.body {
-    width: auto;
-    height: auto;
-    border-radius: .5rem;
-    background-color: azure;
-}
+  .main {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  td {
+    padding: .5rem 1rem;
+  }

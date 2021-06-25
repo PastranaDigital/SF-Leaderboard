@@ -1,11 +1,104 @@
+<!-- https://youtu.be/udAc-zCkv5w -->
 <template>
-    <div class="body">
-        <br>
-        <br>
-        <p align="center">Score Submission</p>
-        <input><input>
-        <br>
-        <br>
-        <br>
+    <div class="leaderboard">
+        <div class="header">
+            <h1><i>Submit Score</i></h1>
+            <img class="topImage" src={keyLogo}/>
+            <nav>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit" class="active">Submit</a>
+                <a href="">Workouts</a>
+            </nav>
+        </div>
+        <div class="main">
+            <div class="workout"> <!-- workout of the week -->
+                <h2>{workoutName}</h2>
+                <p class="date">{workoutDate} &nbsp; | &nbsp; <a href={workoutURL}>Full SP Workout Details</a></p>
+                <div class="workoutDetails">
+                    <p>{workoutDescription}</p>
+                    <br>
+                    <p><b>Goal: </b>{workoutGoal}</p>
+                    <template if:true={workoutRxWeight}>
+                        <p><b>RX Weight (Male): </b>{workoutRxWeight} lbs</p>
+                    </template>
+                </div>
+            </div>
+            <div class="submissionForm">
+                <table>
+                    <tr>
+                        <td colspan="6">
+                            <lightning-input 
+                                name="enter-search"
+                                label="Athlete's Name"
+                                type="search">
+                            </lightning-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <lightning-input 
+                                name="enter-search"
+                                label="Vault Workout"
+                                type="search">
+                            </lightning-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <template if:true={secondLabel}>
+                            <td colspan="3">
+                                <lightning-input 
+                                    type="number" 
+                                    name="firstLabel" 
+                                    label={firstLabel}>
+                                </lightning-input>
+                            </td>
+                            <td colspan="3">
+                                <lightning-input 
+                                    type="number" 
+                                    name="secondLabel" 
+                                    label={secondLabel}>
+                                </lightning-input>
+                            </td>
+                        </template>
+                        <template if:false={secondLabel}>
+                            <td colspan="6">
+                                <lightning-input 
+                                    type="number" 
+                                    name="firstLabel" 
+                                    label={firstLabel}>
+                                </lightning-input>
+                            </td>
+                        </template>
+                    </tr>
+                    <template if:true={workoutRxWeight}>
+                        <tr>
+                            <td colspan="6">
+                                <lightning-input 
+                                    type="number" 
+                                    name="weightUsed" 
+                                    label="Weight Used">
+                                </lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+                    <tr>
+                        <td colspan="6">
+                            <lightning-input 
+                                type="text" 
+                                label="Notes">
+                            </lightning-input>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <lightning-button
+                    variant="brand"
+                    label="Submit Score" 
+                    title="Submit Score" 
+                    onclick={handleClick} 
+                    class="slds-m-left_x-small slds-align_absolute-center">
+                </lightning-button>
+            </div>
+        </div>
     </div>
 </template>
