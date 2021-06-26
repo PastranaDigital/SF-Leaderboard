@@ -1,8 +1,26 @@
 <template>
-    <div class="athleteScore">
-        <!-- <h4>Chaos</h4>
-        <p>Athlete Workout Scores Information</p> -->
-        <h4>{athScore.Name}</h4>
-        <p>{athScore.Total_Points__c}</p>
-    </div>
+    <template if:true={displayAthleteScore}>
+        <div class="athleteScore">
+            <!-- <h4>Chaos</h4>
+            <p>Athlete Workout Scores Information</p> -->
+            <table>
+                <!-- <thead>
+                    <tr>
+                        <th></th>
+                        <th class="score">Goal Pts</th>
+                        <th class="score">Rank Pts</th>
+                        <th class="score">Total Pts</th>
+                    </tr>
+                </thead> -->
+                <tbody>
+                    <tr>
+                        <td class="name">{athScore.Name}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
 </template>

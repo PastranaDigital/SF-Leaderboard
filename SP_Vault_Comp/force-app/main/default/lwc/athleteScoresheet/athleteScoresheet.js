@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 
 export default class Athlete_scoresheet extends LightningElement {
-    displayAthleteScore = true;
+    @api displayAthleteScore;
 
     @api athScore;
     

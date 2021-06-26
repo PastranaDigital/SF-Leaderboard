@@ -9,26 +9,24 @@ tr {
     width: 100%;
 }
 
-td {
-    padding: 1rem 1rem;
-  }
-
-  h4 {
-    color: #cc9900;
-    font-weight: 600;
-  }
+/* td {
+    padding: 0rem 1rem;
+  } */
 
   .name {
     text-align: left;
-    color: white;
-    font-weight: 500;
+    color: #cc9900;
+    font-weight: 600;
     font-size: 1rem;
-    width: 80%;
+    /* padding-left: 1rem; */
+    width: 20ch;
+    /* width: 80%; */
   }
 
   .score {
-    font-size:1.2rem;
-    width: 10%;
+    font-size: .8rem;
+    width: 10ch;
+    /* width: 10%; */
   }
   
   .rank,
@@ -37,13 +35,13 @@ td {
   }
   
   .rank {
-    width: 10%;
+    /* width: 10%; */
     /* width: 4ch; */
     padding-left: 1rem;
   }
 
   .athleteScore {
-      padding: .5rem 0;
+      /* padding: .5rem 0; */
       color: #999;
       font-size: .8rem;
   }

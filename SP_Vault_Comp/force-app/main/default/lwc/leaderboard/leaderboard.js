@@ -17,6 +17,36 @@ export default class Leaderboard extends LightningElement {
             Id: 2,
             Name: 'Kronos',
             Total_Points__c: '180'
+        },
+        {
+            Id: 3,
+            Name: 'Chaos',
+            Total_Points__c: '150'
+        },
+        {
+            Id: 4,
+            Name: 'Kronos',
+            Total_Points__c: '180'
+        },
+        {
+            Id: 5,
+            Name: 'Chaos',
+            Total_Points__c: '150'
+        },
+        {
+            Id: 6,
+            Name: 'Kronos',
+            Total_Points__c: '180'
+        },
+        {
+            Id: 7,
+            Name: 'Chaos',
+            Total_Points__c: '150'
+        },
+        {
+            Id: 8,
+            Name: 'Kronos',
+            Total_Points__c: '180'
         }
     ];
 

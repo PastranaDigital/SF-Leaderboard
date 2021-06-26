@@ -27,17 +27,17 @@
                             <tr key={athlete.Id} onclick={handleAthleteClick}>
                                 <td class="rank">{athlete.Rank}</td>
                                 <td class="name" id={athlete.Id}><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}
-                                    <template if:true={displayAthleteScore}>
+                                    <!-- <template if:true={displayAthleteScore}> -->
                                         <div class="content">
                                         <template for:each={scoreData} for:item="score">
-                                            <c-athlete-scoresheet key={score.Id} ath-score={score}></c-athlete-scoresheet>
+                                            <c-athlete-scoresheet key={score.Id} ath-score={score} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
                                         </template>
                                         </div>
                                         <!-- <div class="athleteScore">
                                             <h4>Chaos</h4>
                                             <p>Athlete Workout Scores Information</p>
                                         </div>  -->
-                            </template>
+                                    <!-- </template> -->
                                 </td>
                                 <td class="score">{athlete.Total_Points__c}</td>
                             </tr>

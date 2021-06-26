@@ -174,15 +174,16 @@
     display: none;
   }
 
-  .content {
+  /* .content {
+    padding: .5rem 0;
     display: flex;
     flex-wrap: wrap;
-  }
+  } */
 
-  c-athlete-scoresheet {
-      min-width: 200px;
+  /* c-athlete-scoresheet {
+      min-width: 15%;
       flex: 1;
-  }
+  } */
 
   /* rgb(59, 62, 71) */
   /* rgb(222, 195, 40) */
