@@ -4,12 +4,13 @@ import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllAthletes from "@salesforce/apex/AthleteLwcController.getAllAthletes";
 import getAllScoreSubmissions from "@salesforce/apex/AthleteLwcController.getAllScoreSubmissions";
 
-const athlete = 'Omar';
 export default class Leaderboard extends LightningElement {
     data =[];
     //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
     wireAthleteList = []; // used for refreshApex
 
+    athName;
+        
     keyLogo = imageResource + '/Images/key_logo.png';
     // athletePic = athleteResource + '/Athletes/' + athlete + '.png';
 
@@ -32,15 +33,28 @@ export default class Leaderboard extends LightningElement {
               rank++;
             });
             this.data = currentData;
-            console.log(currentData[0].Name);
-            console.log(this.data[0].Rank);
-            console.log("Successful getAllAthletes wire");
+            // console.log(currentData[0].Name);
+            // console.log(this.data[0].Rank);
+            console.log("Successful data retrieval");
         } else if (result.error) {
             window.console.log(result.error);
         }
     }
 
+    handleAthleteClick(event) {
+        this.athName = (event.target.id).split('-');
+        // this.athName = event.target.innerHTML;
+        // this.athName = this.athName.split('>');
+        // console.log(`Click /${this.athName[1]}/`);
+        console.log(this.athName[0]);
+        let scoreDiv = this.template.querySelector('.athleteScore');
+        console.log(scoreDiv);
+        scoreDiv.removeClass('.hidden');
+        console.log(scoreDiv);
+        // this.template.querySelector('.athleteScore').removeClass('.hidden');
+    }
+
     connectedCallback() {
-        // console.log(athList.data[0].Name);
+        console.log('Target');
     }
 }

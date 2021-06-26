@@ -162,6 +162,19 @@
     padding: 1rem 1rem;
   }
 
+  h4 {
+    color: #cc9900;
+    font-weight: 600;
+  }
+
+  .athleteScore {
+    padding: .5rem 0;
+    color: #999;
+  }
+
+  .hidden {
+    display: none;
+  }
 
   /* rgb(59, 62, 71) */
   /* rgb(222, 195, 40) */

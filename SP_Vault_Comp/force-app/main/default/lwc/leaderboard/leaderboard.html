@@ -5,9 +5,9 @@
             <h1><i>Leader Board</i></h1>
             <img class="topImage" src={keyLogo}/>
             <nav>
-                <a href="" class="active">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard" class="active">Board</a>
                 <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit">Submit</a>
-                <a href="">Workouts</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/workouts">Workouts</a>
             </nav>
         </div>
         <div class="main">
@@ -23,9 +23,14 @@
                     </thead>
                     <tbody>
                         <template for:each={data} for:item="athlete">
-                            <tr key={athlete.Id}>
+                            <tr key={athlete.Id} onclick={handleAthleteClick}>
                                 <td class="rank">{athlete.Rank}</td>
-                                <td class="name"><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}</td>
+                                <td class="name" id={athlete.Id}><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}
+                                <div class="athleteScore hidden">
+                                    <h4>Chaos</h4>
+                                    <p>Athlete Workout Scores Information</p>
+                                </div> 
+                                </td>
                                 <td class="score">{athlete.Total_Points__c}</td>
                             </tr>
                         </template>
