@@ -1,50 +1,53 @@
-img {
+.athleteImage {
+    height: 2.5rem;
     border-radius: 50%;
-    width: 4rem;
-    margin-left: .5rem;
-    margin-right: .5rem;
+    margin-right: 1rem;
+    border: 2px solid #cc9900;
 }
 
-.tile {
-    padding: .5rem;
-    background-color: #dfdfdf;
-    border-radius: .7rem;
-}
-
-.header {
-    background-color: #dec328;
-    margin-bottom: .5rem;
-}
-
-h1 {
-    font-size: .8rem;
-    /* font-color: #969696; */
-}
-
-h2 {
-    font-size: 1rem;
-}
-
-table {
-    font-family: sans-serif;
-    border: none;
-}
-
-td, 
-th {
-    /* border: 1px solid rgb(190,190,190); */
-    padding: .5rem;
-    text-align: center;
+tr {
+    width: 100%;
 }
 
 td {
-    min-width: 3rem;
-}
+    padding: 1rem 1rem;
+  }
 
-/* tr:nth-child(even) {
-    background-color: #eee;
-}
+  h4 {
+    color: #cc9900;
+    font-weight: 600;
+  }
 
-tr:nth-child(odd) {
-    background-color: #dfdfdf;
-} */
+  .name {
+    text-align: left;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    width: 80%;
+  }
+
+  .score {
+    font-size:1.2rem;
+    width: 10%;
+  }
+  
+  .rank,
+  .score {
+    text-align: right;
+  }
+  
+  .rank {
+    width: 10%;
+    /* width: 4ch; */
+    padding-left: 1rem;
+  }
+
+  .athleteScore {
+      padding: .5rem 0;
+      color: #999;
+      font-size: .8rem;
+  }
+
+  .hidden {
+    display: none;
+  }

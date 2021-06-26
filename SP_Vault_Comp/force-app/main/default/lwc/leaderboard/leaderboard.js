@@ -5,6 +5,21 @@ import getAllAthletes from "@salesforce/apex/AthleteLwcController.getAllAthletes
 import getAllScoreSubmissions from "@salesforce/apex/AthleteLwcController.getAllScoreSubmissions";
 
 export default class Leaderboard extends LightningElement {
+    displayAthleteScore;
+
+    scoreData = [
+        {
+            Id: 1,
+            Name: 'Chaos',
+            Total_Points__c: '150'
+        },
+        {
+            Id: 2,
+            Name: 'Kronos',
+            Total_Points__c: '180'
+        }
+    ];
+
     data =[];
     //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
     wireAthleteList = []; // used for refreshApex
@@ -42,19 +57,30 @@ export default class Leaderboard extends LightningElement {
     }
 
     handleAthleteClick(event) {
-        this.athName = (event.target.id).split('-');
+        // console.log(this.displayAthleteScore);
+        if (this.displayAthleteScore) {
+            this.displayAthleteScore = false;
+        } else {
+            this.displayAthleteScore = true;
+        }
+        // this.displayAthleteScore === true ? false : true;
+        // console.log(this.displayAthleteScore);
+
+
+        // this.athName = (event.target.id).split('-');
         // this.athName = event.target.innerHTML;
         // this.athName = this.athName.split('>');
         // console.log(`Click /${this.athName[1]}/`);
-        console.log(this.athName[0]);
-        let scoreDiv = this.template.querySelector('.athleteScore');
-        console.log(scoreDiv);
-        scoreDiv.removeClass('.hidden');
-        console.log(scoreDiv);
+        // console.log(this.athName[0]);
+        // let scoreDiv = this.template.querySelector('.athleteScore');
+        // console.log(scoreDiv);
+        // scoreDiv.removeClass('.hidden');
+        // console.log(scoreDiv);
         // this.template.querySelector('.athleteScore').removeClass('.hidden');
     }
 
     connectedCallback() {
-        console.log('Target');
+        this.displayAthleteScore = false;
+        console.log(this.scoreData[0].Name);
     }
 }

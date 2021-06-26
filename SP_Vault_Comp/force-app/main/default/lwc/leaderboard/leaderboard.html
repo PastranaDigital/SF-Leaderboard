@@ -23,25 +23,33 @@
                     </thead>
                     <tbody>
                         <template for:each={data} for:item="athlete">
+                            <!-- <c-athlete-scoresheet key={athlete.Id} athlete={athlete}></c-athlete-scoresheet> -->
                             <tr key={athlete.Id} onclick={handleAthleteClick}>
                                 <td class="rank">{athlete.Rank}</td>
                                 <td class="name" id={athlete.Id}><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}
-                                <div class="athleteScore hidden">
-                                    <h4>Chaos</h4>
-                                    <p>Athlete Workout Scores Information</p>
-                                </div> 
+                                    <template if:true={displayAthleteScore}>
+                                        <div class="content">
+                                        <template for:each={scoreData} for:item="score">
+                                            <c-athlete-scoresheet key={score.Id} ath-score={score}></c-athlete-scoresheet>
+                                        </template>
+                                        </div>
+                                        <!-- <div class="athleteScore">
+                                            <h4>Chaos</h4>
+                                            <p>Athlete Workout Scores Information</p>
+                                        </div>  -->
+                            </template>
                                 </td>
                                 <td class="score">{athlete.Total_Points__c}</td>
                             </tr>
                         </template>
                     </tbody>
                 </table>
-                <div class="error">
+                <div class="footer">
                     <p>2021 Vault Competition</p>
                 </div>
             </template>
             <template if:false={data}>
-                <div class="error">
+                <div class="footer">
                     <p>No data was found</p>
                 </div>
             </template>
