@@ -3,6 +3,7 @@
 	<types>
 		<members>RecursionBlock</members>
 		<members>ScoreSubmissionTriggerHelper</members>
+		<members>AthleteLwcController</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -68,6 +69,11 @@
 	<types>
 		<members>*</members>
 		<name>SiteDotCom</name>
+	</types>
+	<types>
+		<members>SPCompAthletes</members>
+		<members>SPCompImages</members>
+		<name>StaticResource</name>
 	</types>
 	<version>51.0</version>
 </Package>

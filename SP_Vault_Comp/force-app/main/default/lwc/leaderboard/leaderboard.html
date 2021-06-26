@@ -10,68 +10,40 @@
                 <a href="">Workouts</a>
             </nav>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th class="rank"></th>
-                    <th class="name">Athlete</th>
-                    <th class="score">Score</th>
-                    <!-- <th class="avg">Avg</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- will be iterated through -->
-                <tr>
-                    <td class="rank">1</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1500</td>
-                </tr>
-                <tr>
-                    <td class="rank">2</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1400</td>
-                </tr>
-                <tr>
-                    <td class="rank">3</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1300</td>
-                </tr>
-                <tr>
-                    <td class="rank">4</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1200</td>
-                </tr>
-                <tr>
-                    <td class="rank">5</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1100</td>
-                </tr>
-                <tr>
-                    <td class="rank">6</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">1000</td>
-                </tr>
-                <tr>
-                    <td class="rank">7</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">900</td>
-                </tr>
-                <tr>
-                    <td class="rank">8</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">800</td>
-                </tr>
-                <tr>
-                    <td class="rank">9</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">700</td>
-                </tr>
-                <tr>
-                    <td class="rank">10</td>
-                    <td class="name"><img class="athleteImage" src={athletePic}/>Omar Pastrana</td>
-                    <td class="score">600</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="main">
+            <template if:true={data}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="rank"></th>
+                            <th class="name">Athlete</th>
+                            <th class="score">Score</th>
+                            <!-- <th class="avg">Avg</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={data} for:item="athlete">
+                            <tr key={athlete.Id}>
+                                <td class="rank">{athlete.Rank}</td>
+                                <td class="name"><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}</td>
+                                <td class="score">{athlete.Total_Points__c}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                <div class="error">
+                    <p>2021 Vault Competition</p>
+                </div>
+            </template>
+            <template if:false={data}>
+                <div class="error">
+                    <p>No data was found</p>
+                </div>
+            </template>
+        </div>
     </div>
 </template>
+
+<!-- https://help.salesforce.com/articleView?id=sf.networks_public_access.htm&type=5 -->
+<!-- https://editor.wix.com/html/editor/web/renderer/edit/f11324cf-ee11-4d17-9018-3bc2ad2095b7?metaSiteId=35e6959c-f05f-4b38-8864-61f8ff5a1402&editorSessionId=1ad9d820-45d7-49da-bfbd-e3c36963a784&referralInfo=dashboard -->
+<!-- https://www.levelupsalesforce.com/lwc-custom-font-static-resource -->
