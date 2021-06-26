@@ -57,14 +57,20 @@
     font-family: Georgia, serif;
   }
 
+  
   .workoutDetails {
-    font-size: .8rem;  
+    font-size: .8rem;
   }
-
+  
+  .workoutDescription {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
   .date {
     font-size: .8rem;
     font-weight: 600;
-    color: #946f00;
+    color: #cc9900;
   }
   
   .topImage {
@@ -114,4 +120,12 @@
   
   td {
     padding: .5rem 1rem;
+  }
+
+  .footer {
+    background-color: #16181e;
+    color: #cc9900;
+    text-align: center;
+    padding: 4rem 0;
+    font-size: .75rem;
   }

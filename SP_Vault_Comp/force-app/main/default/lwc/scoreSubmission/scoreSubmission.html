@@ -7,7 +7,7 @@
             <nav>
                 <a href="https://spcomp-developer-edition.na162.force.com/leaderboard">Board</a>
                 <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit" class="active">Submit</a>
-                <a href="">Workouts</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/workouts">Workouts</a>
             </nav>
         </div>
         <div class="main">
@@ -15,8 +15,9 @@
                 <h2>{workoutName}</h2>
                 <p class="date">{workoutDate} &nbsp; | &nbsp; <a href={workoutURL}>Full SP Workout Details</a></p>
                 <div class="workoutDetails">
-                    <p>{workoutDescription}</p>
-                    <br>
+                    <div class="workoutDescription">
+                        <slot name="description">{workoutDescription}</slot>
+                    </div>
                     <p><b>Goal: </b>{workoutGoal}</p>
                     <template if:true={workoutRxWeight}>
                         <p><b>RX Weight (Male): </b>{workoutRxWeight} lbs</p>
@@ -98,6 +99,9 @@
                     onclick={handleClick} 
                     class="slds-m-left_x-small slds-align_absolute-center">
                 </lightning-button>
+            </div>
+            <div class="footer">
+                <p>2021 Vault Competition</p>
             </div>
         </div>
     </div>
