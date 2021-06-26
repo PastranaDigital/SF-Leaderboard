@@ -1,10 +1,209 @@
-h1 {
-    font-size: 1rem;
+/* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .leaderboard {
+    margin-top: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 6px 1px rgb(29, 29, 29);
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .header {
+    background: linear-gradient(to top, #946f00, #cc9900);
+    color: white;
+    text-transform: uppercase;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    height: 14rem;
+    position: relative;
+  }
+
+  /* https://stackoverflow.com/questions/31343834/how-to-change-side-by-side-divs-to-stack-on-mobile */
+
+  .workout {
+    background-color: #16181e;
+    color: #999;
+    padding: 2rem 1rem;
+    margin-right: 1rem;
+    display: flex;
+  }
+
+  .workoutText {
+    width: 50%;
+    margin-bottom: 1.5rem;
+    /* float: left; */
+    /* padding-right: 1rem; */
+  }
+
+  .workoutImage {
+    /* float: right; */
+    width: 50%;
+    padding-left: 5%;
+  }
+
+  @media (max-width: 767px) {
+    .workout {
+        flex-direction: column;
+    }
+    .workoutText,
+    .workoutImage {
+        width: auto;
+        padding: 0;
+    }
+  }
+
+  /* .vaultImage {
+    height: 18rem;
+  } */
+  
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    position: absolute;
+    margin-left: 2rem;
+    top: 4rem;
+    max-width: 60%;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: Georgia, serif;
+  }
+  
+  h3,
+  .detailDate {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #cc9900;
+  }
+  
+  .workoutDetails {
+    font-size: .8rem;
+  }
+  
+  .workoutDescription {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .topImage {
+    height: 16rem;
+    position: absolute;
+    bottom: 0;
+    right: .5rem;
+  }
+  
+  nav {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.75rem;    
+  }
+  
+  nav a {
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  nav a.active {
+    border-bottom: 8px solid #d3d3d3;
+  }
+  
+  nav a:first-child {
+    margin-left: 3rem;
+  }
+  
+  nav a + a {
+    margin-left: 2rem;
+  }
+  
+  table {
+    background-color: #16181e;
+    color: #999;
+    border-collapse: collapse;
 }
 
-.body {
-    width: auto;
-    height: auto;
-    border-radius: .5rem;
-    background-color: azure;
-}
+.main {
+    background-color: #16181e;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  td {
+    padding: .5rem 1rem;
+  }
+
+  thead {
+    font-size: 0.7rem;
+    color: #cc9900;
+    text-transform: uppercase;
+  }
+  
+  tbody .name {
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-family: Georgia, serif;
+  }
+  
+  tbody tr:nth-child(2n) {
+    background-color: #1f232c;
+  }
+
+  .name {
+    text-align: left;
+  }
+  
+  .order,
+  .date {
+    text-align: right;
+  }
+  
+  .order {
+    width: 4ch;
+    padding-left: 1rem;
+  }
+  
+  .date {
+    width: 16ch;
+  }
+
+  tbody .date {
+      font-size:1.2rem;
+  }
+  
+  th {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+  
+  td {
+    padding: 1rem 1rem;
+  }
+
+  .footer {
+    background-color: #16181e;
+    color: #cc9900;
+    text-align: center;
+    padding: 4rem 0;
+    font-size: .75rem;
+  }
+
+
+  
