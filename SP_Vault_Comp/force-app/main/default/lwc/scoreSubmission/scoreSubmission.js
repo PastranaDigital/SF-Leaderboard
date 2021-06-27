@@ -1,7 +1,59 @@
 import { LightningElement, wire } from 'lwc';
+import { createRecord, getRecord } from "lightning/uiRecordApi";
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
+import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllWorkouts from '@salesforce/apex/WorkoutLwcController.getAllWorkouts';
+import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
+
 export default class ScoreSubmission extends LightningElement {
+    
+    scoreSubmitted = false;
+
+    comboboxValue = '';
+    wireAthleteList = [];
+    optionsAthleteList = [];
+    scoreSubmittedAthlete = [];
+    scoreSubmittedAthleteImage = {
+        Image: '/leaderboard/webruntime/org-asset/c5107c6f53/resource/0815e000000jEeR/Athletes/Graham.png',
+        Name: 'Test Testerson'
+    };
+
+    newRecord = {
+        Athlete_Name__c: '',
+        Vault_Workout__c: '',
+        Score_1st__c: '',
+        Score_2nd__c: '',
+        Weight_Used__c: '',
+        Notes__c: ''
+    };
+
+    @wire(getAllAthletesForOptions) athleteList(result) {
+        this.wireAthleteList = result;
+        if(result.data) {
+            let endResult = [];
+            let fullAthlete = [];
+            result.data.forEach((row) => {
+                let rowData = {};
+                rowData.label = row.Name;
+                rowData.value = row.Id;
+                endResult.push(rowData);
+                rowData.Profile_Pic_URL__c = athleteResource + '/Athletes/' + row.Profile_Pic_URL__c;
+                fullAthlete.push(rowData);
+            });
+            this.optionsAthleteList = endResult;
+            this.scoreSubmittedAthlete = fullAthlete;
+            // console.log(this.optionsAthleteList);
+        }
+    }
+
+    get options() {
+        return this.optionsAthleteList;
+        // return [
+        //     { label: 'New', value: 'new' },
+        //     { label: 'In Progress', value: 'inProgress' },
+        //     { label: 'Finished', value: 'finished' },
+        // ];
+    }
     
     keyLogo = imageResource + '/Images/key_logo.png';
     
@@ -13,7 +65,7 @@ export default class ScoreSubmission extends LightningElement {
 
     //? Default Values
     workoutRecordId = 'a025e0000036GDBAA2'; // workout.Id
-    workoutName = 'Chaos'; // workout.name
+    workoutName = 'Test Workout'; // workout.name
     workoutDescription = '10 min AMRAP'; // workout.Description__c
     firstLabel = 'Reps'; // workout.First_Label__c
     secondLabel = ''; // workout.Second_Label__c
@@ -67,8 +119,8 @@ export default class ScoreSubmission extends LightningElement {
         this.data.forEach(row => {
             let workoutFullDate = row.Workout_Date__c.split("-");
             // console.log(`workoutFullDate: ${Number(workoutFullDate[1])} & ${Number(workoutFullDate[2])}`);
-            if (Number(workoutFullDate[1]) === todaysMonth && flag) {
-                if (Number(workoutFullDate[2]) >= todaysDate) {
+            if (flag) {
+                if ((Number(workoutFullDate[1]) === todaysMonth && Number(workoutFullDate[2]) >= todaysDate) || Number(workoutFullDate[1]) > todaysMonth) {
                     // console.log('INSIDE');
                     let rowData = {};
                     rowData.Id = row.Id;
@@ -104,6 +156,65 @@ export default class ScoreSubmission extends LightningElement {
 
             this.template.querySelector('slot').innerHTML = this.workoutDescription;
         }
+    }
+
+    handleAthleteChange(event) {
+        this.comboboxValue = event.detail.value;
+        this.newRecord.Athlete_Name__c = event.detail.value;
+        console.log(this.newRecord.Athlete_Name__c);
+        this.newRecord.Vault_Workout__c = this.workoutRecordId;
+        console.log(this.newRecord.Vault_Workout__c);
+    }
+
+    handleScore1Change(event) {
+        this.newRecord.Score_1st__c = event.detail.value;
+        console.log(this.newRecord.Score_1st__c);
+    }
+
+    handleScore2Change(event) {
+        this.newRecord.Score_2nd__c = event.detail.value;
+        console.log(this.newRecord.Score_2nd__c);
+    }
+
+    handleWeightUsedChange(event) {
+        this.newRecord.Weight_Used__c = event.detail.value;
+        console.log(this.newRecord.Weight_Used__c);
+    }
+
+    handleNotesChange(event) {
+        this.newRecord.Notes__c = event.detail.value;
+        console.log(this.newRecord.Notes__c);
+    }
+
+
+    createScoreSubmission() {
+        const fields = this.newRecord;
+        const recordInput = {
+          apiName: "Score_Submission__c",
+          fields
+        };
+        // createRecord returns a promise
+        createRecord(recordInput)
+          .then((response) => {
+            console.log("Score Submission has been created : ", response.id);
+            this.recordId = response.id;
+          })
+          .catch((error) => {
+            console.log("Error in creating score submission : ", error.body.message);
+          });
+      }
+
+    handleSubmitRecord() {
+        this.scoreSubmitted = true;
+        // console.log(this.scoreSubmittedAthlete);
+        this.scoreSubmittedAthlete.forEach(element => {
+            if (element.value == this.newRecord.Athlete_Name__c) {
+                this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
+                console.log(this.scoreSubmittedAthleteImage.Image);
+                this.scoreSubmittedAthleteImage.Name = element.label;
+            }
+        });
+        this.createScoreSubmission();
     }
 
     
