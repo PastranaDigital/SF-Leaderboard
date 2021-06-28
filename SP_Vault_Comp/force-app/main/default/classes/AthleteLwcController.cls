@@ -1,4 +1,4 @@
-public class AthleteLwcController {
+public without sharing class AthleteLwcController {
     @AuraEnabled(cacheable=true)
     public static List<Athlete__c> getAllAthletes() {
         Id profileId = userinfo.getProfileId();

@@ -134,6 +134,11 @@
                     onclick={handleSubmitRecord} 
                     class="slds-m-left_x-small slds-align_absolute-center">
                 </lightning-button>
+                <template if:true={errorSubmitting}>
+                    <div class="error">
+                        <p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
+                    </div>
+                </template>
             </div>
             </template>
             <template if:true={scoreSubmitted}>

@@ -1,17 +1,22 @@
 import { LightningElement, wire } from 'lwc';
-import { createRecord, getRecord } from "lightning/uiRecordApi";
+import { createRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllWorkouts from '@salesforce/apex/WorkoutLwcController.getAllWorkouts';
 import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
+import { refreshApex } from "@salesforce/apex";
 
 export default class ScoreSubmission extends LightningElement {
     
+    // both should begin as FALSE values
     scoreSubmitted = false;
+    errorSubmitting = false;
 
     comboboxValue = '';
     wireAthleteList = [];
     optionsAthleteList = [];
+    recordId;
     scoreSubmittedAthlete = [];
     scoreSubmittedAthleteImage = {
         Image: '/leaderboard/webruntime/org-asset/c5107c6f53/resource/0815e000000jEeR/Athletes/Graham.png',
@@ -195,25 +200,52 @@ export default class ScoreSubmission extends LightningElement {
         };
         // createRecord returns a promise
         createRecord(recordInput)
+            // .then(score => {
+            //     this.recordId = score.id;
+            //     console.log("Score Submission has been created : ", this.recordId);
+            //     this.scoreSubmitted = true;
+            //     this.dispatchEvent(
+            //         new ShowToastEvent({
+            //             title: 'Success',
+            //             message: 'Score Submission Entered',
+            //             variant: 'success',
+            //         }),
+            //     );
+            // })
+            // .catch(error => {
+            //     this.dispatchEvent(
+            //         new ShowToastEvent({
+            //             title: 'Error Submitting Score',
+            //             message: error.body.message,
+            //             variant: 'error',
+            //         }),
+            //     );
+            // });
           .then((response) => {
             console.log("Score Submission has been created : ", response.id);
             this.recordId = response.id;
+            this.scoreSubmitted = true;
           })
           .catch((error) => {
+            this.errorSubmitting = true;
             console.log("Error in creating score submission : ", error.body.message);
           });
+        // if(!this.recordId) {
+        //     this.errorSubmitting = true;
+        // }
       }
 
     handleSubmitRecord() {
-        this.scoreSubmitted = true;
+        // this.scoreSubmitted = true;
         // console.log(this.scoreSubmittedAthlete);
         this.scoreSubmittedAthlete.forEach(element => {
             if (element.value == this.newRecord.Athlete_Name__c) {
                 this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
-                console.log(this.scoreSubmittedAthleteImage.Image);
+                // console.log(this.scoreSubmittedAthleteImage.Image);
                 this.scoreSubmittedAthleteImage.Name = element.label;
             }
         });
+        // refreshApex(this.workoutList);
         this.createScoreSubmission();
     }
 
@@ -222,3 +254,20 @@ export default class ScoreSubmission extends LightningElement {
         // console.log(athList.data[0].Name);
     }
 }
+
+
+// https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.data_salesforce_write
+// https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_create.htm
+// https://stackoverflow.com/questions/6396101/pure-javascript-send-post-data-without-a-form
+// https://salesforce.stackexchange.com/questions/264538/passing-an-parameter-to-apex-from-lwc
+
+
+// https://www.learnexperiencecloud.com/s/article/Guest-User-Record-Access-Development-Best-Practices
+
+
+// https://www.salesforcelwc.in/2019/10/css-in-lightning.html
+
+// https://github.com/forcedotcom/b2b-commerce-for-visualforce/blob/main/force-app/main/default/lwc/b2b_Search/b2b_Search.js
+
+// get user info [https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_userinfo.htm]
+// https://github.com/forcedotcom/b2b-commerce-for-visualforce/blob/main/force-app/main/default/lwc/b2b_Menu/b2b_Menu.js

@@ -146,6 +146,15 @@
     padding: .5rem 1rem;
   }
 
+  .error {
+    background-color: #331d1d;
+    color: #cc2900;
+    text-align: center;
+    margin: 2rem 1rem;
+    padding: 2rem 0;
+    font-size: .75rem;
+  }
+
   .footer {
     background-color: #16181e;
     color: #cc9900;
@@ -153,3 +162,23 @@
     padding: 4rem 0;
     font-size: .75rem;
   }
+
+
+  /* .forceCommunityContactSupportForm .contactSupportButton {
+    text-transform: var(--lwc-textTransform,capitalize);
+    font-size: var(--lwc-fcFontSizeMedium,0.8125rem);
+    color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
+    background-color: var(--lwc-colorBackgroundButtonBrand,rgb(209, 225, 224));
+    border-color: var(--lwc-buttonColorBorderBrandPrimary,rgb(209, 225, 224));
+    display: block;
+    border-width: 2px;
+    border-style: solid;
+    padding: 5px 24px;
+    min-width: 135px;
+    transition: all .2s;
+} */
+
+/* .forceCommunityContactSupportForm .contactSupportButton:hover, .forceCommunityContactSupportForm .contactSupportButton:focus {
+  color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
+  background-color: var(--lwc-colorBackgroundButtonBrandHover,#b2cdcb);
+} */

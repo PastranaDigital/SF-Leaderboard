@@ -1,5 +1,9 @@
-public with sharing class ScoreSubmissionTriggerHelper {
+public without sharing class ScoreSubmissionTriggerHelper {
     public static void calculateRanking(List<Score_Submission__c> scoreList) {
+        // get User info
+        String usersName = UserInfo.getUserName();
+        System.debug('Email address: ' + usersName);        
+        
         List<Id> scoreListWorkoutIds = new List<Id>();
         Map<Id, Boolean> workoutIsGoalTimeMap = new Map<Id, Boolean>();
         for (Score_Submission__c s : scoreList) {
