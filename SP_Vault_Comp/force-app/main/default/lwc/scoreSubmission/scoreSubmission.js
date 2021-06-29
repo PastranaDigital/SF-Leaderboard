@@ -1,17 +1,21 @@
 import { LightningElement, wire } from 'lwc';
-import { createRecord } from "lightning/uiRecordApi";
+// import { createRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import createScore from '@salesforce/apex/createScoreSubmission.createScore';
+import getSubmittedScore from '@salesforce/apex/createScoreSubmission.getSubmittedScore';
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllWorkouts from '@salesforce/apex/WorkoutLwcController.getAllWorkouts';
 import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
-import { refreshApex } from "@salesforce/apex";
+// import { refreshApex } from "@salesforce/apex";
 
 export default class ScoreSubmission extends LightningElement {
     
     // both should begin as FALSE values
     scoreSubmitted = false;
     errorSubmitting = false;
+    buttonErrorMessage = '';
+    checkRequiredFieldsBoolean = [];
 
     comboboxValue = '';
     wireAthleteList = [];
@@ -235,18 +239,80 @@ export default class ScoreSubmission extends LightningElement {
         // }
       }
 
+    createScoreApex() {
+        createScore({ score : this.newRecord })
+            .then(result => {
+                this.message = result;
+                this.error = undefined;
+                this.scoreSubmitted = true;                
+                // console.log(JSON.stringify(result));
+                console.log("result", this.message);
+            })
+            .catch(error => {
+                this.message = undefined;
+                this.error = error;
+                this.errorSubmitting = true;
+                // this.dispatchEvent(
+                //     new ShowToastEvent({
+                //         title: 'Error Submitting Score',
+                //         message: error.body.message,
+                //         variant: 'error',
+                //     }),
+                // );
+                console.log("error", JSON.stringify(this.error));
+            });
+    }
+
+    getSubmittedScoreApex() {
+        getSubmittedScore() // only pulls last result
+            .then(result => {
+                this.newRecord.Is_Score_Between_Goal__c = result.Is_Score_Between_Goal__c;
+                this.newRecord.Points_Based_on_Rank__c = result.Points_Based_on_Rank__c;
+                this.newRecord.Total_Workout_Points__c = result.Total_Workout_Points__c;
+            })
+            .catch(error => {
+                this.error = error;
+                // this.errorSubmitting = true;
+                console.log("error", JSON.stringify(this.error));
+            });
+    }
+
     handleSubmitRecord() {
-        // this.scoreSubmitted = true;
-        // console.log(this.scoreSubmittedAthlete);
-        this.scoreSubmittedAthlete.forEach(element => {
-            if (element.value == this.newRecord.Athlete_Name__c) {
-                this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
-                // console.log(this.scoreSubmittedAthleteImage.Image);
-                this.scoreSubmittedAthleteImage.Name = element.label;
-            }
-        });
-        // refreshApex(this.workoutList);
-        this.createScoreSubmission();
+        this.checkRequiredFieldsBoolean[0] = Boolean(this.newRecord.Athlete_Name__c);
+        this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Score_1st__c);
+        if (this.secondLabel) {
+            this.checkRequiredFieldsBoolean[2] = Boolean(this.newRecord.Score_2nd__c);
+        } else {
+            this.checkRequiredFieldsBoolean[2] = true;
+        }
+        if (this.workoutRxWeight) {
+            this.checkRequiredFieldsBoolean[3] = Boolean(this.newRecord.Weight_Used__c);
+        } else {
+            this.checkRequiredFieldsBoolean[3] = true;
+        }
+        
+        console.log(this.checkRequiredFieldsBoolean);
+        
+        if (!this.checkRequiredFieldsBoolean.includes(false)) {
+            // console.log(this.scoreSubmittedAthlete);
+            this.createScoreApex();
+            
+            // setTimeout(() => {this.getSubmittedScoreApex(); }, 1000);
+            this.getSubmittedScoreApex();
+
+            this.scoreSubmittedAthlete.forEach(element => {
+                if (element.value == this.newRecord.Athlete_Name__c) {
+                    this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
+                    // console.log(this.scoreSubmittedAthleteImage.Image);
+                    this.scoreSubmittedAthleteImage.Name = element.label;
+                }
+            });
+            // refreshApex(this.workoutList);
+            // this.createScoreSubmission();
+        } else {
+            this.buttonErrorMessage = 'Please complete required fields';
+            console.log('Please complete required fields');
+        }        
     }
 
     
@@ -254,6 +320,10 @@ export default class ScoreSubmission extends LightningElement {
         // console.log(athList.data[0].Name);
     }
 }
+
+
+//! https://www.salesforcelwc.in/2019/04/how-to-create-record-in-lightning-web.html
+
 
 
 // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.data_salesforce_write

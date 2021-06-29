@@ -146,6 +146,22 @@
     padding: .5rem 1rem;
   }
 
+  .scoreResultsHeader {
+    color: #cc9900;
+    font-weight: 600;
+  }
+
+  /* .submitButton {
+    background-color: #cc9900;
+    color:rgb(29, 29, 29);
+  } */
+
+  .buttonErrorMessage {
+    color: #cc2900;
+    text-align: center;
+    margin: .5rem 0;
+  }
+
   .error {
     background-color: #331d1d;
     color: #cc2900;
@@ -161,6 +177,13 @@
     text-align: center;
     padding: 4rem 0;
     font-size: .75rem;
+  }
+
+  lightning-combobox,
+  lightning-input,
+  select:focus,
+  textarea {
+    font-size: 16px;
   }
 
 
