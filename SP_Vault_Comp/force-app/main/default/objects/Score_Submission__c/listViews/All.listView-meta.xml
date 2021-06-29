@@ -12,6 +12,7 @@
     <columns>Points_Based_on_Rank__c</columns>
     <columns>Total_Workout_Points__c</columns>
     <columns>Weight_Used__c</columns>
+    <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

@@ -1,4 +1,4 @@
-public class WorkoutLwcController {
+public without sharing class WorkoutLwcController {
     @AuraEnabled(cacheable=true)
     public static List<Vault_Workout__c> getAllWorkouts() {
         return [

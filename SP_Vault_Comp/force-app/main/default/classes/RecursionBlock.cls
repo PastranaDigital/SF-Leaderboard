@@ -1,3 +1,3 @@
-public with sharing class RecursionBlock {
+public without sharing class RecursionBlock {
     public static Boolean flag = true;
 }

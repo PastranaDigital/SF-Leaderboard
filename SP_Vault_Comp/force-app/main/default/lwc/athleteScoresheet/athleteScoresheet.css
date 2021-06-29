@@ -1,50 +1,51 @@
-img {
+.athleteImage {
+    height: 2.5rem;
     border-radius: 50%;
-    width: 4rem;
-    margin-left: .5rem;
-    margin-right: .5rem;
+    margin-right: 1rem;
+    border: 2px solid #cc9900;
 }
 
-.tile {
-    padding: .5rem;
-    background-color: #dfdfdf;
-    border-radius: .7rem;
+tr {
+    width: 100%;
 }
 
-.header {
-    background-color: #dec328;
-    margin-bottom: .5rem;
-}
+/* td {
+    padding: 0rem 1rem;
+  } */
 
-h1 {
-    font-size: .8rem;
-    /* font-color: #969696; */
-}
-
-h2 {
+  .name {
+    text-align: left;
+    color: #cc9900;
+    font-weight: 600;
     font-size: 1rem;
-}
+    /* padding-left: 1rem; */
+    width: 20ch;
+    /* width: 80%; */
+  }
 
-table {
-    font-family: sans-serif;
-    border: none;
-}
+  .score {
+    font-size: .8rem;
+    width: 10ch;
+    /* width: 10%; */
+  }
+  
+  .rank,
+  .score {
+    text-align: right;
+  }
+  
+  .rank {
+    /* width: 10%; */
+    /* width: 4ch; */
+    padding-left: 1rem;
+  }
 
-td, 
-th {
-    /* border: 1px solid rgb(190,190,190); */
-    padding: .5rem;
-    text-align: center;
-}
+  .athleteScore {
+      /* padding: .5rem 0; */
+      color: #999;
+      font-size: .8rem;
+  }
 
-td {
-    min-width: 3rem;
-}
-
-/* tr:nth-child(even) {
-    background-color: #eee;
-}
-
-tr:nth-child(odd) {
-    background-color: #dfdfdf;
-} */
+  .hidden {
+    display: none;
+  }
