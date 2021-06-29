@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>AthleteLwcController</members>
 		<members>RecursionBlock</members>
 		<members>ScoreSubmissionTriggerHelper</members>
-		<members>AthleteLwcController</members>
+		<members>ScoreSubmissionTriggerHelperTEST</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -59,15 +60,24 @@
 		<name>ListView</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Vault Competition</members>
 		<name>Network</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>cbVault_Competition</members>
 		<name>NetworkBranding</name>
 	</types>
 	<types>
 		<members>*</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>Guest License User</members>
+		<members>Vault Competition Profile</members>
+		<name>Profile</name>
+	</types>
+	<types>
+		<members>Vault_Competition1</members>
 		<name>SiteDotCom</name>
 	</types>
 	<types>

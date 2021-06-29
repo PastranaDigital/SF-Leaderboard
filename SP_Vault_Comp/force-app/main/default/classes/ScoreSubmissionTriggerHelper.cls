@@ -31,6 +31,17 @@ public without sharing class ScoreSubmissionTriggerHelper {
             updatedScores.add(s);
             rankPoints -= 10;
         }
+        System.debug('updatedScores' + updatedScores);
+        for (Integer i=0; i < updatedScores.size(); i++) {
+            if (i != 0) {
+                if (updatedScores[i].Calculated_Ranking_Points__c == updatedScores[i-1].Calculated_Ranking_Points__c) {
+                    updatedScores[i].Points_Based_on_Rank__c = updatedScores[i-1].Points_Based_on_Rank__c;
+                    updatedScores[i].Total_Workout_Points__c = updatedScores[i].Is_Score_Between_Goal__c + updatedScores[i].Points_Based_on_Rank__c;
+                }
+            }
+        }
+		System.debug('updatedScores' + updatedScores);
+
         
         if (updatedScores.size() > 0) {
             update updatedScores;

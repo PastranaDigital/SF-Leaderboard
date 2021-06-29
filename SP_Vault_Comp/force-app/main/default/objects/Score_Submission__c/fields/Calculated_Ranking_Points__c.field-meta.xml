@@ -2,16 +2,29 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Calculated_Ranking_Points__c</fullName>
     <externalId>false</externalId>
-    <formula>IF( 
-Vault_Workout__r.Is_Dumbbell__c , 
-Calculated_Points__c + Calculated_Points__c * (0.01 * Weight_Used__c + 0.6), 
-Calculated_Points__c + Calculated_Points__c * (0.005 * Weight_Used__c + 0.525)
+    <formula>IF ( Vault_Workout__r.RX_Weight_Male__c = 0 , Calculated_Points__c ,  
+
+IF( Vault_Workout__r.Is_Dumbbell__c , 
+  IF( Vault_Workout__r.Is_Goal_Time__c,  
+    Calculated_Points__c * (1/(0.01 * Weight_Used__c + 0.6)), 
+    Calculated_Points__c * (0.01 * Weight_Used__c + 0.6)),
+  IF( Vault_Workout__r.Is_Goal_Time__c,  
+    Calculated_Points__c * (1/(0.005 * Weight_Used__c + 0.525)), 
+    Calculated_Points__c * (0.005 * Weight_Used__c + 0.525))
+)
+
+) + 
+
+( 
+IF (  Weight_Used__c =  Vault_Workout__r.RX_Weight_Male__c,
+  IF ( Vault_Workout__r.Is_Goal_Time__c , -0.05, 0.05 ),
+  0.0 )
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Calculated Ranking Points</label>
     <precision>18</precision>
     <required>false</required>
-    <scale>1</scale>
+    <scale>3</scale>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Number</type>

@@ -1,33 +1,26 @@
 <template>
-    <!-- <div class="tile">
-        <table>
-          <tr>
-              <td>
-                <lightning-avatar
-                    class="slds-text-align_center"
-                    fallback-icon-name="standard:avatar"
-                    size="large"
-                    src={photoURL}
-                    variant="circle">
-                </lightning-avatar>   -->
-                <!-- <img src="/Users/omarpastrana/Desktop/SP Vault/Nick.png"></img> -->
-              <!-- </td>
-              <td>
-                  <h2>Nick Elizondo</h2>
-              </td>
-              <td>
-                  <p>2700</p>
-              </td>
-              <td>
-                  <p>900</p>
-              </td>
-              <td>
-                  <p>900</p>
-              </td>
-              <td>
-                  <p>900</p>
-              </td>
-          </tr>
-        </table>
-        </div> -->
+    <template if:true={displayAthleteScore}>
+        <div class="athleteScore">
+            <!-- <h4>Chaos</h4>
+            <p>Athlete Workout Scores Information</p> -->
+            <table>
+                <!-- <thead>
+                    <tr>
+                        <th></th>
+                        <th class="score">Goal Pts</th>
+                        <th class="score">Rank Pts</th>
+                        <th class="score">Total Pts</th>
+                    </tr>
+                </thead> -->
+                <tbody>
+                    <tr>
+                        <td class="name">{athScore.Name}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                        <td class="score">{athScore.Total_Points__c}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
 </template>
