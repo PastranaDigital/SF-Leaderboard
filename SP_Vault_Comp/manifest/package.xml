@@ -5,6 +5,8 @@
 		<members>RecursionBlock</members>
 		<members>ScoreSubmissionTriggerHelper</members>
 		<members>ScoreSubmissionTriggerHelperTEST</members>
+		<members>createScoreSubmission</members>
+		<members>createScoreSubmissionTEST</members>
 		<name>ApexClass</name>
 	</types>
 	<types>

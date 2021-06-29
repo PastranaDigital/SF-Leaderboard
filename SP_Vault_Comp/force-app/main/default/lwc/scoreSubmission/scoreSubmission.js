@@ -264,8 +264,11 @@ export default class ScoreSubmission extends LightningElement {
     }
 
     getSubmittedScoreApex() {
-        getSubmittedScore() // only pulls last result
+        getSubmittedScore({ score : this.newRecord }) // only pulls last result
             .then(result => {
+                this.message = result;
+                console.log("getSubmittedScore result:", this.message);
+
                 this.newRecord.Is_Score_Between_Goal__c = result.Is_Score_Between_Goal__c;
                 this.newRecord.Points_Based_on_Rank__c = result.Points_Based_on_Rank__c;
                 this.newRecord.Total_Workout_Points__c = result.Total_Workout_Points__c;
@@ -299,12 +302,22 @@ export default class ScoreSubmission extends LightningElement {
             
             // setTimeout(() => {this.getSubmittedScoreApex(); }, 1000);
             this.getSubmittedScoreApex();
-
+            // while (!this.newRecord.Is_Score_Between_Goal__c) {
+            for (let index = 0; index < 5; index++) {
+                if (!this.newRecord.Is_Score_Between_Goal__c) {
+                    this.getSubmittedScoreApex();
+                }
+            }
+            console.log('this.newRecord.Is_Score_Between_Goal__c: ' + this.newRecord.Is_Score_Between_Goal__c);
+            
             this.scoreSubmittedAthlete.forEach(element => {
                 if (element.value == this.newRecord.Athlete_Name__c) {
                     this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
                     // console.log(this.scoreSubmittedAthleteImage.Image);
                     this.scoreSubmittedAthleteImage.Name = element.label;
+                    this.newRecord.Is_Score_Between_Goal__c = this.newRecord.Is_Score_Between_Goal__c;
+                    this.newRecord.Points_Based_on_Rank__c = this.newRecord.Points_Based_on_Rank__c;
+                    this.newRecord.Total_Workout_Points__c = this.newRecord.Total_Workout_Points__c;
                 }
             });
             // refreshApex(this.workoutList);
