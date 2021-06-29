@@ -1,16 +1,57 @@
+<!-- https://youtu.be/udAc-zCkv5w -->
 <template>
-    <div class="body">
-        <p align="center">Workouts</p>
-        <lightning-layout multiple-rows>
-            <lightning-layout-item size="4" padding="around-small">
-                <c-workout-tile></c-workout-tile>
-            </lightning-layout-item>
-            <lightning-layout-item size="4" padding="around-small">
-                <c-workout-tile></c-workout-tile>
-            </lightning-layout-item>
-            <lightning-layout-item size="4" padding="around-small">
-                <c-workout-tile></c-workout-tile>
-            </lightning-layout-item>
-        </lightning-layout>
+    <div class="leaderboard">
+        <div class="header">
+            <h1><i>Vault Workouts</i></h1>
+            <img class="topImage" src={keyLogo}/>
+            <nav>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit">Submit</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/workouts" class="active">Workouts</a>
+            </nav>
+        </div>
+        <div class="main">
+            <template if:true={data}>
+                <lightning-accordion class="example-accordion"
+                    onsectiontoggle={handleToggleSection}
+                    active-section-name="A">
+                    <template for:each={data} for:item="workout">
+                        <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}>
+                            <div class="workout">
+                                <div class="workoutText">
+                                    <h2>{workout.Name}</h2>
+                                    <p class="detailDate">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout Details</a></p>
+                                    <div class="workoutDetails">
+                                        <div class="workoutDescription">
+                                            <slot name="description">{workout.Plain_Description__c}</slot>
+                                        </div>
+                                        <p><b>Goal: </b>{workout.Goal__c}</p>
+                                        <template if:true={workout.RX_Weight_Male__c}>
+                                            <p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
+                                        </template>
+                                        <br>
+                                        <h3>Top Scores</h3>
+                                        <p>1. Omar 124 reps @ 40 lbs</p>
+                                        <p>2. Omar 124 reps @ 40 lbs</p>
+                                        <p>3. Omar 124 reps @ 40 lbs</p>
+                                    </div>
+                                </div>
+                                <div class="workoutImage">
+                                    <img class="vaultImage" src={workout.Image_File__c}/> 
+                                </div>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+                    </lightning-accordion>
+                    <div class="footer">
+                        <p>2021 Vault Competition</p>
+                    </div>
+            </template>
+            <template if:false={data}>
+                <div class="footer">
+                    <p>No data was found</p>
+                </div>
+            </template>
+        </div>
     </div>
 </template>

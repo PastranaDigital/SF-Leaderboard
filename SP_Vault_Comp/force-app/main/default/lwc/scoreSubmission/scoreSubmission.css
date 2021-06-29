@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   .leaderboard {
     margin-top: 1.5rem;
     border-radius: 1rem;
@@ -31,13 +31,31 @@
   .workout {
     background-color: #16181e;
     color: #999;
-    padding: 2rem 1rem;
+    padding: 2rem 2.5rem;
   }
 
   .submissionForm {
+    /* background-color: #94928f; */
     background-color: #1f232c;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    font-size: .8rem;
+    color: #555;
+  }
+
+  .submittedResults {
+    /* text-align: center; */
+    background-color: #1f232c;
+    padding: 1rem 2.5rem 2rem 2.5rem;
+    font-size: .8rem;
+    color: #ddd;
+  }
+
+  .athleteImage {
+    height: 6rem;
+    width: 6rem;
+    margin: 1rem 0;
+    border-radius: 50%;
+    border: 4px solid #cc9900;
   }
   
   h1 {
@@ -57,14 +75,26 @@
     font-family: Georgia, serif;
   }
 
-  .workoutDetails {
-    font-size: .8rem;  
+  h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
+  
+  .workoutDetails {
+    font-size: .8rem;
+  }
+  
+  .workoutDescription {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
   .date {
     font-size: .8rem;
     font-weight: 600;
-    color: #946f00;
+    color: #cc9900;
   }
   
   .topImage {
@@ -115,3 +145,63 @@
   td {
     padding: .5rem 1rem;
   }
+
+  .scoreResultsHeader {
+    color: #cc9900;
+    font-weight: 600;
+  }
+
+  /* .submitButton {
+    background-color: #cc9900;
+    color:rgb(29, 29, 29);
+  } */
+
+  .buttonErrorMessage {
+    color: #cc2900;
+    text-align: center;
+    margin: .5rem 0;
+  }
+
+  .error {
+    background-color: #331d1d;
+    color: #cc2900;
+    text-align: center;
+    margin: 2rem 1rem;
+    padding: 2rem 0;
+    font-size: .75rem;
+  }
+
+  .footer {
+    background-color: #16181e;
+    color: #cc9900;
+    text-align: center;
+    padding: 4rem 0;
+    font-size: .75rem;
+  }
+
+  lightning-combobox,
+  lightning-input,
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
+
+
+  /* .forceCommunityContactSupportForm .contactSupportButton {
+    text-transform: var(--lwc-textTransform,capitalize);
+    font-size: var(--lwc-fcFontSizeMedium,0.8125rem);
+    color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
+    background-color: var(--lwc-colorBackgroundButtonBrand,rgb(209, 225, 224));
+    border-color: var(--lwc-buttonColorBorderBrandPrimary,rgb(209, 225, 224));
+    display: block;
+    border-width: 2px;
+    border-style: solid;
+    padding: 5px 24px;
+    min-width: 135px;
+    transition: all .2s;
+} */
+
+/* .forceCommunityContactSupportForm .contactSupportButton:hover, .forceCommunityContactSupportForm .contactSupportButton:focus {
+  color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
+  background-color: var(--lwc-colorBackgroundButtonBrandHover,#b2cdcb);
+} */
