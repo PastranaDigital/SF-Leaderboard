@@ -105,7 +105,24 @@
       margin-right: 1rem;
       border: 2px solid #cc9900;
   }
+
+  .content {
+    padding-top: .5rem;
+  }
   
+  button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0;
+    background-color: #fff;
+    color: #16181e;
+    text-align: center; 
+    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
   table {
     background-color: #16181e;
     color: #999;
@@ -147,15 +164,18 @@
   
   .rank,
   .score {
-    text-align: right;
+    vertical-align: top;
+    padding-top: 1.5rem;
   }
   
   .rank {
+    text-align: center;
     width: 4ch;
     padding-left: 1rem;
   }
   
   .score {
+    text-align: right;
     width: 8ch;
   }
 
@@ -172,6 +192,10 @@
 
   .hidden {
     display: none;
+  }
+
+  .toTopButton {
+    position : right;
   }
 
   /* .content {

@@ -25,9 +25,11 @@ public without sharing class AthleteLwcController {
     
     @AuraEnabled(cacheable=true)
     public static List<Score_Submission__c> getAllScoreSubmissions() {
-        return [
-            SELECT Id, Athlete_Name__c, Score_1st__c, Score_2nd__c, Weight_Used__c, Workout_Order_Number__c, Total_Workout_Points__c, CreatedDate
+        Score_Submission__c[] allScores = [
+            SELECT Id, Athlete_Name__c, Athlete_Name__r.Name, Vault_Workout__r.Name, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c, Vault_Workout__r.Order__c
             FROM Score_Submission__c 
-            ORDER BY Workout_Order_Number__c ASC];
+            ORDER BY Vault_Workout__r.Order__c ASC];
+        System.debug(allScores[0]);
+        return allScores;
     }
 }

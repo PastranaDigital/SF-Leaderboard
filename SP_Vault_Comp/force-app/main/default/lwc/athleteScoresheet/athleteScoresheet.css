@@ -5,9 +5,14 @@
     border: 2px solid #cc9900;
 }
 
-tr {
+  /* table {
+    border-collapse: collapse;
+  } */
+
+  tr {
+    /* border-top: 1px solid #4a4e57; */
     width: 100%;
-}
+  }
 
 /* td {
     padding: 0rem 1rem;

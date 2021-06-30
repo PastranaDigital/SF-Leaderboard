@@ -1,6 +1,6 @@
 <!-- https://youtu.be/udAc-zCkv5w -->
 <template>
-    <div class="leaderboard">
+    <div class="leaderboard" id="#top">
         <div class="header">
             <h1><i>Leader Board</i></h1>
             <img class="topImage" src={keyLogo}/>
@@ -15,29 +15,23 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="rank"></th>
+                            <th class="rank"><button onclick={handleAthleteClick}>&#9650;</button></th>
                             <th class="name">Athlete</th>
                             <th class="score">Score</th>
-                            <!-- <th class="avg">Avg</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <template for:each={data} for:item="athlete">
-                            <!-- <c-athlete-scoresheet key={athlete.Id} athlete={athlete}></c-athlete-scoresheet> -->
-                            <tr key={athlete.Id} onclick={handleAthleteClick}>
+                            <tr key={athlete.Id}>
                                 <td class="rank">{athlete.Rank}</td>
                                 <td class="name" id={athlete.Id}><img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>{athlete.Name}
-                                    <!-- <template if:true={displayAthleteScore}> -->
+                                    <template if:true={displayAthleteScore}>
                                         <div class="content">
-                                        <template for:each={scoreData} for:item="score">
-                                            <c-athlete-scoresheet key={score.Id} ath-score={score} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
+                                        <template for:each={athlete.allWorkouts} for:item="score">
+                                            <c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athlete.Id} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
                                         </template>
                                         </div>
-                                        <!-- <div class="athleteScore">
-                                            <h4>Chaos</h4>
-                                            <p>Athlete Workout Scores Information</p>
-                                        </div>  -->
-                                    <!-- </template> -->
+                                    </template>
                                 </td>
                                 <td class="score">{athlete.Total_Points__c}</td>
                             </tr>
@@ -46,6 +40,10 @@
                 </table>
                 <div class="footer">
                     <p>2021 Vault Competition</p>
+                    <template if:true={displayAthleteScore}>
+                        <br>
+                        <button onclick={handleAthleteClick}><b>X</b></button>
+                    </template>
                 </div>
             </template>
             <template if:false={data}>
