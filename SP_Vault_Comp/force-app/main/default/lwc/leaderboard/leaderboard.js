@@ -184,7 +184,7 @@ export default class Leaderboard extends LightningElement {
         console.log(incomingArray);
         let currentData = [];
         incomingArray.forEach(row => {
-            let rowData = {};
+            let rowData = row;
             let athWorkouts = [];
             this.scoreData.forEach((element) => {
                 let athScore = {};
@@ -192,7 +192,7 @@ export default class Leaderboard extends LightningElement {
                     athScore.WorkoutName = element.WorkoutName;
                     athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
                     athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
-                    athScore.Total_Points__c = element.Total_Workout_Points__c;
+                    athScore.Total_Points__c = element.Total_Points__c;
                     athWorkouts.push(athScore);
                 }
             });
