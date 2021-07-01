@@ -5,28 +5,34 @@
     border: 2px solid #cc9900;
 }
 
-tr {
+  /* table {
+    border-collapse: collapse;
+  } */
+
+  tr {
+    /* border-top: 1px solid #4a4e57; */
     width: 100%;
-}
+  }
 
 /* td {
     padding: 0rem 1rem;
   } */
 
+  
   .name {
     text-align: left;
     color: #cc9900;
     font-weight: 600;
     font-size: 1rem;
     /* padding-left: 1rem; */
-    width: 20ch;
+    width: 30%;
     /* width: 80%; */
   }
 
   .score {
     font-size: .8rem;
-    width: 10ch;
-    /* width: 10%; */
+    /* width: 6ch; */
+    width: 8%;
   }
   
   .rank,
@@ -38,6 +44,22 @@ tr {
     /* width: 10%; */
     /* width: 4ch; */
     padding-left: 1rem;
+  }
+
+  .filler {
+    width: 46%;
+  }
+
+  @media (max-width: 500px) { /* When in Mobile Portrait Mode */
+    .name {
+      width: 53%;
+    }
+    .score {
+      width: 15%;
+    }
+    .filler {
+      width: 2%;
+    }
   }
 
   .athleteScore {
