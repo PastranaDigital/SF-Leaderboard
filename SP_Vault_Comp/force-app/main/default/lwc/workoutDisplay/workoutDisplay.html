@@ -30,9 +30,12 @@
                                         </template>
                                         <br>
                                         <h3>Top Scores</h3>
-                                        <p>1. Omar 124 reps @ 40 lbs</p>
-                                        <p>2. Omar 124 reps @ 40 lbs</p>
-                                        <p>3. Omar 124 reps @ 40 lbs</p>
+                                        <template for:each={workout.Top3Scores} for:item="rank">
+                                            <p key={workout.Id}>{workout.topScoreString}</p>
+                                        </template>
+                                        <!-- <p>1. Omar 124 reps @ 40 lbs</p> -->
+                                        <!-- <p>2. Omar 124 reps @ 40 lbs</p>
+                                        <p>3. Omar 124 reps @ 40 lbs</p> -->
                                     </div>
                                 </div>
                                 <div class="workoutImage">
