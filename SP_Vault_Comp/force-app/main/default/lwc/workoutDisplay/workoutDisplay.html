@@ -13,7 +13,6 @@
         <div class="main">
             <template if:true={data}>
                 <lightning-accordion class="example-accordion"
-                    onsectiontoggle={handleToggleSection}
                     active-section-name="A">
                     <template for:each={data} for:item="workout">
                         <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}>
