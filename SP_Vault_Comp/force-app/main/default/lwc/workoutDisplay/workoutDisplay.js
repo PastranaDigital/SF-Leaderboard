@@ -1,9 +1,9 @@
 import { LightningElement, wire } from 'lwc';
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
 import getAllWorkouts from '@salesforce/apex/WorkoutLwcController.getAllWorkouts';
-import getTop3Results from '@salesforce/apex/WorkoutLwcController.getTop3Results';
+// import getTop3Results from '@salesforce/apex/WorkoutLwcController.getTop3Results';
 import getTopResults from '@salesforce/apex/WorkoutLwcController.getTopResults';
-import getWorkoutsAndResults from '@salesforce/apex/WorkoutLwcController.getWorkoutsAndResults';
+// import getWorkoutsAndResults from '@salesforce/apex/WorkoutLwcController.getWorkoutsAndResults';
 export default class WorkoutDisplay extends LightningElement {
     
     keyLogo = imageResource + '/Images/key_logo.png';
@@ -25,7 +25,7 @@ export default class WorkoutDisplay extends LightningElement {
     // `${rank}. ${athleteName}: ${Score_1st__c} ${First_Label__c} ${Score_2nd__c} ${Second_Label__c} @ ${Weight_Used__c} lbs`
     
     // topScoreString = `${rank}. ${athleteName}: ${Score_1st__c} ${First_Label__c}`;
-    topScoreString = '{rank}. {rank.athleteName}: {rank.Score_1st__c} {rank.First_Label__c}';
+    
     
 
     // @wire(getWorkoutsAndResults) workoutList(result) {
@@ -105,15 +105,8 @@ export default class WorkoutDisplay extends LightningElement {
                 rowData.URL__c = row.URL__c;
                 rowData.Workout_Date__c = row.Workout_Date__c;
                 // rowData.top3results = getTop3(row.Id); // didn't work
-                //! needs to be done here
-                if (row.Second_Label__c) {
-                    this.topScoreString += ' ${Score_2nd__c} ${Second_Label__c}';
-                } 
-                if (row.RX_Weight_Male__c) {
-                    this.topScoreString += ' @ ${Weight_Used__c} lbs';
-                };
-                rowData.topScoreString = this.topScoreString;
-
+                
+                
                 currentData.push(rowData);
                 // console.log(`rowData: ${rowData.Workout_Date__c}`);
                 // console.log(`topScoreString: ${rowData.topScoreString}`);
@@ -135,18 +128,19 @@ export default class WorkoutDisplay extends LightningElement {
 
     buildData(incomingArray) {
         console.log('Executing building of data');
-        console.log('incomingArray: ' + incomingArray);
+        // console.log('incomingArray: ' + incomingArray);
         let currentData = [];
         incomingArray.forEach(row => {
-            let rowData = row;
+            let rowData = row; // row = workout
             let athWorkouts = [];
             let count = 1;
-            this.scoreData.forEach((element) => {
+            this.scoreData.forEach((element) => { // element = score submission
                 let athScore = {};
-                console.log('element.Vault_Workout__c ' + element.Vault_Workout__c);
-                console.log('row.Id ' + row.Id);
-            
+                // console.log('element.Vault_Workout__c ' + element.Vault_Workout__c);
+                // console.log('row.Id ' + row.Id);
+                
                 if (row.Id == element.Vault_Workout__c && count < 4) {
+                    
                     athScore.rank = count;
                     athScore.athleteName = element.Athlete_Name__r.Name;
                     athScore.Score_1st__c = element.Score_1st__c;
@@ -155,6 +149,18 @@ export default class WorkoutDisplay extends LightningElement {
                     athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
                     athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
                     athScore.Total_Points__c = element.Total_Points__c;
+                    
+                    let topScoreString = `${count}. ${element.Athlete_Name__r.Name}: ${element.Score_1st__c} ${row.First_Label__c}`;
+                    //! needs to be done here
+                    if (row.Second_Label__c) {
+                        topScoreString += ` ${element.Score_2nd__c} ${row.Second_Label__c}`;
+                    } 
+                    if (row.RX_Weight_Male__c) {
+                        topScoreString += ` @ ${element.Weight_Used__c} lbs`;
+                    };
+                    athScore.topScoreString = topScoreString;
+
+                    
                     athWorkouts.push(athScore);
                     count++;
                 }
@@ -175,10 +181,10 @@ export default class WorkoutDisplay extends LightningElement {
 
     renderedCallback() {
         if(this.scoreData.length > 0 && !this.buildDataComplete) {
-            console.log('this.scoreData.length ' + this.scoreData.length);
+            // console.log('this.scoreData.length ' + this.scoreData.length);
             console.log('Building Data');
             this.buildData(this.data);
         }
-        console.log('rendered');
+        // console.log('rendered');
     }
 }
