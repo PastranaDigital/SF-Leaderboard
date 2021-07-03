@@ -8,6 +8,25 @@ public without sharing class WorkoutLwcController {
     }
 
     @AuraEnabled(cacheable=true)
+    public static List<Score_Submission__c> getTop3Results(Id workout) {
+        return [
+            SELECT Id, Athlete_Name__r.Name, Vault_Workout__c, Score_1st__c, Score_2nd__c, Weight_Used__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
+            FROM Score_Submission__c 
+            WHERE Vault_Workout__c = :workout
+            ORDER BY Total_Workout_Points__c DESC
+            LIMIT 3];
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Score_Submission__c> getTopResults() {
+        return [
+            SELECT Id, Athlete_Name__r.Name, Vault_Workout__c, Score_1st__c, Score_2nd__c, Weight_Used__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
+            FROM Score_Submission__c 
+            ORDER BY Total_Workout_Points__c DESC];
+    }
+
+    //! this produced a array of objects that is different from normal wire
+    @AuraEnabled(cacheable=true)
     public static List<workoutDisplayObject> getWorkoutsAndResults() {
         Vault_Workout__c[] allWorkouts = WorkoutLwcController.getAllWorkouts();
         Score_Submission__c[] allScoreSubmissions = [

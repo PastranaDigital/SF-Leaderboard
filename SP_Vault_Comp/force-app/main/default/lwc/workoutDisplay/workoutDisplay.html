@@ -12,11 +12,13 @@
         </div>
         <div class="main">
             <template if:true={data}>
-                <lightning-accordion class="example-accordion"
-                    active-section-name="A">
+                <!-- <lightning-accordion class="example-accordion"
+                    active-section-name="A"> -->
                     <template for:each={data} for:item="workout">
-                        <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}>
-                            <div class="workout">
+                        <tr key={workout.Id} >
+                            <div class="workout" key={workout.Id}>
+                        <!-- <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}> -->
+                            <!-- <div class="workout"> -->
                                 <div class="workoutText">
                                     <h2>{workout.Name}</h2>
                                     <p class="detailDate">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout Details</a></p>
@@ -29,9 +31,11 @@
                                             <p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
                                         </template>
                                         <br>
+                                        <template if:true={scoreData}>
                                         <h3>Top Scores</h3>
-                                        <template for:each={workout.Top3Scores} for:item="rank">
-                                            <p key={workout.Id}>{workout.topScoreString}</p>
+                                        <template for:each={workout.top3results} for:item="rank">
+                                            <p key={workout.Id}>{workout.topScoreString} Something</p>
+                                        </template>
                                         </template>
                                         <!-- <p>1. Omar 124 reps @ 40 lbs</p> -->
                                         <!-- <p>2. Omar 124 reps @ 40 lbs</p>
@@ -42,9 +46,10 @@
                                     <img class="vaultImage" src={workout.Image_File__c}/> 
                                 </div>
                             </div>
-                        </lightning-accordion-section>
+                        <!-- </lightning-accordion-section> -->
+                        </tr>
                     </template>
-                    </lightning-accordion>
+                    <!-- </lightning-accordion> -->
                     <div class="footer">
                         <p>2021 Vault Competition</p>
                     </div>
