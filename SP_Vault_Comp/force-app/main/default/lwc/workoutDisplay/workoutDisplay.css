@@ -51,7 +51,7 @@
     padding-left: 5%;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 500px) {
     .workout {
         flex-direction: column;
     }

@@ -13,9 +13,10 @@
         <div class="main">
             <template if:true={data}>
                 <lightning-accordion class="example-accordion"
-                    onsectiontoggle={handleToggleSection}
                     active-section-name="A">
                     <template for:each={data} for:item="workout">
+                        <!-- <tr key={workout.Id} >
+                            <div class="workout" key={workout.Id}> -->
                         <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}>
                             <div class="workout">
                                 <div class="workoutText">
@@ -30,10 +31,15 @@
                                             <p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
                                         </template>
                                         <br>
+                                        <template if:true={scoreData}>
                                         <h3>Top Scores</h3>
-                                        <p>1. Omar 124 reps @ 40 lbs</p>
-                                        <p>2. Omar 124 reps @ 40 lbs</p>
-                                        <p>3. Omar 124 reps @ 40 lbs</p>
+                                        <template for:each={workout.top3results} for:item="rank">
+                                            <p key={workout.Id}>#{rank.topScoreString}</p>
+                                        </template>
+                                        </template>
+                                        <!-- <p>1. Omar 124 reps @ 40 lbs</p> -->
+                                        <!-- <p>2. Omar 124 reps @ 40 lbs</p>
+                                        <p>3. Omar 124 reps @ 40 lbs</p> -->
                                     </div>
                                 </div>
                                 <div class="workoutImage">
@@ -41,6 +47,7 @@
                                 </div>
                             </div>
                         </lightning-accordion-section>
+                        <!-- </tr> -->
                     </template>
                     </lightning-accordion>
                     <div class="footer">
