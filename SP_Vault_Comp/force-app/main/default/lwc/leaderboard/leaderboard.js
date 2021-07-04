@@ -8,6 +8,67 @@ export default class Leaderboard extends LightningElement {
     displayAthleteScore; // Expand all onclick Boolean value
     buildDataComplete = false;
 
+
+
+    //! Boolean tracked variable to indicate if modal is open or not default value is false as modal is closed when page is loaded 
+    isModalOpen = false;
+    athSpotlight = {};
+    
+    athId;
+    athName;
+    
+    openModal(event) {
+        // console.log(event.target.id);
+        this.athId = (event.target.id).split('-');
+        this.athId = this.athId[0];
+        this.athName = event.target.innerHTML;
+        this.athName = this.athName.split('>');
+        this.athName = this.athName[1];
+        
+        if(this.scoreData && !this.buildDataComplete) {
+            console.log(this.scoreData.length);
+            console.log('Building Data');
+            this.buildData(this.data);
+        }
+
+        // if (this.buildDataComplete) {
+            this.data.forEach(element => {
+                // console.log('checking: ', element.Id, this.athId);
+                if (element.Id == this.athId) {
+                    console.log(`element.Id: ${element.Id}`);
+                    this.athSpotlight.Id = element.Id;
+                    this.athSpotlight.Name = element.Name;
+                    this.athSpotlight.Location = element.Location__c;
+                    this.athSpotlight.Age = element.Age__c;
+                    this.athSpotlight.Pic = element.Profile_Pic_URL__c;
+                    this.athSpotlight.Rank = element.Rank;
+                    this.athSpotlight.TotalPoints = element.Total_Points__c;
+                    this.athSpotlight.allWorkouts = element.allWorkouts;
+                }
+            });
+        // }
+
+
+        // console.log(`Clicked ${this.athName}`);
+        // console.log(this.athId);
+        // console.log(event.target.innerHTML);
+        // to open modal set isModalOpen tarck value as true
+        this.isModalOpen = true;
+    }
+    
+    closeModal() {
+        // to close modal set isModalOpen tarck value as false
+        this.isModalOpen = false;
+    }
+    
+    submitDetails() {
+        // to close modal set isModalOpen tarck value as false
+        //Add your code to call apex method or do some processing
+        this.isModalOpen = false;
+    }
+    //! ----------------------------------------------------------------
+
+
     //? Example
     // workoutsOrganizedByAthlete = [
     //     {
