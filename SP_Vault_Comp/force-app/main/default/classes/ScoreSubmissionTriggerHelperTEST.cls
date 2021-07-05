@@ -74,8 +74,8 @@ private class ScoreSubmissionTriggerHelperTEST {
         List<Integer> calculatedPoints = new List<Integer>{615, 615, 690, 900, 1005, 1005};
         List<Decimal> calculatedRankPoints = new List<Decimal>{683.333, 614.950, 689.950, 1000.000, 1004.950, 1004.950};
         List<Integer> goalPoints = new List<Integer>{ 100, 100, 100, 100,   0,   0};
-        List<Integer> rankPoints = new List<Integer>{  90, 100,  80,  70,  60,  60};
-        List<Integer> totalPoints = new List<Integer>{190, 200, 180, 170,  60,  60};
+        List<Integer> rankPoints = new List<Integer>{  95, 100,  90,  85,  80,  80};
+        List<Integer> totalPoints = new List<Integer>{195, 200, 190, 185,  80,  80};
             
         System.assertEquals(scores1.size(), subScores.size());
         for (Integer i = 0; i < subScores.size(); i++) {
@@ -161,8 +161,8 @@ private class ScoreSubmissionTriggerHelperTEST {
         List<Integer> calculatedPoints = new List<Integer>{135, 135, 195, 180, 215, 215};
         List<Decimal> calculatedRankPoints = new List<Decimal>{135.05, 135.05, 195.05, 162, 193.5, 193.5};
         List<Integer> goalPoints = new List<Integer>{ 100, 100,   0, 100,   0,   0};
-        List<Integer> rankPoints = new List<Integer>{  60,  60, 100,  70,  90,  90};
-        List<Integer> totalPoints = new List<Integer>{160, 160, 100, 170,  90,  90};
+        List<Integer> rankPoints = new List<Integer>{  80,  80, 100,  85,  95,  95};
+        List<Integer> totalPoints = new List<Integer>{180, 180, 100, 185,  95,  95};
             
         System.assertEquals(scores1.size(), subScores.size());
         for (Integer i = 0; i < subScores.size(); i++) {
@@ -245,8 +245,8 @@ private class ScoreSubmissionTriggerHelperTEST {
         List<Integer> calculatedPoints = new List<Integer>{100, 100, 110, 135, 156, 156};
         List<Decimal> calculatedRankPoints = new List<Decimal>{100.05, 100.05, 110.05, 135.05, 156.05, 156.05};
         List<Integer> goalPoints = new List<Integer>{ 100, 100, 100, 100,   0,   0};
-        List<Integer> rankPoints = new List<Integer>{  60,  60,  70,  80, 100, 100};
-        List<Integer> totalPoints = new List<Integer>{160, 160, 170, 180, 100, 100};
+        List<Integer> rankPoints = new List<Integer>{  80,  80,  85,  90, 100, 100};
+        List<Integer> totalPoints = new List<Integer>{180, 180, 185, 190, 100, 100};
             
         System.assertEquals(scores1.size(), subScores.size());
         for (Integer i = 0; i < subScores.size(); i++) {

@@ -22,6 +22,10 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomLabels</name>
+	</types>
+	<types>
 		<members>Athlete__c</members>
 		<members>Score_Submission__c</members>
 		<members>Vault_Workout__c</members>

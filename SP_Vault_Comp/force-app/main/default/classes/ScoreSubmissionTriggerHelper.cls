@@ -24,12 +24,13 @@ public without sharing class ScoreSubmissionTriggerHelper {
         List<Score_Submission__c> existingScoresForWorkout = Database.query(queryString + endQueryString);
 
         Integer rankPoints = 100;
+        Integer rankInterval = Integer.valueOf(System.Label.CompRankInterval);
         List<Score_Submission__c> updatedScores = new List<Score_Submission__c>(); 
         for (Score_Submission__c s : existingScoresForWorkout) {
             s.Points_Based_on_Rank__c = rankPoints;
             s.Total_Workout_Points__c = s.Is_Score_Between_Goal__c + s.Points_Based_on_Rank__c;
             updatedScores.add(s);
-            rankPoints -= 10;
+            rankPoints -= rankInterval;
         }
         System.debug('updatedScores' + updatedScores);
         for (Integer i=0; i < updatedScores.size(); i++) {
