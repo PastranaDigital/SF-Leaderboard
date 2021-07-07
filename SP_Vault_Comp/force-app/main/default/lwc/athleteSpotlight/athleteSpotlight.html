@@ -1,9 +1,27 @@
 <template>
-    <div class="body">
-        <br>
-        <br>
-        <p align="center">Athlete Spotlight</p>
-        <br>
-        <br>
-    </div>
+    <template if:true={displayAthleteScore}>
+        <div class="athleteScore">
+            <!-- <h4>Chaos</h4>
+            <p>Athlete Workout Scores Information</p> -->
+            <table>
+                <!-- <thead>
+                    <tr>
+                        <th></th>
+                        <th class="score">Goal Pts</th>
+                        <th class="score">Rank Pts</th>
+                        <th class="score">Total Pts</th>
+                    </tr>
+                </thead> -->
+                <tbody>
+                    <tr>
+                        <td class="name">{athScore.WorkoutName}</td>
+                        <td class="score">{athScore.ScoreString}</td>
+                        <!-- <td class="name">Prometheus</td>
+                        <td class="score">11 Rounds 21 Reps @ 115 lbs</td> -->
+                        <td class="filler"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
 </template>
