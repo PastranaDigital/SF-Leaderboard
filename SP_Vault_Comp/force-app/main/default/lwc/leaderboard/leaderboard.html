@@ -22,16 +22,32 @@
                 <div class="modalBody slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                     <img class="spotlightImage slds-align_absolute-center" src={athSpotlight.Pic}/>
                     
-                    <p>
+                    <table class="spotlightTable">
+                        <tr>
+                            <td class="spotlightRank" colspan="2">
+                                <p><b>Rank:</b> {athSpotlight.Rank}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spotlightLocation">
+                                <p><b>Location:</b> {athSpotlight.Location} &nbsp;</p>
+                            </td>
+                            <td class="spotlightAge">
+                                <p><b>Age:</b> {athSpotlight.Age} &nbsp;</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <p>
                         <b>Rank:</b> {athSpotlight.Rank}<br>
-                        <b>Location:</b> {athSpotlight.Location} &nbsp; | &nbsp;    <b>Age:</b> {athSpotlight.Age}<br>
+                        <b>Location:</b> {athSpotlight.Location} &nbsp; | &nbsp;    <b>Age:</b> {athSpotlight.Age}<br> -->
                         <!-- {athSpotlight.Rank}<br> -->
                         <!-- {athSpotlight.TotalPoints}<br> -->
                         <!-- {athSpotlight.allWorkouts}<br> -->
-                    </p>
+                    <!-- </p> -->
                     <br>
                     <template for:each={athSpotlight.allWorkouts} for:item="score">
-                        <c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athSpotlight.Id} display-athlete-score=TRUE></c-athlete-scoresheet>
+                        <c-athlete-spotlight key={score.Name} ath-score={score} ath-id={athSpotlight.Id} display-athlete-score=TRUE></c-athlete-spotlight>
+                        <!-- <c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athSpotlight.Id} display-athlete-score=TRUE></c-athlete-scoresheet> -->
                     </template>
                 </div>
                 <!-- Modal/Popup Box LWC footer starts here -->
@@ -58,7 +74,7 @@
         </div>
         <div class="main">
             <template if:true={data}>
-                <table>
+                <table class="mainTable">
                     <thead>
                         <tr>
                             <th class="rank"><button onclick={handleAthleteClick}>&#9650;</button></th>

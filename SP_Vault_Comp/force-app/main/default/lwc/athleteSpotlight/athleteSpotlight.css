@@ -1,10 +1,73 @@
-h1 {
-    font-size: 1rem;
+.athleteImage {
+    height: 2.5rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid #cc9900;
 }
 
-.body {
-    width: auto;
-    height: auto;
-    border-radius: .5rem;
-    background-color: azure;
-}
+  /* table {
+    border-collapse: collapse;
+  } */
+
+  tr {
+    /* border-top: 1px solid #4a4e57; */
+    width: 100%;
+  }
+
+/* td {
+    padding: 0rem 1rem;
+  } */
+
+  
+  .name {
+    text-align: left;
+    color: #cc9900;
+    font-weight: 600;
+    font-size: 1rem;
+    /* padding-left: 1rem; */
+    width: 30%;
+    /* width: 80%; */
+  }
+
+  .score {
+    font-size: .8rem;
+    /* width: 6ch; */
+    width: 60%;
+  }
+  
+  .rank,
+  .score {
+    text-align: left;
+  }
+  
+  .rank {
+    /* width: 10%; */
+    /* width: 4ch; */
+    padding-left: 1rem;
+  }
+
+  .filler {
+    width: 10%;
+  }
+
+  @media (max-width: 500px) { /* When in Mobile Portrait Mode */
+    .name {
+      width: 35%;
+    }
+    .score {
+      width: 60%;
+    }
+    .filler {
+      width: 5%;
+    }
+  }
+
+  .athleteScore {
+      /* padding: .5rem 0; */
+      color: #999;
+      font-size: .8rem;
+  }
+
+  .hidden {
+    display: none;
+  }

@@ -44,6 +44,28 @@ export default class Leaderboard extends LightningElement {
                     this.athSpotlight.Rank = element.Rank;
                     this.athSpotlight.TotalPoints = element.Total_Points__c;
                     this.athSpotlight.allWorkouts = element.allWorkouts;
+
+
+                    // this.athSpotlight.Score_1st__c = element.Score_1st__c;
+                    // this.athSpotlight.First_Label__c = element.First_Label__c;
+                    // this.athSpotlight.Score_2nd__c = element.Score_2nd__c;
+                    // this.athSpotlight.Second_Label__c = element.Second_Label__c;
+                    // this.athSpotlight.Weight_Used__c = element.Weight_Used__c;
+                    // this.athSpotlight.RX_Weight_Male__c = element.RX_Weight_Male__c;
+
+
+                    // //? takes the Score Submission and make it into a string
+                    // let ScoreString = `${element.Score_1st__c} ${element.First_Label__c}`;
+                    // //! needs to be done here
+                    // if (element.Second_Label__c) {
+                    //     ScoreString += ` ${element.Score_2nd__c} ${element.Second_Label__c}`;
+                    // } 
+                    // if (element.RX_Weight_Male__c) {
+                    //     ScoreString += ` @ ${element.Weight_Used__c} lbs`;
+                    // };
+                    // this.athSpotlight.ScoreString = ScoreString;
+
+                    // console.log(`athSpotlight: ${this.athSpotlight.ScoreString}`);
                 }
             });
         // }
@@ -148,15 +170,23 @@ export default class Leaderboard extends LightningElement {
         if (result.data) {
             let currentData = [];
             result.data.forEach((row) => {
-              let rowData = {};
-              rowData.Id = row.Id; // score submission Id
-              rowData.AthleteId = row.Athlete_Name__c;
-              rowData.AthleteName = row.Athlete_Name__r.Name;
-              rowData.WorkoutName = row.Vault_Workout__r.Name;
-              rowData.Is_Score_Between_Goal__c = row.Is_Score_Between_Goal__c;
-              rowData.Points_Based_on_Rank__c = row.Points_Based_on_Rank__c;
-              rowData.Total_Points__c = row.Total_Workout_Points__c;
-              currentData.push(rowData);
+                let rowData = {};
+                rowData.Id = row.Id; // score submission Id
+                rowData.AthleteId = row.Athlete_Name__c;
+                rowData.AthleteName = row.Athlete_Name__r.Name;
+                rowData.WorkoutName = row.Vault_Workout__r.Name;
+                rowData.Is_Score_Between_Goal__c = row.Is_Score_Between_Goal__c;
+                rowData.Points_Based_on_Rank__c = row.Points_Based_on_Rank__c;
+                rowData.Total_Points__c = row.Total_Workout_Points__c;
+
+                rowData.Score_1st__c = row.Score_1st__c;
+                rowData.First_Label__c = row.Vault_Workout__r.First_Label__c;
+                rowData.Score_2nd__c = row.Score_2nd__c;
+                rowData.Second_Label__c = row.Vault_Workout__r.Second_Label__c;
+                rowData.Weight_Used__c = row.Weight_Used__c;
+                rowData.RX_Weight_Male__c = row.Vault_Workout__r.RX_Weight_Male__c;
+
+                currentData.push(rowData);
             });
             this.scoreData = currentData;
             console.log("Successful workoutsOrgByAthlete retrieval");
@@ -251,6 +281,27 @@ export default class Leaderboard extends LightningElement {
                 let athScore = {};
                 if (row.Id == element.AthleteId) {
                     athScore.WorkoutName = element.WorkoutName;
+
+                    athScore.Score_1st__c = element.Score_1st__c;
+                    athScore.First_Label__c = element.First_Label__c;
+                    athScore.Score_2nd__c = element.Score_2nd__c;
+                    athScore.Second_Label__c = element.Second_Label__c;
+                    athScore.Weight_Used__c = element.Weight_Used__c;
+                    athScore.RX_Weight_Male__c = element.RX_Weight_Male__c;
+
+
+                    //? takes the Score Submission and make it into a string
+                    let ScoreString = `${element.Score_1st__c} ${element.First_Label__c}`;
+                    //! needs to be done here
+                    if (element.Second_Label__c) {
+                        ScoreString += ` ${element.Score_2nd__c} ${element.Second_Label__c}`;
+                    } 
+                    if (element.RX_Weight_Male__c) {
+                        ScoreString += ` @ ${element.Weight_Used__c} lbs`;
+                    };
+                    athScore.ScoreString = ScoreString;
+
+                    
                     athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
                     athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
                     athScore.Total_Points__c = element.Total_Points__c;

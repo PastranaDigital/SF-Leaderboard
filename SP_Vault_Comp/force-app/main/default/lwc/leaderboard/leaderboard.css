@@ -86,6 +86,7 @@
   }
 
   .main {
+    background-color: #16181e;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     width: 100%;
@@ -110,6 +111,19 @@
     padding-top: .5rem;
   }
   
+  .spotlightRank,
+  .spotlightLocation {
+    text-align: left;
+  }
+
+  .spotlightLocation {
+    width: 14rem;
+  }
+
+  .spotlightAge {
+    width: 6rem;
+  }
+
   button {
     width: 2rem;
     height: 2rem;
@@ -123,38 +137,38 @@
     vertical-align: middle;
   }
 
-  table {
+  .mainTable table {
     background-color: #16181e;
     color: #999;
     width: 100%;
     border-collapse: collapse;
   }
   
-  thead {
+  .mainTable thead {
     font-size: 0.7rem;
     color: #cc9900;
     text-transform: uppercase;
   }
   
-  tbody .name {
+  .mainTable tbody .name {
     color: white;
     font-weight: 500;
     font-size: 1rem;
   }
   
-  tbody tr:nth-child(2n) {
+  .mainTable tbody tr:nth-child(2n) {
     background-color: #1f232c;
   }
 
-  tbody .score {
+  .mainTable tbody .score {
       font-size:1.2rem;
   }
   
-  th {
+  .mainTable th {
     padding: 1.5rem 1rem 0.5rem;
   }
   
-  td {
+  .mainTable td {
     padding: 1rem 1rem;
   }
 
