@@ -54,6 +54,17 @@
     margin-left: 2rem;
   }
 
+  td svg {
+    padding-right: .5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .largeSVG {
+    height: 10rem;
+    width: 10rem;
+  }
+
   .leaderboard {
     /* max-width: 25rem; */
     /* margin: 5rem auto; */
@@ -100,41 +111,13 @@
     right: .5rem;
   }
 
-  .athleteImage {
-      height: 2.5rem;
-      border-radius: 50%;
-      margin-right: 1rem;
-      border: 2px solid #cc9900;
+  .totalSection {
+    padding: 2rem;
+    /* height: 20rem; */
   }
 
   .content {
     padding-top: .5rem;
-  }
-  
-  .spotlightRank,
-  .spotlightLocation {
-    text-align: left;
-  }
-
-  .spotlightLocation {
-    width: 14rem;
-  }
-
-  .spotlightAge {
-    width: 6rem;
-  }
-
-  button {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    border: 0;
-    background-color: #fff;
-    color: #16181e;
-    text-align: center; 
-    margin: auto;
-    display: table-cell;
-    vertical-align: middle;
   }
 
   .mainTable table {
@@ -172,85 +155,37 @@
     padding: 1rem 1rem;
   }
 
-  .name {
+  .name,
+  .score {
     text-align: left;
   }
   
-  .rank,
+  .order,
   .score {
-    vertical-align: top;
+    /* vertical-align: top; */
     padding-top: 1.5rem;
   }
   
-  .rank {
+  .order {
     text-align: center;
     width: 4ch;
     padding-left: 1rem;
   }
-  
-  .score {
-    text-align: right;
-    width: 8ch;
-  }
 
-  h4 {
-    color: #cc9900;
+  .totalTitle {
+    font-size: 3.5rem;
     font-weight: 600;
-  }
-
-  .athleteScore {
-    padding: .5rem 0;
-    color: #999;
-    font-size: .8rem;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .toTopButton {
-    position : right;
-  }
-
-  .spotlightImage {
-    height: 10rem;
-    margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 50%;
-    border: 6px solid #c90;
-  }
-
-  .modalEntire {
-    /* max-height: 90%; */
-    width: 100%;
-    overflow: hidden;
-    margin: 1rem;
-  }
-
-  .modalHeader {
-    padding: 1rem;
+    color: #cc9900;
+    font-family: Georgia, serif;
   }
 
   h2 {
-    font-size: 1.6rem;
-    color: #16181e;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: Georgia, serif;
   }
 
-  .modalBody {
-    padding: 1rem;
+  h3 {
+    padding-left: .5rem;
   }
-
-  /* .content {
-    padding: .5rem 0;
-    display: flex;
-    flex-wrap: wrap;
-  } */
-
-  /* c-athlete-scoresheet {
-      min-width: 15%;
-      flex: 1;
-  } */
-
-  /* rgb(59, 62, 71) */
-  /* rgb(222, 195, 40) */
