@@ -15,7 +15,7 @@
             </nav>
         </div>
         <div class="main">
-            <template if:true={data2}>
+            <template if:true={data}>
                 <div class="totalSection">
                     <div class="slds-align_absolute-center"><div class="totalTitle">Total Results</div></div>
                     <lightning-layout multiple-rows="true">
@@ -35,18 +35,32 @@
                                 <circle r="5" cx="10" cy="10" fill="transparent"
                                         stroke="#DEC328"
                                         stroke-width="10"
-                                        stroke-dasharray={totalResults.RxCalced}
+                                        stroke-dasharray={totalResults.GoalCalced}
                                         transform="rotate(-90) translate(-20)" />
                             </svg>
                         </lightning-layout-item>
 
                         <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
-                            <h2>Did RX</h2><br><br>
-                            <h3>{totalResults.RxPercent}%</h3>
+                            <h2>Did RX</h2>
                         </lightning-layout-item>
                         <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
-                            <h2>Hit Goal</h2><br><br>
+                            <h2>Hit Goal</h2>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Did RX</h2><br><br> -->
                             <h3>{totalResults.RxPercent}%</h3>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Hit Goal</h2><br><br> -->
+                            <h3>{totalResults.GoalPercent}%</h3>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Did RX</h2><br><br> -->
+                            <h4>{totalResults.RxCount} / {totalResults.TotalSubmissions}</h4>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Hit Goal</h2><br><br> -->
+                            <h4>{totalResults.GoalCount} / {totalResults.TotalSubmissions}</h4>
                         </lightning-layout-item>
                     </lightning-layout>
                 </div>
@@ -62,8 +76,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template for:each={data2} for:item="workout">
-                            <tr key={workout.Order}>
+                        <template for:each={data} for:item="workout">
+                            <tr key={workout.WorkoutOrder}>
                                 <td class="order">{workout.WorkoutOrder}</td>
                                 <td class="name"><h2>{workout.WorkoutName}</h2></td>
                                 <td class="score">
@@ -76,12 +90,6 @@
                                             transform="rotate(-90) translate(-20)" />
                                   </svg>{workout.RxPercent}%</td>
                                 <td class="score">
-                                    <!-- <svg height="20" width="20" viewBox="0 0 20 20" data-percentage={workout.GoalPercent}>
-                                        <circle r="10" cx="10" cy="10" fill="#7c600d" />
-                                        <circle r="5" cx="10" cy="10" fill="transparent"
-                                            stroke="#DEC328"
-                                            stroke-width="10"
-                                            transform="rotate(-90) translate(-20)" /> -->
                                     <svg height="20" width="20" viewBox="0 0 20 20">
                                     <circle r="10" cx="10" cy="10" fill="#7c600d" />
                                     <circle r="5" cx="10" cy="10" fill="transparent"
@@ -98,7 +106,7 @@
                     <p>2021 Vault Competition</p>
                 </div>
             </template>
-            <template if:false={data2}>
+            <template if:false={data}>
                 <div class="footer">
                     <p>No data was found</p>
                 </div>

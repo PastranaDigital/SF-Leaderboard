@@ -4,229 +4,158 @@ import imageResource from '@salesforce/resourceUrl/SPCompImages';
 // import getAllAthletes from "@salesforce/apex/AthleteLwcController.getAllAthletes";
 import getAllScores from "@salesforce/apex/ResultsLwcController.getAllScores";
 
-export default class Leaderboard extends LightningElement {
-    buildDataComplete = false;
-
-
+export default class Results extends LightningElement {
     wiredScoreData = [];
-
-    data =[];
-
-    //? EXAMPLE
-    totalResults = {
-        TotalSubmissions: 20,
-        RxCount: 9,
-        RxPercent: 45,
-        RxCalced: ((45 * 31.4) / 100) + ' 31.4', 
-        GoalCount: 14,
-        GoalPercent: 70,
-        GoalCalced: ((70 * 31.4) / 100) + ' 31.4',
-    };
-    
-    //? EXAMPLE
-    data2 =[
-        {
-            WorkoutOrder: '1',                  //? Make on first pass
-            WorkoutName: 'Prometheus',          //? Make on first pass
-
-            AllScoreSubmissions: [              //? Make on second pass
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: 1,
-                    HitGoal: 1,
-                },
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: 1,
-                    HitGoal: 1,
-                },
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: 1,
-                    HitGoal: 1,
-                },
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: 1,
-                    HitGoal: 1,
-                },
-            ],
-            //? Make on third pass
-            TotalSubmissions: 10,                   //! length of array with all workout scores
-            RxCount: 5,                             //! Count of how many TRUE Rx values
-            RxPercent: 50,                          //! RxCount / TotalSubmissions
-            RxCalced: ((50 * 31.4) / 100) + ' 31.4',//! Calced while object being built 
-            GoalCount: 8,                           //! Count of how many 100 In Goal values
-            GoalPercent: 80,                        //! GoalCount / TotalSubmissions
-            GoalCalced: ((80 * 31.4) / 100) + ' 31.4',
-        },
-        {
-            WorkoutOrder: '2',
-            WorkoutName: 'Workout',
-
-            AllScoreSubmissions: [
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: true,
-                    HitGoal: true,
-                },
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: true,
-                    HitGoal: false,
-                },
-                {
-                    ScoreId: 'a1234',
-                    WorkoutName: 'Example',
-                    DidRx: true,
-                    HitGoal: false,
-                },
-            ],
-            TotalSubmissions: 10,                   //! length of array with all workout scores
-            RxCount: 4,                             //! Count of how many TRUE Rx values
-            RxPercent: 40,                          //! RxCount / TotalSubmissions
-            RxCalced: ((40 * 31.4) / 100) + ' 31.4',//! Calced while object being built 
-            GoalCount: 6,                           //! Count of how many 100 In Goal values
-            GoalPercent: 60,                        //! GoalCount / TotalSubmissions
-            GoalCalced: ((60 * 31.4) / 100) + ' 31.4',
-        },
-    ];
-    wireAthleteList = []; // used for refreshApex
-
+    scoreData = [];
     keyLogo = imageResource + '/Images/key_logo.png';
-    
 
-    @wire(getAllScores) ScoreResultsByWorkout(result) {
-        this.wiredScoreData = result;
-        if (result.data) {
-            let currentData = [];
-            result.data.forEach((row) => {
-                let rowData = {};
-                
-                
-                // Id, Vault_Workout__c, Vault_Workout__r.Name, Vault_Workout__r.Order__c,Is_Score_Between_Goal__c, Did_RX_or_RXplus__c
-                
-                
-                //? Basic information
-                // rowData.Id = row.Id; // score submission Id
-                rowData.WorkoutOrder = row.Vault_Workout__r.Order__c
-                rowData.WorkoutName = row.Vault_Workout__r.Name;
+    data;
+    workoutSet =  new Set([]);
+    workoutArray = [];
+    totalResults = {};
+    incomingScores;
 
-                //? Calculations for Each Workout
-                //! make a set of all the workouts logged
+    workout = {};
 
+    error;
+    getWorkoutDetails() {
+        getAllScores()
+            .then(result => {
+                let currentData = [];
+                result.forEach(row => {
+                    let rowData = {};
+                    rowData.Id = row.Id;
+                    rowData.WorkoutOrder = row.Vault_Workout__r.Order__c;
+                    rowData.WorkoutName = row.Vault_Workout__r.Name;
+                    rowData.DidRX = row.Did_RX_or_RXplus__c;
+                    rowData.HitGoal = row.Is_Score_Between_Goal__c;
 
-
-
-                rowData.Is_Score_Between_Goal__c = row.Is_Score_Between_Goal__c;
-                rowData.Points_Based_on_Rank__c = row.Points_Based_on_Rank__c;
-                rowData.Total_Points__c = row.Total_Workout_Points__c;
-
-                rowData.Score_1st__c = row.Score_1st__c;
-                rowData.First_Label__c = row.Vault_Workout__r.First_Label__c;
-                rowData.Score_2nd__c = row.Score_2nd__c;
-                rowData.Second_Label__c = row.Vault_Workout__r.Second_Label__c;
-                rowData.Weight_Used__c = row.Weight_Used__c;
-                rowData.RX_Weight_Male__c = row.Vault_Workout__r.RX_Weight_Male__c;
-
-                currentData.push(rowData);
-            });
-            this.scoreData = currentData;
-            console.log("Successful workoutsOrgByAthlete retrieval");
-        } else if (result.error) {
-            window.console.log(result.error);
-        }
-    }
+                    currentData.push(rowData);
+                });
+                // console.log('currentData', currentData);
+                this.scoreData = currentData;
+                console.log('this.scoreData', this.scoreData);
+                console.log(this.scoreData.length);
+                console.log("Successful workoutsOrgByAthlete retrieval");
 
 
-    
-
-    buildData(incomingArray){
-        console.log('Executing building of data');
-        console.log(incomingArray);
-        let currentData = [];
-        incomingArray.forEach(row => {
-            let rowData = row;
-            let athWorkouts = [];
-            this.scoreData.forEach((element) => {
-                let athScore = {};
-                if (row.Id == element.AthleteId) {
-                    athScore.WorkoutName = element.WorkoutName;
-
-                    athScore.Score_1st__c = element.Score_1st__c;
-                    athScore.First_Label__c = element.First_Label__c;
-                    athScore.Score_2nd__c = element.Score_2nd__c;
-                    athScore.Second_Label__c = element.Second_Label__c;
-                    athScore.Weight_Used__c = element.Weight_Used__c;
-                    athScore.RX_Weight_Male__c = element.RX_Weight_Male__c;
+                this.incomingScores = this.scoreData;
 
 
-                    //? takes the Score Submission and make it into a string
-                    let ScoreString = `${element.Score_1st__c} ${element.First_Label__c}`;
-                    //! needs to be done here
-                    if (element.Second_Label__c) {
-                        ScoreString += ` ${element.Score_2nd__c} ${element.Second_Label__c}`;
-                    } 
-                    if (element.RX_Weight_Male__c) {
-                        ScoreString += ` @ ${element.Weight_Used__c} lbs`;
-                    };
-                    athScore.ScoreString = ScoreString;
+                //! get unique workouts
+                this.incomingScores.forEach(element => {
+                    this.workoutSet.add(element.WorkoutName);
+                });
+                this.workoutArray = [...this.workoutSet];
 
+                this.data = [];
                     
-                    athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
-                    athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
-                    athScore.Total_Points__c = element.Total_Points__c;
-                    athWorkouts.push(athScore);
-                }
+                //! place the workouts into workout objects
+                let workoutOrder = 1;
+                this.workoutArray.forEach(row => {
+                    let tempWorkout = {
+                        WorkoutOrder: '',
+                        WorkoutName: '',
+                        AllScoreSubmissions: []
+                    };
+                    tempWorkout.WorkoutOrder = workoutOrder;
+                    tempWorkout.WorkoutName = row;
+                    // this.data.push(tempWorkout);
+                    workoutOrder++;
+                    //! place the incoming scores into the specific workout objects
+                    this.incomingScores.forEach(element => {
+                        if(element.WorkoutName == row) {
+                            let tempObj = {};
+                            tempObj.ScoreId = element.Id;
+                            tempObj.WorkoutName = element.WorkoutName;
+                            tempObj.DidRX = element.DidRX;
+                            if(element.HitGoal == 100) {
+                                let value = 1;
+                                tempObj.HitGoal = value;
+                            } else {
+                                let value = 0;
+                                tempObj.HitGoal = value;
+                            }
+
+                            tempWorkout.AllScoreSubmissions.push(tempObj);
+                        }
+                    });
+                    this.data.push(tempWorkout);
+                });
+
+                //! go through each workout object and calculate the details
+                this.data.forEach(element => {
+                    element.TotalSubmissions = element.AllScoreSubmissions.length;
+                    //! count the RX values
+                    element.RxCount = 0;
+                    element.AllScoreSubmissions.forEach(row => {
+                        element.RxCount = row.DidRX ? element.RxCount += 1 : element.RxCount;
+                    });
+                    //! calc the RX Percent
+                    element.RxPercent = (element.RxCount / element.TotalSubmissions * 100);
+                    element.RxPercent = element.RxPercent.toFixed(1);
+                    //! make RxCalced String
+                    element.RxCalced = ((element.RxPercent * 31.4) / 100) + ' 31.4';
+
+
+                    //! count the Goal values
+                    element.GoalCount = 0;
+                    element.AllScoreSubmissions.forEach(row => {
+                        element.GoalCount += row.HitGoal;
+                    });
+                    //! calc the Goal Percent
+                    element.GoalPercent = (element.GoalCount / element.TotalSubmissions * 100);
+                    element.GoalPercent = element.GoalPercent.toFixed(1);
+                    //! make GoalCalced String
+                    element.GoalCalced = ((element.GoalPercent * 31.4) / 100) + ' 31.4';
+                });
+
+                //! get the total values for totalResults
+                this.totalResults.TotalSubmissions = 0;
+                this.totalResults.RxCount = 0;
+                this.totalResults.RxPercent = 0;
+                // this.totalResults.RxCalced = ((45 * 31.4) / 100) + ' 31.4'; 
+                this.totalResults.GoalCount = 0;
+                this.totalResults.GoalPercent = 0;
+                // this.totalResults.GoalCalced = ((70 * 31.4) / 100) + ' 31.4';
+                this.data.forEach(workout => {
+                    this.totalResults.TotalSubmissions += workout.TotalSubmissions;
+                    this.totalResults.RxCount += workout.RxCount;
+                    this.totalResults.GoalCount += workout.GoalCount;
+
+                    //! calc the RX Percent
+                    this.totalResults.RxPercent = (this.totalResults.RxCount / this.totalResults.TotalSubmissions * 100);
+                    this.totalResults.RxPercent = this.totalResults.RxPercent.toFixed(1);
+                    //! make RxCalced String
+                    this.totalResults.RxCalced = ((this.totalResults.RxPercent * 31.4) / 100) + ' 31.4';
+                    
+                    //! calc the Goal Percent
+                    this.totalResults.GoalPercent = (this.totalResults.GoalCount / this.totalResults.TotalSubmissions * 100);
+                    this.totalResults.GoalPercent = this.totalResults.GoalPercent.toFixed(1);
+                    //! make GoalCalced String
+                    this.totalResults.GoalCalced = ((this.totalResults.GoalPercent * 31.4) / 100) + ' 31.4';
+                });
+                console.log('data', this.data);
+                console.log('totalResults', this.totalResults);
+                console.log('Completed building the data');
+                this.buildDataComplete = true;
+            })
+            .catch(error => {
+                this.error = error;
+                console.log('Error: ', error);
             });
-            rowData.allWorkouts = athWorkouts;
-            currentData.push(rowData);
-        });
-        console.log(currentData);
-        this.data = currentData;
-        console.log('Complete building the data');
-        this.buildDataComplete = true;
     }
-
-    // updatePieCharts() {
-    //     console.log('update pie charts');
-    //     let pieCharts = this.template.querySelectorAll('[data-percentage]');
-
-    //     console.log(pieCharts);
-    //     if (pieCharts) {
-    //         for (let i = 0; i < pieCharts.length; i += 1) {
-    //             console.log('inside for loop');
-    //             let slice = pieCharts[i];
-    //             let percentage = slice.getAttribute('data-percentage');
-    //             console.log(slice.getAttribute('data-percentage'));
-    //             let circumference = 31.4;
-    //             let strokeDash = Math.round((percentage * circumference) / 100);
-    //             let strokeDashArray = `${strokeDash} ${circumference}`;
-
-    //             slice.setAttribute('stroke-dasharray', strokeDashArray);
-    //         }
-    //     }
-    // }
-
+    
     connectedCallback() {
-        this.displayAthleteScore = false;
         console.log('connected');
-
-        // this.updatePieCharts();        
     }
-
+    
+    buildDataComplete = false;
     renderedCallback() {
-        if(this.scoreData && !this.buildDataComplete) {
-            console.log(this.scoreData.length);
-            console.log('Building Data');
-            this.buildData(this.data);
+        if(this.scoreData.length == 0 && !this.buildDataComplete) {
+            this.getWorkoutDetails();
         }
         console.log('rendered');
+        console.log(this.totalResults.GoalCalced);
     }
 }

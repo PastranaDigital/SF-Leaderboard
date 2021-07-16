@@ -61,8 +61,8 @@
   }
 
   .largeSVG {
-    height: 10rem;
-    width: 10rem;
+    height: 7rem;
+    width: 7rem;
   }
 
   .leaderboard {
@@ -108,7 +108,7 @@
     height: 16rem;
     position: absolute;
     bottom: 0;
-    right: .5rem;
+    right: 0rem;
   }
 
   .totalSection {
@@ -144,20 +144,23 @@
   }
 
   .mainTable tbody .score {
-      font-size:1.2rem;
+      font-size:1rem;
   }
   
   .mainTable th {
-    padding: 1.5rem 1rem 0.5rem;
+    padding: 1.5rem 0.5rem 0.5rem;
   }
   
   .mainTable td {
-    padding: 1rem 1rem;
+    padding: 1rem 0.5rem;
   }
 
-  .name,
-  .score {
+  /* .name {
     text-align: left;
+  } */
+  
+  .score {
+    text-align: center;
   }
   
   .order,
@@ -168,19 +171,19 @@
   
   .order {
     text-align: center;
-    width: 4ch;
-    padding-left: 1rem;
+    width: 2ch;
+    padding-left: 1rem !important;
   }
 
   .totalTitle {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: #cc9900;
     font-family: Georgia, serif;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #fff;
     font-family: Georgia, serif;
@@ -188,4 +191,8 @@
 
   h3 {
     padding-left: .5rem;
+  }
+
+  h4 {
+    font-size: .75rem;
   }
