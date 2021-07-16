@@ -6,9 +6,9 @@ public without sharing class AthleteLwcController {
         system.debug('ProfileName: '+profileName);
 
         List<Athlete__c> results = [
-            SELECT Id, Name, Total_Points__c, Age__c, Location__c, Profile_Pic_URL__c 
+            SELECT Id, Name, Total_Points__c, Age__c, Location__c, Profile_Pic_URL__c, Total_Tie_Break_Points__c 
             FROM Athlete__c 
-            ORDER BY Total_Points__c DESC];
+            ORDER BY Total_Tie_Break_Points__c DESC];
 
         System.debug(results);
 

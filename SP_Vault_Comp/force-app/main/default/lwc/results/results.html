@@ -1,0 +1,120 @@
+<!-- https://youtu.be/udAc-zCkv5w -->
+
+<!-- https://www.sfdcpoint.com/salesforce/modal-popup-lightning-web-component-lwc/ -->
+
+<template>
+    <div class="leaderboard">
+        <div class="header">
+            <h1><i>Group Results</i></h1>
+            <img class="topImage" src={keyLogo}/>
+            <nav>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit">Submit</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/workouts">Workouts</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/results" class="active">Results</a>
+            </nav>
+        </div>
+        <div class="main">
+            <template if:true={data}>
+                <div class="totalSection">
+                    <div class="slds-align_absolute-center"><div class="totalTitle">Total Results</div></div>
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
+                            <svg height="20" width="20" viewBox="0 0 20 20" class="largeSVG">
+                                <circle r="10" cx="10" cy="10" fill="#7c600d" />
+                                <circle r="5" cx="10" cy="10" fill="transparent"
+                                        stroke="#DEC328"
+                                        stroke-width="10"
+                                        stroke-dasharray={totalResults.RxCalced}
+                                        transform="rotate(-90) translate(-20)" />
+                            </svg>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
+                            <svg height="20" width="20" viewBox="0 0 20 20" class="largeSVG">
+                                <circle r="10" cx="10" cy="10" fill="#7c600d" />
+                                <circle r="5" cx="10" cy="10" fill="transparent"
+                                        stroke="#DEC328"
+                                        stroke-width="10"
+                                        stroke-dasharray={totalResults.GoalCalced}
+                                        transform="rotate(-90) translate(-20)" />
+                            </svg>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
+                            <h2>Did RX</h2>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_large">
+                            <h2>Hit Goal</h2>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Did RX</h2><br><br> -->
+                            <h3>{totalResults.RxPercent}%</h3>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Hit Goal</h2><br><br> -->
+                            <h3>{totalResults.GoalPercent}%</h3>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Did RX</h2><br><br> -->
+                            <h4>{totalResults.RxCount} / {totalResults.TotalSubmissions}</h4>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-align_absolute-center slds-p-top_small">
+                            <!-- <h2>Hit Goal</h2><br><br> -->
+                            <h4>{totalResults.GoalCount} / {totalResults.TotalSubmissions}</h4>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                
+                
+                <table class="mainTable">
+                    <thead>
+                        <tr>
+                            <th class="order"></th>
+                            <th class="name">Vault Workout</th>
+                            <th class="score">Did RX</th>
+                            <th class="score">Hit Goal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={data} for:item="workout">
+                            <tr key={workout.WorkoutOrder}>
+                                <td class="order">{workout.WorkoutOrder}</td>
+                                <td class="name"><h2>{workout.WorkoutName}</h2></td>
+                                <td class="score">
+                                    <svg height="20" width="20" viewBox="0 0 20 20">
+                                    <circle r="10" cx="10" cy="10" fill="#7c600d" />
+                                    <circle r="5" cx="10" cy="10" fill="transparent"
+                                            stroke="#DEC328"
+                                            stroke-width="10"
+                                            stroke-dasharray={workout.RxCalced}
+                                            transform="rotate(-90) translate(-20)" />
+                                  </svg>{workout.RxPercent}%</td>
+                                <td class="score">
+                                    <svg height="20" width="20" viewBox="0 0 20 20">
+                                    <circle r="10" cx="10" cy="10" fill="#7c600d" />
+                                    <circle r="5" cx="10" cy="10" fill="transparent"
+                                            stroke="#DEC328"
+                                            stroke-width="10"
+                                            stroke-dasharray={workout.GoalCalced}
+                                            transform="rotate(-90) translate(-20)" />
+                                    </svg>{workout.GoalPercent}%</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                <div class="footer">
+                    <p>2021 Vault Competition</p>
+                </div>
+            </template>
+            <template if:false={data}>
+                <div class="footer">
+                    <p>No data was found</p>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
+
+<!-- https://help.salesforce.com/articleView?id=sf.networks_public_access.htm&type=5 -->
+<!-- https://editor.wix.com/html/editor/web/renderer/edit/f11324cf-ee11-4d17-9018-3bc2ad2095b7?metaSiteId=35e6959c-f05f-4b38-8864-61f8ff5a1402&editorSessionId=1ad9d820-45d7-49da-bfbd-e3c36963a784&referralInfo=dashboard -->
+<!-- https://www.levelupsalesforce.com/lwc-custom-font-static-resource -->
