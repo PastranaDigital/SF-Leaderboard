@@ -30,7 +30,7 @@
   }
 
   .score {
-    font-size: .8rem;
+    /* font-size: .8rem; */
     /* width: 6ch; */
     width: 8%;
   }
@@ -43,29 +43,30 @@
   .rank {
     /* width: 10%; */
     /* width: 4ch; */
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
+    font-weight: 600;
   }
 
   .filler {
-    width: 46%;
+    width: 38%;
   }
 
   @media (max-width: 500px) { /* When in Mobile Portrait Mode */
     .name {
-      width: 53%;
+      width: 50%;
     }
     .score {
-      width: 15%;
+      width: 12.5%;
     }
     .filler {
-      width: 2%;
+      width: 0%;
     }
   }
 
   .athleteScore {
       /* padding: .5rem 0; */
       color: #999;
-      font-size: .8rem;
+      font-size: .75rem;
   }
 
   .hidden {

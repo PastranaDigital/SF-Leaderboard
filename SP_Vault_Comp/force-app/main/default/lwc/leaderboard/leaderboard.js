@@ -44,6 +44,8 @@ export default class Leaderboard extends LightningElement {
                     this.athSpotlight.Rank = element.Rank;
                     this.athSpotlight.TotalPoints = element.Total_Points__c;
                     this.athSpotlight.allWorkouts = element.allWorkouts;
+                    
+                    this.athSpotlight.RankNumber = this.getRankNumber(this.athSpotlight.Rank);
 
 
                     // this.athSpotlight.Score_1st__c = element.Score_1st__c;
@@ -270,6 +272,34 @@ export default class Leaderboard extends LightningElement {
         
     }
 
+    getRankNumber(incomingRank) {
+        let RankNumber = incomingRank;
+
+        let lastDigit = RankNumber % 10;
+
+        let lastTwoDigits = RankNumber % 100;
+        if(lastTwoDigits == 11 || lastTwoDigits == 12 || lastTwoDigits == 13 ) {
+            lastDigit = 0;
+        }
+
+        switch (lastDigit) {
+            case 1:
+                RankNumber += 'st';
+                break;
+            case 2:
+                RankNumber += 'nd';
+                break;
+            case 3:
+                RankNumber += 'rd';
+                break;
+                                
+            default:
+                RankNumber += 'th';
+                break;
+        }
+        return RankNumber;
+    }
+
     buildData(incomingArray){
         console.log('Executing building of data');
         console.log(incomingArray);
@@ -290,7 +320,16 @@ export default class Leaderboard extends LightningElement {
                     athScore.RX_Weight_Male__c = element.RX_Weight_Male__c;
 
 
+                    athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
+                    athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
+                    athScore.Total_Points__c = element.Total_Points__c;
+                    
+                    let RankNumber = ((105 - element.Points_Based_on_Rank__c) / 5);
+        
+                    athScore.RankNumber = this.getRankNumber(RankNumber);
+
                     //? takes the Score Submission and make it into a string
+                    // let ScoreString = `[${athScore.RankNumber}]  ${element.Score_1st__c} ${element.First_Label__c}`;
                     let ScoreString = `${element.Score_1st__c} ${element.First_Label__c}`;
                     //! needs to be done here
                     if (element.Second_Label__c) {
@@ -302,9 +341,6 @@ export default class Leaderboard extends LightningElement {
                     athScore.ScoreString = ScoreString;
 
                     
-                    athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
-                    athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
-                    athScore.Total_Points__c = element.Total_Points__c;
                     athWorkouts.push(athScore);
                 }
             });

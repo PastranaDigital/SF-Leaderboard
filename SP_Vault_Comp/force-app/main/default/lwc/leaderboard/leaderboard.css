@@ -125,8 +125,8 @@
   }
 
   button {
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border-radius: 50%;
     border: 0;
     background-color: #fff;
@@ -165,11 +165,11 @@
   }
   
   .mainTable th {
-    padding: 1.5rem 1rem 0.5rem;
+    padding: 1.5rem .5rem 0.5rem;
   }
   
   .mainTable td {
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
   }
 
   .name {
@@ -184,13 +184,14 @@
   
   .rank {
     text-align: center;
-    width: 4ch;
-    padding-left: 1rem;
+    width: 2ch;
+    padding-left: 1rem !important;
   }
   
   .score {
     text-align: right;
-    width: 8ch;
+    width: 5ch;
+    padding-right: 1rem !important;
   }
 
   h4 {
