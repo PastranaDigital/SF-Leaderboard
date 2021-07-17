@@ -13,6 +13,7 @@
     <columns>Total_Workout_Points__c</columns>
     <columns>Weight_Used__c</columns>
     <columns>CREATED_DATE</columns>
+    <columns>Did_RX_or_RXplus__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

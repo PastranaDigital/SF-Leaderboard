@@ -157,7 +157,7 @@
     <nameField>
         <displayFormat>S-{0000}</displayFormat>
         <label>Score Submission Number</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Score Submissions</pluralLabel>

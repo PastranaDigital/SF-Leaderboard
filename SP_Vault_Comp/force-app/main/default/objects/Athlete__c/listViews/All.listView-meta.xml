@@ -3,6 +3,7 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Total_Points__c</columns>
+    <columns>Total_Tie_Break_Points__c</columns>
     <columns>Location__c</columns>
     <columns>Age__c</columns>
     <columns>Profile_Pic_URL__c</columns>

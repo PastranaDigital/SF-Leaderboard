@@ -3,10 +3,13 @@
 	<types>
 		<members>AthleteLwcController</members>
 		<members>RecursionBlock</members>
+		<members>ResultsLwcController</members>
 		<members>ScoreSubmissionTriggerHelper</members>
 		<members>ScoreSubmissionTriggerHelperTEST</members>
+		<members>WorkoutLwcController</members>
 		<members>createScoreSubmission</members>
 		<members>createScoreSubmissionTEST</members>
+		<members>workoutDisplayObject</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -54,7 +57,13 @@
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>athleteScoresheet</members>
+		<members>athleteSpotlight</members>
+		<members>leaderboard</members>
+		<members>results</members>
+		<members>scoreSubmission</members>
+		<members>workoutDisplay</members>
+		<members>workoutTile</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
@@ -72,10 +81,6 @@
 	<types>
 		<members>cbVault_Competition</members>
 		<name>NetworkBranding</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PermissionSet</name>
 	</types>
 	<types>
 		<members>Guest License User</members>
