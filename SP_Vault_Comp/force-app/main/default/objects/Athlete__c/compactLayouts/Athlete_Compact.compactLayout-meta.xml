@@ -5,5 +5,7 @@
     <fields>Total_Points__c</fields>
     <fields>Location__c</fields>
     <fields>Age__c</fields>
+    <fields>Total_Tie_Break_Points__c</fields>
+    <fields>Is_RX__c</fields>
     <label>Athlete Compact</label>
 </CompactLayout>

@@ -2,10 +2,14 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Is_Score_Between_Goal__c</fullName>
     <externalId>false</externalId>
-    <formula>IF(
-AND( Calculated_Points__c &gt;=  Vault_Workout__r.Goal_Low_Value__c,  Calculated_Points__c &lt;=  Vault_Workout__r.Goal_High_Value__c),
-100,
-0)</formula>
+    <formula>IF(Vault_Workout__r.Is_Goal_Time__c, 
+  IF(Weight_Used__c &gt;= Vault_Workout__r.RX_Weight_Male__c, IF(Calculated_Points__c &lt;= Vault_Workout__r.Goal_High_Value__c, 100, 0), IF(AND(Calculated_Points__c &lt;= Vault_Workout__r.Goal_High_Value__c, Calculated_Points__c &gt;= Vault_Workout__r.Goal_Low_Value__c), 100, 0)
+  ), 
+
+  IF(Weight_Used__c &gt;= Vault_Workout__r.RX_Weight_Male__c, IF(Calculated_Points__c &gt;= Vault_Workout__r.Goal_Low_Value__c, 100, 0), IF(AND(Calculated_Points__c &lt;= Vault_Workout__r.Goal_High_Value__c, Calculated_Points__c &gt;= Vault_Workout__r.Goal_Low_Value__c), 100, 0)
+  )
+
+)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Is Score Between Goal?</label>
     <precision>18</precision>
