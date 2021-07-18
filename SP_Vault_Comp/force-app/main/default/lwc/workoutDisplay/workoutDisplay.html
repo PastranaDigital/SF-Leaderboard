@@ -14,7 +14,9 @@
         <div class="main">
             <template if:true={data}>
                 <lightning-accordion class="example-accordion"
-                    active-section-name="A">
+                    onsectiontoggle={handleToggleSection}
+                    active-section-name={accordianSection}
+                    allow-multiple-sections-open>
                     <template for:each={data} for:item="workout">
                         <!-- <tr key={workout.Id} >
                             <div class="workout" key={workout.Id}> -->

@@ -14,6 +14,18 @@ export default class WorkoutDisplay extends LightningElement {
     wireWorkoutList = []; // used for refreshApex
 
     scoreData;
+
+
+
+    accordianSection = '';
+
+    handleToggleSection(event) {
+        if(this.accordianSection.length === 0){
+            this.accordianSection ='';
+        } else{
+            this.accordianSection ='ABC';
+        }
+    }
     
     //? 1. Omar Pastrana: 120 reps
     // `${rank}. ${athleteName}: ${Score_1st__c} ${First_Label__c}`
@@ -119,12 +131,12 @@ export default class WorkoutDisplay extends LightningElement {
         }
     }
 
-    activeSectionMessage = '';
+    // activeSectionMessage = '';
     
-    handleToggleSection(event) {
-        this.activeSectionMessage =
-            'Open section name:  ' + event.detail.openSections;
-    }
+    // handleToggleSection(event) {
+    //     this.activeSectionMessage =
+    //         'Open section name:  ' + event.detail.openSections;
+    // }
 
     buildData(incomingArray) {
         console.log('Executing building of data');

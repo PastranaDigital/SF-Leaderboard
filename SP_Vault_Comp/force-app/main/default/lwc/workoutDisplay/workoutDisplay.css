@@ -1,9 +1,15 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
 
+
+/* Accordion color overrides */
+/* background #1f232c */
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* --sds-c-accordion-heading-text-color: #fff !important; */
   }
   
   .leaderboard {
