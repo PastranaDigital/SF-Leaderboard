@@ -176,21 +176,19 @@
     text-align: left;
   }
   
-  .rank,
-  .score {
-    vertical-align: top;
-    padding-top: 1.5rem;
-  }
-  
   .rank {
     text-align: center;
+    vertical-align: top;
     width: 2ch;
+    padding-top: 1.5rem !important;
     padding-left: 1rem !important;
   }
   
   .score {
     text-align: right;
+    vertical-align: top;
     width: 5ch;
+    padding-top: 1.25rem !important;
     padding-right: 1rem !important;
   }
 
