@@ -13,6 +13,10 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
+		<members>CommunitiesLanding</members>
+		<name>ApexPage</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>ApexTrigger</name>
 	</types>
@@ -35,7 +39,7 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Vault_Competition</members>
 		<name>CustomSite</name>
 	</types>
 	<types>
