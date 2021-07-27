@@ -151,7 +151,7 @@ export default class WorkoutDisplay extends LightningElement {
                 // console.log('element.Vault_Workout__c ' + element.Vault_Workout__c);
                 // console.log('row.Id ' + row.Id);
                 
-                if (row.Id == element.Vault_Workout__c && count < 4) {
+                if (row.Id == element.Vault_Workout__c && count < 11) {
                     
                     athScore.rank = count;
                     athScore.athleteName = element.Athlete_Name__r.Name;

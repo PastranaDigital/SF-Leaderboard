@@ -132,6 +132,10 @@
     color: #cc9900;
     text-transform: uppercase;
   }
+
+  .mainTable thead .score {
+    text-align: center;
+  }
   
   .mainTable tbody .name {
     color: white;
@@ -145,6 +149,7 @@
 
   .mainTable tbody .score {
       font-size:1rem;
+      text-align: left;
   }
   
   .mainTable th {
@@ -159,9 +164,9 @@
     text-align: left;
   } */
   
-  .score {
+  /* .score {
     text-align: center;
-  }
+  } */
   
   .order,
   .score {
