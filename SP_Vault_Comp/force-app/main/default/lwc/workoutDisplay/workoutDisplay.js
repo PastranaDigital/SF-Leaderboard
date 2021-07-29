@@ -162,7 +162,7 @@ export default class WorkoutDisplay extends LightningElement {
                     athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
                     athScore.Total_Points__c = element.Total_Points__c;
                     
-                    let topScoreString = `${count}. ${element.Athlete_Name__r.Name}: ${element.Score_1st__c} ${row.First_Label__c}`;
+                    let topScoreString = `${element.Score_1st__c} ${row.First_Label__c}`;
                     //! needs to be done here
                     if (row.Second_Label__c) {
                         topScoreString += ` ${element.Score_2nd__c} ${row.Second_Label__c}`;

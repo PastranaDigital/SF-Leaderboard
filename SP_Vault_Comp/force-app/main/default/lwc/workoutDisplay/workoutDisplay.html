@@ -36,9 +36,16 @@
                                         <br>
                                         <template if:true={scoreData}>
                                         <h3>Results</h3>
+                                        <table>
                                         <template for:each={workout.top3results} for:item="rank">
-                                            <p key={workout.Id}>#{rank.topScoreString}</p>
-                                        </template>
+                                            <!-- <p key={workout.Id}>#{rank.topScoreString}</p> -->
+                                                <tr key={workout.Id}>
+                                                    <td class="rank">{rank.rank}</td>
+                                                    <td class="name">{rank.athleteName}</td>
+                                                    <td>{rank.topScoreString}</td>
+                                                </tr>
+                                            </template>
+                                        </table>
                                         </template>
                                         <!-- <p>1. Omar 124 reps @ 40 lbs</p> -->
                                         <!-- <p>2. Omar 124 reps @ 40 lbs</p>
