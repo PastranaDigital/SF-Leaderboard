@@ -15,12 +15,12 @@
             <template if:true={data}>
                 <lightning-accordion class="example-accordion"
                     onsectiontoggle={handleToggleSection}
-                    active-section-name={accordianSection}
+                    active-section-name={accordionSection}
                     allow-multiple-sections-open>
                     <template for:each={data} for:item="workout">
                         <!-- <tr key={workout.Id} >
                             <div class="workout" key={workout.Id}> -->
-                        <lightning-accordion-section key={workout.Id} name="A" label={workout.AccordionTitle}>
+                        <lightning-accordion-section key={workout.Id} name={workout.AccordionName} label={workout.AccordionTitle}>
                             <div class="workout">
                                 <div class="workoutText">
                                     <h2>{workout.Name}</h2>

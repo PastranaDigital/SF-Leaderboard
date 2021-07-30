@@ -17,13 +17,50 @@ export default class WorkoutDisplay extends LightningElement {
 
 
 
-    accordianSection = '';
+    accordionSection = '';
+    thisWeeksWorkout;
+
+    assignAccordionSection() {
+        let today = new Date();
+        let mm = Number(today.getMonth() + 1); //January is 0!
+        let dd = Number(today.getDate()); 
+        let yyyy = today.getFullYear();
+        // console.log(yyyy);
+        // console.log(mm);
+        // console.log(dd);
+        
+        today = yyyy*10000 + mm*100 + dd; // converts 2021/06/05 to 20210605
+        //! goes back 6 days to set the "line" to pull the next workout only 
+        dd < 4 ? today -= 100 : today -= 5; // accounts for end of month
+        console.log('today', today);
+
+        let flag = true;
+        this.data.forEach(row => {
+            let workoutFullDate = row.Workout_Date__c.split("-");
+            let workoutDateNumber = Number(workoutFullDate[0])*10000 + Number(workoutFullDate[1])*100 + Number(workoutFullDate[2]);
+            if (flag) {
+                console.log('workoutDateNumber', workoutDateNumber);
+                if (workoutDateNumber >= today) {
+                    this.thisWeeksWorkout = row.Order__c;
+                    console.log('this.thisWeeksWorkout', this.thisWeeksWorkout);
+                    flag = false;
+                }
+            }
+        });
+        // if(!this.thisWeeksWorkout) this.thisWeeksWorkout = 4;
+        // else this.thisWeeksWorkout = 1;
+        
+        this.accordionSection = this.data[this.thisWeeksWorkout-1].AccordionName;
+        // console.log('this.accordionSection_____: ', this.accordionSection);
+    }
 
     handleToggleSection(event) {
-        if(this.accordianSection.length === 0){
-            this.accordianSection ='';
+        console.log('this.accordionSection: ', this.accordionSection);
+        if(this.accordionSection.length === 0){
+            this.accordionSection ='';
         } else{
-            this.accordianSection ='ABC';
+            this.assignAccordionSection();
+            // this.accordionSection ='ABC';
         }
     }
     
@@ -105,6 +142,7 @@ export default class WorkoutDisplay extends LightningElement {
                 let rowData = {};
                 rowData.Id = row.Id;
                 rowData.Name = row.Name;
+                rowData.AccordionName = String(row.Order__c);
                 rowData.AccordionTitle = `#${row.Order__c} ${row.Name} - ${row.Workout_Date__c}`;
                 rowData.Plain_Description__c = row.Plain_Description__c;
                 rowData.Description__c = row.Description__c;
@@ -124,6 +162,9 @@ export default class WorkoutDisplay extends LightningElement {
                 // console.log(`topScoreString: ${rowData.topScoreString}`);
             });
             this.data = currentData;
+            // this.accordionSection = String(currentData[this.thisWeeksWorkout-1].AccordionName);
+            // console.log(this.accordionSection);
+            this.assignAccordionSection();
             console.log('successful workout list pull');
             // console.log(currentData[5].Plain_Description__c);
         } else if (result.error) {
