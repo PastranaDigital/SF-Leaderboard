@@ -21,26 +21,16 @@ export default class WorkoutDisplay extends LightningElement {
     thisWeeksWorkout;
 
     assignAccordionSection() {
-        let today = new Date();
-        let mm = Number(today.getMonth() + 1); //January is 0!
-        let dd = Number(today.getDate()); 
-        let yyyy = today.getFullYear();
-        // console.log(yyyy);
-        // console.log(mm);
-        // console.log(dd);
-        
-        today = yyyy*10000 + mm*100 + dd; // converts 2021/06/05 to 20210605
-        //! goes back 6 days to set the "line" to pull the next workout only 
-        dd < 4 ? today -= 100 : today -= 5; // accounts for end of month
-        console.log('today', today);
+        let todaysDate = new Date();
+        // console.log('todaysDate ', todaysDate);
 
         let flag = true;
         this.data.forEach(row => {
-            let workoutFullDate = row.Workout_Date__c.split("-");
-            let workoutDateNumber = Number(workoutFullDate[0])*10000 + Number(workoutFullDate[1])*100 + Number(workoutFullDate[2]);
+            let workoutDate = new Date(row.Workout_Date__c);
+            // console.log('workoutDate ', workoutDate);
+            
             if (flag) {
-                console.log('workoutDateNumber', workoutDateNumber);
-                if (workoutDateNumber >= today) {
+                if (workoutDate >= todaysDate - 1000*60*60*24) {
                     this.thisWeeksWorkout = row.Order__c;
                     console.log('this.thisWeeksWorkout', this.thisWeeksWorkout);
                     flag = false;
