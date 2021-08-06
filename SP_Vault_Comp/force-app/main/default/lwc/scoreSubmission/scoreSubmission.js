@@ -5,7 +5,7 @@ import createScore from '@salesforce/apex/createScoreSubmission.createScore';
 import getSubmittedScore from '@salesforce/apex/createScoreSubmission.getSubmittedScore';
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
-import getAllWorkouts from '@salesforce/apex/WorkoutLwcController.getAllWorkouts';
+import getActiveWorkouts from '@salesforce/apex/WorkoutLwcController.getActiveWorkouts';
 import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
 // import { refreshApex } from "@salesforce/apex";
 
@@ -85,7 +85,7 @@ export default class ScoreSubmission extends LightningElement {
     workoutURL = ''; // 'https://spmembersonly.com/2021-vault-workouts/2021/01/04/chaos'; // workout.URL__c
     workoutDate = ''; // '7/5/2021'; // workout.Workout_Date__c
 
-    @wire(getAllWorkouts) workoutList(result) {
+    @wire(getActiveWorkouts) workoutList(result) {
         this.wireWorkoutList = result;
         if (result.data) {
             let currentData = [];
@@ -109,74 +109,37 @@ export default class ScoreSubmission extends LightningElement {
         } else if (result.error) {
             window.console.log(result.error);
         }
-        let todaysDate = new Date();
-        console.log('todaysDate ', todaysDate);
-        // console.log('todaysDate ', todaysDate - 1000*60*60*24);
-
-        // let today = new Date();
-        // let mm = Number(today.getMonth() + 1); //January is 0!
-        // let dd = Number(today.getDate()); 
-        // let yyyy = today.getFullYear();
-        // // console.log(yyyy);
-        // console.log('mm ',mm);
-        // // console.log(dd);
         
-        // console.log('today way before ', today);
-        // today = yyyy*10000 + mm*100 + dd; // converts 2021/06/05 to 20210605
-        // console.log('today before ', today);
-        // //! goes back 6 days to set the "line" to pull the next workout only 
-        // dd < 4 ? today -= 99 : today -= 5; // accounts for end of month
-        // console.log('today after ', today);
+        this.workoutRecordId = this.data[0].Id;
+        this.workoutName = this.data[0].Name;
+        this.workoutDescription = this.data[0].Description__c;
+        this.firstLabel = this.data[0].First_Label__c;
+        this.secondLabel = this.data[0].Second_Label__c;
+        this.workoutOrder = this.data[0].Order__c;
+        this.workoutGoal = this.data[0].Goal__c;
+        this.workoutImage = this.data[0].Image_File__c;
+        this.workoutRxWeight = this.data[0].RX_Weight_Male__c;
+        this.workoutURL = this.data[0].URL__c;
+        this.workoutDate = this.data[0].Workout_Date__c;
 
-        let tempData = [];
-        let flag = true;
-        this.data.forEach(row => {
-            // console.log('row.Workout_Date__c ', row.Workout_Date__c);
-            
-            let workoutDate = new Date(row.Workout_Date__c);
-            // console.log('workoutDate ', workoutDate);
-
-            // let workoutFullDate = row.Workout_Date__c.split("-");
-            // let workoutDateNumber = Number(workoutFullDate[0])*10000 + Number(workoutFullDate[1])*100 + Number(workoutFullDate[2]);
-            // // console.log(workoutDateNumber);
-            if (flag) {
-                if (workoutDate >= todaysDate - 1000*60*60*24) {
-                // if (workoutDateNumber >= today) {
-                    // console.log('INSIDE');
-                    let rowData = {};
-                    rowData.Id = row.Id;
-                    rowData.Name = row.Name;
-                    rowData.Description__c = row.Description__c;
-                    rowData.First_Label__c = row.First_Label__c;
-                    rowData.Second_Label__c = row.Second_Label__c;
-                    rowData.Order__c = row.Order__c;
-                    rowData.Goal__c = row.Goal__c;
-                    rowData.Image_File__c = imageResource + '/Images/' + row.Image_File__c;
-                    rowData.RX_Weight_Male__c = row.RX_Weight_Male__c;
-                    rowData.URL__c = row.URL__c;
-                    rowData.Workout_Date__c = row.Workout_Date__c;
-                    tempData.push(rowData);
-                    flag = false;
-                }
-            }
-        });
-        this.currentWorkout = tempData;
+        this.workoutDescriptionForTemplate = this.workoutDescription;
+        
         // console.log(`Today's Workout: ${this.currentWorkout[0].Name}`);
-        if (this.currentWorkout[0]) {
-            this.workoutRecordId = this.currentWorkout[0].Id;
-            this.workoutName = this.currentWorkout[0].Name;
-            this.workoutDescription = this.currentWorkout[0].Description__c;
-            this.firstLabel = this.currentWorkout[0].First_Label__c;
-            this.secondLabel = this.currentWorkout[0].Second_Label__c;
-            this.workoutOrder = this.currentWorkout[0].Order__c;
-            this.workoutGoal = this.currentWorkout[0].Goal__c;
-            this.workoutImage = this.currentWorkout[0].Image_File__c;
-            this.workoutRxWeight = this.currentWorkout[0].RX_Weight_Male__c;
-            this.workoutURL = this.currentWorkout[0].URL__c;
-            this.workoutDate = this.currentWorkout[0].Workout_Date__c;
+        // if (this.currentWorkout[0]) {
+        //     this.workoutRecordId = this.currentWorkout[0].Id;
+        //     this.workoutName = this.currentWorkout[0].Name;
+        //     this.workoutDescription = this.currentWorkout[0].Description__c;
+        //     this.firstLabel = this.currentWorkout[0].First_Label__c;
+        //     this.secondLabel = this.currentWorkout[0].Second_Label__c;
+        //     this.workoutOrder = this.currentWorkout[0].Order__c;
+        //     this.workoutGoal = this.currentWorkout[0].Goal__c;
+        //     this.workoutImage = this.currentWorkout[0].Image_File__c;
+        //     this.workoutRxWeight = this.currentWorkout[0].RX_Weight_Male__c;
+        //     this.workoutURL = this.currentWorkout[0].URL__c;
+        //     this.workoutDate = this.currentWorkout[0].Workout_Date__c;
 
-            this.template.querySelector('slot').innerHTML = this.workoutDescription;
-        }
+        //     this.template.querySelector('slot').innerHTML = this.workoutDescription;
+        // }
     }
 
     handleAthleteChange(event) {
@@ -343,6 +306,9 @@ export default class ScoreSubmission extends LightningElement {
     
     connectedCallback() {
         // console.log(athList.data[0].Name);
+    }
+    renderedCallback() {
+        this.template.querySelector('slot').innerHTML = this.workoutDescriptionForTemplate;
     }
 }
 
