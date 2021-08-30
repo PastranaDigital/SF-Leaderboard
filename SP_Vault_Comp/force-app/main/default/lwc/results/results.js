@@ -105,9 +105,9 @@ export default class Results extends LightningElement {
                     });
                     //! calc the Goal Percent
                     element.GoalPercent = (element.GoalCount / element.TotalSubmissions * 100);
-                    element.GoalPercent = element.GoalPercent.toFixed(1);
                     //! make GoalCalced String
                     element.GoalCalced = ((element.GoalPercent * 31.4) / 100) + ' 31.4';
+                    element.GoalPercent = element.GoalPercent.toFixed(1);
                 });
 
                 //! get the total values for totalResults
@@ -125,15 +125,15 @@ export default class Results extends LightningElement {
 
                     //! calc the RX Percent
                     this.totalResults.RxPercent = (this.totalResults.RxCount / this.totalResults.TotalSubmissions * 100);
-                    this.totalResults.RxPercent = this.totalResults.RxPercent.toFixed(1);
                     //! make RxCalced String
                     this.totalResults.RxCalced = ((this.totalResults.RxPercent * 31.4) / 100) + ' 31.4';
+                    this.totalResults.RxPercent = this.totalResults.RxPercent.toFixed(1);
                     
                     //! calc the Goal Percent
                     this.totalResults.GoalPercent = (this.totalResults.GoalCount / this.totalResults.TotalSubmissions * 100);
-                    this.totalResults.GoalPercent = this.totalResults.GoalPercent.toFixed(1);
                     //! make GoalCalced String
                     this.totalResults.GoalCalced = ((this.totalResults.GoalPercent * 31.4) / 100) + ' 31.4';
+                    this.totalResults.GoalPercent = this.totalResults.GoalPercent.toFixed(1);
                 });
                 console.log('data', this.data);
                 console.log('totalResults', this.totalResults);
