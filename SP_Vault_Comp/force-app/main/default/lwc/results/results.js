@@ -93,9 +93,9 @@ export default class Results extends LightningElement {
                     });
                     //! calc the RX Percent
                     element.RxPercent = (element.RxCount / element.TotalSubmissions * 100);
-                    element.RxPercent = element.RxPercent.toFixed(1);
                     //! make RxCalced String
                     element.RxCalced = ((element.RxPercent * 31.4) / 100) + ' 31.4';
+                    element.RxPercent = element.RxPercent.toFixed(1);
 
 
                     //! count the Goal values
