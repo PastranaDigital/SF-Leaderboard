@@ -49,23 +49,27 @@
   .bar-athlete-percentage {
 	right: 11%; 
 	position: absolute; 
-	margin-top: 0.2rem; 
+	margin-top: 0.35rem; 
 	font-size: .5rem;
   }
   
   .bar-background {
 	display: block; 
-	height: 5px; 
+	height: .4rem; 
 	background: #3B3E47; 
 	position: relative;
+	border-radius: 5rem;
   }
 
   .bar-filler {
 	display: block; 
 	height: 100%; 
 	background: #DEC328; 
-	/* width: 50%;  */
+	width: 0%; 
 	position: relative;
+	border-radius: 5rem;
+	transition: all 1s;
+	transition-timing-function: ease-out;
   }
 
   .submissionForm {
@@ -79,7 +83,7 @@
   .submittedResults {
     /* text-align: center; */
     background-color: #1f232c;
-    padding: 1rem 2.5rem 0 2.5rem;
+    padding: 1rem 2.5rem 2rem 2.5rem;
     font-size: .8rem;
     color: #ddd;
   }

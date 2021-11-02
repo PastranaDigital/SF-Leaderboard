@@ -27,9 +27,10 @@
 			<template if:true={scoreSubmitted}>
                 <div class="submittedResults">
                     <p class="date">Score successfully submitted, results updated</p>
+                    <p class="date">Refresh page to submit another</p>
                 </div>
             </template>
-            <!-- <template if:false={scoreSubmitted}> -->
+            <template if:false={scoreSubmitted}>
             <div class="submissionForm">
                 <table>
                     <tr>
@@ -97,7 +98,7 @@
                     </div>
                 </template>
             </div>
-            <!-- </template> -->
+            </template>
             
             <div class="footer">
                 <p>2021 Vault Competition</p>

@@ -1,24 +1,19 @@
 import { LightningElement, wire } from 'lwc';
-import { createRecord } from "lightning/uiRecordApi";
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
-// import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllChallengeScores from '@salesforce/apex/ChallengeLwcController.getAllChallengeScores';
 import createChallengeSubmission from '@salesforce/apex/ChallengeLwcController.createChallengeSubmission';
 import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
 
-// import { refreshApex } from "@salesforce/apex";
+import { refreshApex } from "@salesforce/apex";
 
 export default class MonthlyChallenge extends LightningElement {
-	// both should begin as FALSE values
+	//? both should begin as FALSE values
     scoreSubmitted = false;
     errorSubmitting = false;
     buttonErrorMessage = '';
     checkRequiredFieldsBoolean = [];
 
-    comboboxValue = '';
-    wireAthleteList = [];
     optionsAthleteList = [];
-    recordId;
 
     newRecord = {
         Athlete__c: '',
@@ -51,8 +46,6 @@ export default class MonthlyChallenge extends LightningElement {
     //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
     wireChallengeScores = []; //? used for refreshApex
     
-    currentWorkout = [];
-
     //? Default Values
     firstLabel = 'Burpees';
     secondLabel = 'KB Swings';
@@ -67,34 +60,19 @@ export default class MonthlyChallenge extends LightningElement {
                 rowData.Id = row.Id;
                 rowData.Name = row.Name;
                 rowData.Challenge_Total__c = row.Challenge_Total__c;
-				rowData.barFill = `width: ${Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
+				rowData.barFill = `width: ${row.Challenge_Total__c > 2000 ? 100 : Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
                 currentData.push(rowData);
             });
             this.data = currentData;
-            // console.log(currentData[0].Workout_Date__c);
         } else if (result.error) {
             window.console.log(result.error);
         }
     }
 
-    // createScoreSubmission() {
-    //     const fields = this.newRecord;
-    //     const recordInput = {
-    //       apiName: "Score_Submission__c",
-    //       fields
-    //     };
-    //     //? createRecord returns a promise
-    //     createRecord(recordInput)
-    //       .then((response) => {
-    //         console.log("Score Submission has been created : ", response.id);
-    //         this.recordId = response.id;
-    //         this.scoreSubmitted = true;
-    //       })
-    //       .catch((error) => {
-    //         this.errorSubmitting = true;
-    //         console.log("Error in creating score submission : ", error.body.message);
-    //       });
-    //   }
+	refreshScores() {
+		console.log('refreshing...');
+		refreshApex(this.wireChallengeScores);
+	}
 
     createScoreApex() {
         createChallengeSubmission({ score : this.newRecord })
@@ -103,6 +81,7 @@ export default class MonthlyChallenge extends LightningElement {
                 this.error = undefined;
                 this.scoreSubmitted = true;
                 console.log("result", this.message);
+				this.refreshScores();
             })
             .catch(error => {
                 this.message = undefined;
@@ -113,7 +92,6 @@ export default class MonthlyChallenge extends LightningElement {
     }
 
 	handleAthleteChange(event) {
-        this.comboboxValue = event.detail.value;
         this.newRecord.Athlete__c = event.detail.value;
         console.log(this.newRecord.Athlete__c);
     }
@@ -131,7 +109,6 @@ export default class MonthlyChallenge extends LightningElement {
     handleCheckboxChange(event) {
         this.newRecord.Fruits_Veggies__c = event.detail.checked;
         console.log(this.newRecord.Fruits_Veggies__c);
-		// console.log(event.detail);
     }
 
     handleSubmitRecord() {
@@ -144,7 +121,7 @@ export default class MonthlyChallenge extends LightningElement {
         if (!this.checkRequiredFieldsBoolean.includes(false)) {
             this.createScoreApex();
         } else {
-            this.buttonErrorMessage = 'Please complete required fields';
+			this.buttonErrorMessage = 'Please complete required fields';
             console.log('Please complete required fields');
         }        
     }
@@ -152,4 +129,8 @@ export default class MonthlyChallenge extends LightningElement {
     connectedCallback() {
         // console.log(athList.data[0].Name);
     }
+
+	renderedCallback() {
+
+	}
 }
