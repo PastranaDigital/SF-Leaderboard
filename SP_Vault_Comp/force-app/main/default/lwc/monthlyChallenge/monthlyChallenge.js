@@ -56,12 +56,14 @@ export default class MonthlyChallenge extends LightningElement {
         if (result.data) {
             let currentData = [];
             result.data.forEach((row) => {
-                let rowData = {};
-                rowData.Id = row.Id;
-                rowData.Name = row.Name;
-                rowData.Challenge_Total__c = row.Challenge_Total__c;
-				rowData.barFill = `width: ${row.Challenge_Total__c > 2000 ? 100 : Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
-                currentData.push(rowData);
+                if (row.Challenge_Total__c > 0) {
+					let rowData = {};
+					rowData.Id = row.Id;
+					rowData.Name = row.Name;
+					rowData.Challenge_Total__c = row.Challenge_Total__c;
+					rowData.barFill = `width: ${row.Challenge_Total__c > 2000 ? 100 : Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
+					currentData.push(rowData);
+				}
             });
             this.data = currentData;
         } else if (result.error) {

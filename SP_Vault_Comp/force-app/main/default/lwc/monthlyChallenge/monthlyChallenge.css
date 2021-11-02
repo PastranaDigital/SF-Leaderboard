@@ -32,7 +32,7 @@
     background-color: #16181e;
     color: #999;
 	height: 50%;
-    padding: 2rem 2.5rem;
+    padding: 2rem 2.5rem 4rem;
   }
 
   .bar {
@@ -112,6 +112,7 @@
     font-weight: 600;
     color: #fff;
     font-family: Georgia, serif;
+	padding-bottom: 2rem;
   }
 
   h3 {
@@ -232,9 +233,9 @@
 	}
 
 	.bar-athlete-percentage {
-	  right: 9%;
+	  right: 11%;
 	  margin-top: 0.75rem; 
-	  font-size: 1rem;
+	  font-size: .75rem;
 	}
 	
 	.bar-background {
