@@ -36,26 +36,26 @@
   }
 
   .bar {
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
   }
 
   .bar-athlete-name {
 	display: inline-flex; 
-	margin-top: 0.2rem; 
-	font-size: .75rem;
+	margin-top: 0.5rem; 
+	font-size: 1.5rem;
 	color: white;
   }
 
   .bar-athlete-percentage {
-	right: 11%; 
+	right: 6%; 
 	position: absolute; 
-	margin-top: 0.35rem; 
-	font-size: .5rem;
+	margin-top: 0.75rem; 
+	font-size: 1rem;
   }
   
   .bar-background {
 	display: block; 
-	height: .4rem; 
+	height: .75rem; 
 	background: #3B3E47; 
 	position: relative;
 	border-radius: 5rem;
@@ -220,3 +220,40 @@
   textarea {
     font-size: 16px;
   }
+
+  @media (max-width: 600px) {
+    .bar {
+	  margin-bottom: 1rem;
+	}
+
+	.bar-athlete-name {
+	  margin-top: 0.5rem; 
+	  font-size: 1rem;
+	}
+
+	.bar-athlete-percentage {
+	  right: 9%;
+	  margin-top: 0.75rem; 
+	  font-size: 1rem;
+	}
+	
+	.bar-background {
+	  height: .75rem; 
+	}
+  }
+
+/* 
+  .bar-athlete-percentage {
+	right: 6%; 
+	position: absolute; 
+	margin-top: 0.35rem; 
+	font-size: .5rem;
+  }
+  
+  .bar-background {
+	display: block; 
+	height: .4rem; 
+	background: #3B3E47; 
+	position: relative;
+	border-radius: 5rem;
+  } */
