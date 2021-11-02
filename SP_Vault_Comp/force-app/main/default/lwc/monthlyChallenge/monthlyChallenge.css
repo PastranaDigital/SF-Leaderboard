@@ -28,10 +28,44 @@
     position: relative;
   }
 
-  .workout {
+  .graph {
     background-color: #16181e;
     color: #999;
+	height: 50%;
     padding: 2rem 2.5rem;
+  }
+
+  .bar {
+	margin-bottom: 0.5rem;
+  }
+
+  .bar-athlete-name {
+	display: inline-flex; 
+	margin-top: 0.2rem; 
+	font-size: .75rem;
+	color: white;
+  }
+
+  .bar-athlete-percentage {
+	right: 11%; 
+	position: absolute; 
+	margin-top: 0.2rem; 
+	font-size: .5rem;
+  }
+  
+  .bar-background {
+	display: block; 
+	height: 5px; 
+	background: #3B3E47; 
+	position: relative;
+  }
+
+  .bar-filler {
+	display: block; 
+	height: 100%; 
+	background: #DEC328; 
+	/* width: 50%;  */
+	position: relative;
   }
 
   .submissionForm {
@@ -45,7 +79,7 @@
   .submittedResults {
     /* text-align: center; */
     background-color: #1f232c;
-    padding: 1rem 2.5rem 2rem 2.5rem;
+    padding: 1rem 2.5rem 0 2.5rem;
     font-size: .8rem;
     color: #ddd;
   }
@@ -66,6 +100,7 @@
     margin-left: 2rem;
     top: 4rem;
     max-width: 60%;
+	z-index: 1;
   }
 
   h2 {
@@ -101,6 +136,7 @@
     height: 16rem;
     position: absolute;
     bottom: 0;
+	z-index: 0;
     right: 0rem;
   }
   
@@ -151,11 +187,6 @@
     font-weight: 600;
   }
 
-  /* .submitButton {
-    background-color: #cc9900;
-    color:rgb(29, 29, 29);
-  } */
-
   .buttonErrorMessage {
     color: #cc2900;
     text-align: center;
@@ -185,23 +216,3 @@
   textarea {
     font-size: 16px;
   }
-
-
-  /* .forceCommunityContactSupportForm .contactSupportButton {
-    text-transform: var(--lwc-textTransform,capitalize);
-    font-size: var(--lwc-fcFontSizeMedium,0.8125rem);
-    color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
-    background-color: var(--lwc-colorBackgroundButtonBrand,rgb(209, 225, 224));
-    border-color: var(--lwc-buttonColorBorderBrandPrimary,rgb(209, 225, 224));
-    display: block;
-    border-width: 2px;
-    border-style: solid;
-    padding: 5px 24px;
-    min-width: 135px;
-    transition: all .2s;
-} */
-
-/* .forceCommunityContactSupportForm .contactSupportButton:hover, .forceCommunityContactSupportForm .contactSupportButton:focus {
-  color: var(--lwc-colorTextBrandPrimary,rgb(0, 0, 0));
-  background-color: var(--lwc-colorBackgroundButtonBrandHover,#b2cdcb);
-} */
