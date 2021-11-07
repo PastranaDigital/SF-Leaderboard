@@ -60,8 +60,11 @@ export default class MonthlyChallenge extends LightningElement {
 					let rowData = {};
 					rowData.Id = row.Id;
 					rowData.Name = row.Name;
+					rowData.Total_Burpees__c = row.Total_Burpees__c;
+					rowData.Total_KB_Swings__c = row.Total_KB_Swings__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;
 					rowData.barFill = `width: ${row.Challenge_Total__c > 2000 ? 100 : Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
+					rowData.barFillBurpees = `width: ${(row.Total_Burpees__c / 2000 * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}
             });

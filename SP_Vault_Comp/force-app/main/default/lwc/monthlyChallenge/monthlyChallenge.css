@@ -1,7 +1,8 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
 
 * {
-    margin: 0;
+    --color-burpees: #6381bb;
+	margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
@@ -33,6 +34,34 @@
     color: #999;
 	height: 50%;
     padding: 2rem 2.5rem 4rem;
+  }
+
+  .details {
+    padding: 0 0 2rem 0;
+    display: flex;
+    justify-content: space-between;	  
+  }
+
+  .legend {
+	display: flex;
+    margin-top: .75rem;
+  }
+	
+  .burpees,
+  .kb-swings {
+    color: #16181e;
+    padding: .5rem 1rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    margin: auto .25rem;
+  }
+
+  .burpees {
+	  background: var(--color-burpees);
+	}
+	
+  .kb-swings {
+	  background: #DEC328;
   }
 
   .bar {
@@ -72,6 +101,18 @@
 	transition-timing-function: ease-out;
   }
 
+  .bar-filler-burpees {
+	display: block; 
+	height: 100%; 
+	background: var(--color-burpees);
+    top: -.75rem;
+	width: 0%; 
+	position: relative;
+	border-radius: 5rem;
+	transition: all 1s;
+	transition-timing-function: ease-out;
+  }
+
   .submissionForm {
     /* background-color: #94928f; */
     background-color: #1f232c;
@@ -86,14 +127,6 @@
     padding: 1rem 2.5rem 2rem 2.5rem;
     font-size: .8rem;
     color: #ddd;
-  }
-
-  .athleteImage {
-    height: 6rem;
-    width: 6rem;
-    margin: 1rem 0;
-    border-radius: 50%;
-    border: 4px solid #cc9900;
   }
   
   h1 {
@@ -112,29 +145,13 @@
     font-weight: 600;
     color: #fff;
     font-family: Georgia, serif;
-	padding-bottom: 2rem;
+	/* padding-bottom: 2rem; */
   }
 
   h3 {
     color: #fff;
     font-size: 1.1rem;
     font-weight: 600;
-  }
-
-  
-  .workoutDetails {
-    font-size: .8rem;
-  }
-  
-  .workoutDescription {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  
-  .date {
-    font-size: .8rem;
-    font-weight: 600;
-    color: #cc9900;
   }
   
   .topImage {
@@ -187,11 +204,6 @@
     padding: .5rem 1rem;
   }
 
-  .scoreResultsHeader {
-    color: #cc9900;
-    font-weight: 600;
-  }
-
   .buttonErrorMessage {
     color: #cc2900;
     text-align: center;
@@ -223,7 +235,11 @@
   }
 
   @media (max-width: 600px) {
-    .bar {
+    .details {
+	  display: block;
+	}
+
+	.bar {
 	  margin-bottom: 1rem;
 	}
 
@@ -242,19 +258,3 @@
 	  height: .75rem; 
 	}
   }
-
-/* 
-  .bar-athlete-percentage {
-	right: 6%; 
-	position: absolute; 
-	margin-top: 0.35rem; 
-	font-size: .5rem;
-  }
-  
-  .bar-background {
-	display: block; 
-	height: .4rem; 
-	background: #3B3E47; 
-	position: relative;
-	border-radius: 5rem;
-  } */
