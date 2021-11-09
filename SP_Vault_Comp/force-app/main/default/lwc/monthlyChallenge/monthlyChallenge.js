@@ -15,6 +15,11 @@ export default class MonthlyChallenge extends LightningElement {
 
     optionsAthleteList = [];
 
+	pacer = {
+		pace: 0,
+		barFill: 0,
+	};
+
     newRecord = {
         Athlete__c: '',
         Burpees__c: '',
@@ -133,6 +138,12 @@ export default class MonthlyChallenge extends LightningElement {
 
     connectedCallback() {
         // console.log(athList.data[0].Name);
+		const date = Number((new Date()).getDate());
+		// console.log(`date: ${date}`);
+		this.pacer.pace = (+date / 30 * 2000).toFixed(0);
+		// console.log('this.pacer.pace', this.pacer.pace);
+		this.pacer.barFill = `width: ${(+date / 30 * 100).toFixed(1)}%;`;
+		// console.log('this.pacer.pace', this.pacer.barFill);
     }
 
 	renderedCallback() {

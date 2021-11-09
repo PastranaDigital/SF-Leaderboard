@@ -82,6 +82,7 @@
 	font-size: 1rem;
   }
   
+  .pacer-background,
   .bar-background {
 	display: block; 
 	height: .75rem; 
@@ -90,15 +91,27 @@
 	border-radius: 5rem;
   }
 
+  .pacer-background {
+	  margin-bottom: 3rem;
+  }
+
+  .pacer-filler,
   .bar-filler {
 	display: block; 
 	height: 100%; 
-	background: #DEC328; 
 	width: 0%; 
 	position: relative;
 	border-radius: 5rem;
 	transition: all 1s;
 	transition-timing-function: ease-out;
+  }
+
+  .pacer-filler {
+	background: #a72f2b; 
+  }
+
+  .bar-filler {
+	background: #DEC328; 
   }
 
   .bar-filler-burpees {

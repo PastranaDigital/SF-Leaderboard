@@ -14,11 +14,20 @@
         <div class="main">
             <div class="graph">
 				<div class="details">
-					<h2>2,000 Burpees & KB Swings</h2>
+					<h2>2,000 Burpees / KB Swings</h2>
 					<div class="legend">
 						<span class="burpees">Burpees</span>  <span class="kb-swings">Swings</span>
 					</div>
 				</div>
+
+				<div class="bar">
+					<!-- <p class="bar-athlete-name">Pacer</p> -->
+					<p class="bar-athlete-percentage">Pace: {pacer.pace} / 2000</p>
+					<div class="pacer-background">
+						<div class="pacer-filler" style={pacer.barFill}></div>
+					</div>
+				</div>
+
 				<template for:each={data} for:item="athlete">
 					<div key={athlete.Id} class="bar">
 						<p class="bar-athlete-name">{athlete.Name}</p>
