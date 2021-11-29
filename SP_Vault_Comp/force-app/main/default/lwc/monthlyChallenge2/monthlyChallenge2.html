@@ -1,0 +1,124 @@
+<!-- https://youtu.be/udAc-zCkv5w -->
+<template>
+    <div class="leaderboard">
+        <div class="header">
+            <h1><i>Monthly Challenge</i></h1>
+            <img class="topImage" src={keyLogo}/>
+            <nav>
+                <!-- <a href="https://spcomp-developer-edition.na162.force.com/leaderboard">Board</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/submit">Submit</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/workouts">Workouts</a>
+                <a href="https://spcomp-developer-edition.na162.force.com/leaderboard/results">Results</a> -->
+            </nav>
+        </div>
+        <div class="main">
+            <div class="graph">
+				<div class="details">
+					<h2>2,000 Burpees / KB Swings</h2>
+					<div class="legend">
+						<span class="burpees">Burpees</span>  <span class="kb-swings">Swings</span>
+					</div>
+				</div>
+
+				<div class="bar">
+					<!-- <p class="bar-athlete-name">Pacer</p> -->
+					<p class="bar-athlete-percentage">Pace: {pacer.pace} / 2000</p>
+					<div class="pacer-background">
+						<div class="pacer-filler" style={pacer.barFill}></div>
+					</div>
+				</div>
+
+				<template for:each={data} for:item="athlete">
+					<div key={athlete.Id} class="bar">
+						<p class="bar-athlete-name">{athlete.Name}</p>
+						<p class="bar-athlete-percentage">{athlete.Challenge_Total__c} / 2000</p>
+						<div class="bar-background">
+							<div class="bar-filler" style={athlete.barFill}></div>
+							<div class="bar-filler-burpees" style={athlete.barFillBurpees}></div>
+						</div>
+					</div>
+				</template>
+				
+            </div>
+			<template if:true={scoreSubmitted}>
+                <div class="submittedResults">
+                    <p class="date">Score successfully submitted, results updated</p>
+                    <p class="date">Refresh page to submit another</p>
+                </div>
+            </template>
+            <template if:false={scoreSubmitted}>
+            <div class="submissionForm">
+                <table>
+                    <tr>
+                        <td colspan="6">
+                            <lightning-combobox
+                                name="Athlete"
+                                label="Athlete's Name"
+                                value={value}
+                                placeholder="Select Athlete"
+                                options={options}
+                                onchange={handleAthleteChange}
+                                required ></lightning-combobox>
+                        </td>
+                    </tr>
+                    <tr>
+						<td colspan="3">
+							<lightning-input 
+								type="number" 
+								name="firstLabel"
+								value=''
+								onchange={handleScore1Change} 
+								label={firstLabel}
+								>
+							</lightning-input>
+						</td>
+						<td colspan="3">
+							<lightning-input 
+								type="number" 
+								name="secondLabel" 
+								value=''
+								onchange={handleScore2Change}
+								label={secondLabel}
+								>
+							</lightning-input>
+						</td>
+                    </tr>
+                    <tr>
+                        
+						<td colspan="6">
+							<lightning-input 
+								type="checkbox" 
+								name="fnvLabel"
+								value=''
+								onchange={handleCheckboxChange} 
+								label={fnvLabel}
+								>
+							</lightning-input>
+						</td>
+                    </tr>
+                    
+                </table>
+                <br>
+                <p class="buttonErrorMessage">{buttonErrorMessage}</p>
+                <lightning-button
+                    variant="brand"
+                    label="Submit Score" 
+                    title="Submit Score" 
+                    onclick={handleSubmitRecord} 
+                    class="slds-m-left_x-small slds-align_absolute-center">
+                </lightning-button>
+                <template if:true={errorSubmitting}>
+                    <div class="error">
+                        <p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
+                        <p>{error.body.pageErrors.message}</p>
+                    </div>
+                </template>
+            </div>
+            </template>
+            
+            <div class="footer">
+                <p>2021 Vault Competition</p>
+            </div>
+        </div>
+    </div>
+</template>
