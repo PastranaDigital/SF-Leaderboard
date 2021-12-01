@@ -13,7 +13,18 @@ export default class MonthlyChallenge extends LightningElement {
     buttonErrorMessage = '';
     checkRequiredFieldsBoolean = [];
 
+	totalChallengeCount = 3000;
+	daysInMonth = 30;
+
     optionsAthleteList = [];
+
+	labels = {
+		challengeTitle: `${this.totalChallengeCount} Calories (Run, Bike, Row)`,
+		movement1: 'Calories',
+		movement2: '',
+		checkbox: 'Did Street Parking WOD?',
+		month: 'December',
+	}
 
 	pacer = {
 		pace: 0,
@@ -22,9 +33,9 @@ export default class MonthlyChallenge extends LightningElement {
 
     newRecord = {
         Athlete__c: '',
-        Burpees__c: '',
-        KB_Swings__c: '',
-        Fruits_Veggies__c: '',
+        Movement_1__c: '',
+        Movement_2__c: '',
+        Daily_Checkbox__c: '',
     };
     
     keyLogo = imageResource + '/Images/key_logo.png';
@@ -50,11 +61,7 @@ export default class MonthlyChallenge extends LightningElement {
     data = [];
     //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
     wireChallengeScores = []; //? used for refreshApex
-    
-    //? Default Values
-    firstLabel = 'Burpees';
-    secondLabel = 'KB Swings';
-    fnvLabel = 'Fruits & Veggies';
+
 
     @wire(getAllChallengeScores) challengeScores(result) {
         this.wireChallengeScores = result;
@@ -65,11 +72,11 @@ export default class MonthlyChallenge extends LightningElement {
 					let rowData = {};
 					rowData.Id = row.Id;
 					rowData.Name = row.Name;
-					rowData.Total_Burpees__c = row.Total_Burpees__c;
-					rowData.Total_KB_Swings__c = row.Total_KB_Swings__c;
+					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
+					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;
-					rowData.barFill = `width: ${row.Challenge_Total__c > 2000 ? 100 : Number(row.Challenge_Total__c / 2000 * 100).toFixed(1)}%;`;
-					rowData.barFillBurpees = `width: ${(row.Total_Burpees__c / 2000 * 100).toFixed(1)}%;`;
+					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.totalChallengeCount * 100).toFixed(1)}%;`;
+					rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.totalChallengeCount * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}
             });
@@ -107,25 +114,25 @@ export default class MonthlyChallenge extends LightningElement {
     }
 
     handleScore1Change(event) {
-        this.newRecord.Burpees__c = event.detail.value;
-        console.log(this.newRecord.Burpees__c);
+        this.newRecord.Movement_1__c = event.detail.value;
+        console.log(this.newRecord.Movement_1__c);
     }
 
     handleScore2Change(event) {
-        this.newRecord.KB_Swings__c = event.detail.value;
-        console.log(this.newRecord.KB_Swings__c);
+        this.newRecord.Movement_2__c = event.detail.value;
+        console.log(this.newRecord.Movement_2__c);
     }
 
     handleCheckboxChange(event) {
-        this.newRecord.Fruits_Veggies__c = event.detail.checked;
-        console.log(this.newRecord.Fruits_Veggies__c);
+        this.newRecord.Daily_Checkbox__c = event.detail.checked;
+        console.log(this.newRecord.Daily_Checkbox__c);
     }
 
     handleSubmitRecord() {
         this.checkRequiredFieldsBoolean[0] = Boolean(this.newRecord.Athlete__c);
-        // this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Burpees__c);
-        // this.checkRequiredFieldsBoolean[2] = Boolean(this.newRecord.KB_Swings__c);
-        // this.checkRequiredFieldsBoolean[3] = Boolean(this.newRecord.Fruits_Veggies__c);
+        this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Movement_1__c);
+        // this.checkRequiredFieldsBoolean[2] = Boolean(this.newRecord.Movement_2__c);
+        // this.checkRequiredFieldsBoolean[3] = Boolean(this.newRecord.Daily_Checkbox__c);
         console.log(this.checkRequiredFieldsBoolean);
         
         if (!this.checkRequiredFieldsBoolean.includes(false)) {
@@ -140,9 +147,9 @@ export default class MonthlyChallenge extends LightningElement {
         // console.log(athList.data[0].Name);
 		const date = Number((new Date()).getDate());
 		// console.log(`date: ${date}`);
-		this.pacer.pace = (+date / 30 * 2000).toFixed(0);
+		this.pacer.pace = (+date / this.daysInMonth * this.totalChallengeCount).toFixed(0);
 		// console.log('this.pacer.pace', this.pacer.pace);
-		this.pacer.barFill = `width: ${(+date / 30 * 100).toFixed(1)}%;`;
+		this.pacer.barFill = `width: ${(+date / this.daysInMonth * 100).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
     }
 

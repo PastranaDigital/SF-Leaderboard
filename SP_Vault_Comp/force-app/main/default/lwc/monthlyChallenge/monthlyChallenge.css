@@ -1,7 +1,8 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
 
 * {
-    --color-burpees: #6381bb;
+    --color-movement-1: #DEC328;
+    --color-movement-2: #6381bb;
 	margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -38,30 +39,32 @@
 
   .details {
     padding: 0 0 2rem 0;
-    display: flex;
-    justify-content: space-between;	  
+    display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr auto;
+    /* justify-content: space-between;	   */
   }
 
   .legend {
 	display: flex;
-    margin-top: .75rem;
+    margin-top: 0.75rem;
   }
 	
-  .burpees,
-  .kb-swings {
+  .movement-1,
+  .movement-2 {
     color: #16181e;
-    padding: .5rem 1rem;
-    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: .75rem;
     text-align: center;
-    margin: auto .25rem;
+    margin: auto 0.25rem;
   }
 
-  .burpees {
-	  background: var(--color-burpees);
+  .movement-1 {
+	  background: var(--color-movement-1);
 	}
 	
-  .kb-swings {
-	  background: #DEC328;
+  .movement-2 {
+	  background: var(--color-movement-2);
   }
 
   .bar {
@@ -78,17 +81,17 @@
   .bar-athlete-percentage {
 	right: 6%; 
 	position: absolute; 
-	margin-top: 0.75rem; 
+	margin-top: 1.5rem; 
 	font-size: 1rem;
   }
   
   .pacer-background,
   .bar-background {
 	display: block; 
-	height: .75rem; 
+	height: 1.5rem; 
 	background: #3B3E47; 
 	position: relative;
-	border-radius: 5rem;
+	border-radius: .5rem;
   }
 
   .pacer-background {
@@ -101,27 +104,27 @@
 	height: 100%; 
 	width: 0%; 
 	position: relative;
-	border-radius: 5rem;
+	border-radius: .5rem;
 	transition: all 1s;
 	transition-timing-function: ease-out;
   }
 
   .pacer-filler {
-	background: #a72f2b; 
+	background: #752622; 
   }
 
   .bar-filler {
-	background: #DEC328; 
+	background: var(--color-movement-2); 
   }
 
-  .bar-filler-burpees {
+  .bar-filler-movement-1 {
 	display: block; 
 	height: 100%; 
-	background: var(--color-burpees);
-    top: -.75rem;
+	background: var(--color-movement-1);
+    top: -1.5rem;
 	width: 0%; 
 	position: relative;
-	border-radius: 5rem;
+	border-radius: .5rem;
 	transition: all 1s;
 	transition-timing-function: ease-out;
   }
@@ -130,7 +133,7 @@
     /* background-color: #94928f; */
     background-color: #1f232c;
     padding: 1rem 1.5rem 2rem 1.5rem;
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: #555;
   }
 
@@ -214,13 +217,13 @@
   }
   
   td {
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
   }
 
   .buttonErrorMessage {
     color: #cc2900;
     text-align: center;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
   }
 
   .error {
@@ -229,7 +232,7 @@
     text-align: center;
     margin: 2rem 1rem;
     padding: 2rem 0;
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
 
   .footer {
@@ -237,7 +240,7 @@
     color: #cc9900;
     text-align: center;
     padding: 4rem 0;
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
 
   lightning-combobox,
@@ -263,11 +266,15 @@
 
 	.bar-athlete-percentage {
 	  right: 11%;
-	  margin-top: 0.75rem; 
-	  font-size: .75rem;
+	  margin-top: 1.5rem; 
+	  font-size: 0.75rem;
+	}
+	
+	.pacer-background {
+	  height: 1.5rem; 
 	}
 	
 	.bar-background {
-	  height: .75rem; 
+	  height: 1.5rem; 
 	}
   }
