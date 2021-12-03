@@ -253,15 +253,22 @@
   }
 
   @media (max-width: 600px) {
-    .topImage {
-	  height: 10rem;
-	  bottom: 3.5rem;
+    h1 {
+		font-size: 2.25rem;
+		line-height: 1.75rem;
+		margin-left: 1.5rem;
+		top: 2.5rem;
+	}
+
+	.topImage {
+	  height: 8rem;
+	  bottom: 2.5rem;
 	  z-index: 1;
 	  right: 0.5rem;
 	}
 
 	.header {
-		height: 12rem;
+		height: 9rem;
 	}
 
 	.details {

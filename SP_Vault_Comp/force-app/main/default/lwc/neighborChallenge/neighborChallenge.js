@@ -19,7 +19,7 @@ export default class MonthlyChallenge extends LightningElement {
     optionsAthleteList = [];
 
 	labels = {
-		challengeTitle: `${this.totalChallengeCount} Miles Run`,
+		challengeTitle: `Run ${this.totalChallengeCount} Miles`,
 		movement1: 'Miles',
 		movement2: '',
 		checkbox: '',
