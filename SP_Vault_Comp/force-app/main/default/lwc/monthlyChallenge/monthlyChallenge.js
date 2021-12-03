@@ -15,6 +15,7 @@ export default class MonthlyChallenge extends LightningElement {
 
 	totalChallengeCount = 3000;
 	daysInMonth = 30;
+	divisor = 0;
 
     optionsAthleteList = [];
 
@@ -67,7 +68,14 @@ export default class MonthlyChallenge extends LightningElement {
         this.wireChallengeScores = result;
         if (result.data) {
             let currentData = [];
-            result.data.forEach((row) => {
+			this.divisor = this.totalChallengeCount;
+            result.data.forEach((score) => {
+				this.divisor = score.Challenge_Total__c > this.divisor ? score.Challenge_Total__c : this.divisor;
+				// console.log(score.Challenge_Total__c);
+				console.log(score.Challenge_Total__c, this.divisor);
+			});
+			console.log('divisor',this.divisor);
+			result.data.forEach((row) => {
                 if (row.Challenge_Total__c > 0) {
 					let rowData = {};
 					rowData.Id = row.Id;
@@ -75,8 +83,8 @@ export default class MonthlyChallenge extends LightningElement {
 					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;
-					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.totalChallengeCount * 100).toFixed(1)}%;`;
-					rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.totalChallengeCount * 100).toFixed(1)}%;`;
+					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+					rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}
             });
@@ -147,7 +155,7 @@ export default class MonthlyChallenge extends LightningElement {
         // console.log(athList.data[0].Name);
 		const date = Number((new Date()).getDate());
 		// console.log(`date: ${date}`);
-		this.pacer.pace = (+date / this.daysInMonth * this.totalChallengeCount).toFixed(0);
+		this.pacer.pace = (+date / this.daysInMonth * this.divisor).toFixed(0);
 		// console.log('this.pacer.pace', this.pacer.pace);
 		this.pacer.barFill = `width: ${(+date / this.daysInMonth * 100).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
