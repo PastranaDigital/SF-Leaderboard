@@ -1,0 +1,128 @@
+<template>
+    <div class="leaderboard">
+        <div class="main">
+            <div class="graph">
+				<div class="details">
+					<h2>{labels.challengeTitle}</h2>
+					<div class="legend">
+						<span class="movement-1">{labels.movement1}</span>
+						<template if:true={labels.movement2}>
+							<span class="movement-2">{labels.movement2}</span>
+						</template>
+					</div>
+				</div>
+
+				<div class="bar">
+					<!-- <p class="bar-athlete-name">Pacer</p> -->
+					<p class="bar-athlete-percentage">Pace: {pacer.pace} / {totalChallengeCount}</p>
+					<div class="pacer-background">
+						<div class="pacer-filler" style={pacer.barFill}></div>
+					</div>
+				</div>
+
+				<template for:each={data} for:item="athlete">
+					<div key={athlete.Id} class="bar">
+						<p class="bar-athlete-name">{athlete.Name}</p>
+						<p class="bar-athlete-percentage">{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+						<div class="bar-background">
+							<div class="bar-filler" style={athlete.barFill}></div>
+							<div class="bar-filler-movement-1" style={athlete.barFillMovement1}></div>
+						</div>
+					</div>
+				</template>
+				
+            </div>
+			<template if:true={scoreSubmitted}>
+                <div class="submittedResults">
+                    <p class="date">Score successfully submitted, results updated</p>
+                    <p class="date">Refresh page to submit another</p>
+                </div>
+            </template>
+            <template if:false={scoreSubmitted}>
+            <div class="submissionForm">
+                <table>
+                    <tr>
+                        <td colspan="6">
+                            <lightning-combobox
+                                name="Athlete"
+                                label="Athlete's Name"
+                                value={value}
+                                placeholder="Select Athlete"
+                                options={options}
+                                onchange={handleAthleteChange}
+                                required >
+							</lightning-combobox>
+                        </td>
+                    </tr>
+                    <tr>
+						<template if:true={labels.movement2}>
+							<td colspan="3">
+								<lightning-input 
+									type="number" 
+									name="firstLabel"
+									value=''
+									onchange={handleScore1Change} 
+									label={labels.movement1}
+									>
+								</lightning-input>
+							</td>
+							<td colspan="3">
+								<lightning-input 
+								type="number" 
+								name="secondLabel" 
+								value=''
+								onchange={handleScore2Change}
+								label={labels.movement2}
+								>
+								</lightning-input>
+							</td>
+						</template>
+						<template if:false={labels.movement2}>
+							<td colspan="6">
+								<lightning-input 
+									type="number" 
+									name="firstLabel"
+									value=''
+									onchange={handleScore1Change} 
+									label={labels.movement1}
+									>
+								</lightning-input>
+							</td>
+						</template>
+                    </tr>
+                    <tr>
+                        <template if:true={labels.checkbox}>
+							<td colspan="6">
+								<lightning-input 
+									type="checkbox" 
+									name='checkboxLabel'
+									value=''
+									onchange={handleCheckboxChange} 
+									label={labels.checkbox}
+									>
+								</lightning-input>
+							</td>
+						</template>
+                    </tr>
+                    
+                </table>
+                <br>
+                <p class="buttonErrorMessage">{buttonErrorMessage}</p>
+                <lightning-button
+                    variant="brand"
+                    label="Submit Score" 
+                    title="Submit Score" 
+                    onclick={handleSubmitRecord} 
+                    class="slds-m-left_x-small slds-align_absolute-center">
+                </lightning-button>
+                <template if:true={errorSubmitting}>
+                    <div class="error">
+                        <p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
+                        <p>{error.body.pageErrors.message}</p>
+                    </div>
+                </template>
+            </div>
+            </template>
+        </div>
+    </div>
+</template>

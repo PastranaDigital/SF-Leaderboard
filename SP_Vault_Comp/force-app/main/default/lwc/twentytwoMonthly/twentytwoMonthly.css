@@ -1,0 +1,196 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@1,500&display=swap'); */
+
+* {
+    --color-movement-1: #DEC328;
+    --color-movement-2: #6381bb;
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .graph {
+    /* background-color: #16181e; */
+    color: #999;
+	height: 50%;
+    padding: 2rem 2.5rem 4rem;
+  }
+
+  .details {
+    padding: 0 0 2rem 0;
+    display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr auto;
+    /* justify-content: space-between;	   */
+  }
+
+  .legend {
+	display: flex;
+    margin-top: 0.75rem;
+  }
+	
+  .movement-1,
+  .movement-2 {
+    color: #16181e;
+    padding: 0.5rem 1rem;
+    border-radius: .75rem;
+    text-align: center;
+    margin: auto 0.25rem;
+  }
+
+  .movement-1 {
+	  background: var(--color-movement-1);
+	}
+	
+  .movement-2 {
+	  background: var(--color-movement-2);
+  }
+
+  .bar {
+	margin-bottom: 1rem;
+  }
+
+  .bar-athlete-name {
+	display: inline-flex; 
+	margin-top: 0.5rem; 
+	font-size: 1.5rem;
+	color: #16181e;
+  }
+
+  .bar-athlete-percentage {
+	right: 6%; 
+	position: absolute; 
+	margin-top: 1.5rem; 
+	font-size: 1rem;
+  }
+  
+  .pacer-background,
+  .bar-background {
+	display: block; 
+	height: 1.5rem; 
+	background: #a9a9a9; 
+	position: relative;
+	border-radius: .5rem;
+  }
+
+  .pacer-background {
+	  margin-bottom: 3rem;
+  }
+
+  .pacer-filler,
+  .bar-filler {
+	display: block; 
+	height: 100%; 
+	width: 0%; 
+	position: relative;
+	border-radius: .5rem;
+	transition: all 1s;
+	transition-timing-function: ease-out;
+  }
+
+  .pacer-filler {
+	background: #752622; 
+  }
+
+  .bar-filler {
+	background: var(--color-movement-2); 
+  }
+
+  .bar-filler-movement-1 {
+	display: block; 
+	height: 100%; 
+	background: var(--color-movement-1);
+    top: -1.5rem;
+	width: 0%; 
+	position: relative;
+	border-radius: .5rem;
+	transition: all 1s;
+	transition-timing-function: ease-out;
+  }
+
+  .submissionForm {
+    /* background-color: #94928f; */
+    background-color: #e9e9e9;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    font-size: 0.8rem;
+    color: #555;
+	border-radius: 1rem;
+  }
+
+  .submittedResults {
+    /* text-align: center; */
+    /* background-color: #1f232c; */
+    padding: 1rem 2.5rem 2rem 2.5rem;
+    font-size: .8rem;
+    color: #16181e;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #16181e;
+    font-family: Georgia, serif;
+	/* padding-bottom: 2rem; */
+  }
+
+  h3 {
+    color: #16181e;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+
+  .main {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .buttonErrorMessage {
+    color: #cc2900;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  .error {
+    background-color: #331d1d;
+    color: #cc2900;
+    text-align: center;
+    margin: 2rem 1rem;
+    padding: 2rem 0;
+    font-size: 0.75rem;
+  }
+
+  lightning-combobox,
+  lightning-input,
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .details {
+	  display: block;
+	}
+
+	.bar {
+	  margin-bottom: 1rem;
+	}
+
+	.bar-athlete-name {
+	  margin-top: 0.5rem; 
+	  font-size: 1rem;
+	}
+
+	.bar-athlete-percentage {
+	  right: 11%;
+	  margin-top: 1.5rem; 
+	  font-size: 0.75rem;
+	}
+	
+	.pacer-background {
+	  height: 1.5rem; 
+	}
+	
+	.bar-background {
+	  height: 1.5rem; 
+	}
+  }

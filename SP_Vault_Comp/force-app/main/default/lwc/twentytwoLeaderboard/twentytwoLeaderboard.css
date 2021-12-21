@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.wrapper {
+	display: flex;
+	/*   width: 400px; */
+	/*   background: whitesmoke; */
+	margin: 0 auto;
+	padding: 0;
+	flex-direction: column;
+	align-items: center;
+  }
+
+.leaderboard {
+	display: grid;
+	  /* margin-top: 10rem; */
+  /*   margin-top: calc(12vh + 2rem); */
+	width: 100%;
+	padding-bottom: 2rem;
+	/* background: whitesmoke; */
+	justify-items: center;
+  }
+  
+  .leaderboard-title {
+	/*   font-size: 1.5rem;
+	font-weight: 600; */
+	padding-bottom: 1rem;
+  }
+
+  /* table stuff */
+  
+  .mainTable {
+	/* background-color: whitesmoke; */
+	color: rgb(95, 95, 95);
+	width: 90%;
+	border-collapse: collapse;
+	/*   border-radius: 1rem; */
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mainTable thead {
+	font-size: 0.7rem;
+	color: #cc9900;
+	text-transform: uppercase;
+  }
+  
+  .mainTable tbody .name {
+	color: var(--color-dark-text);
+	font-weight: 500;
+	font-size: 1rem;
+  }
+  
+  .mainTable tbody tr:nth-child(2n) {
+	background-color: var(--color-alt-table);
+  }
+  
+  .mainTable tbody .score {
+	font-size: 1.2rem;
+  }
+  
+  .mainTable th {
+	padding: 1rem 0.5rem 0.5rem;
+  }
+  
+  .mainTable td {
+	padding: 1rem 0.5rem;
+  }
+  
+  .ath-image {
+	padding: 0;
+	width: 3rem;
+  }
+  
+  .name {
+	text-align: left;
+	/*   vertical-align: top; */
+  }
+  
+  .rank {
+	text-align: center;
+	width: 2ch;
+	padding-left: 1rem !important;
+  }
+  
+  .score {
+	text-align: right;
+	/*   vertical-align: top; */
+	width: 5ch;
+	/*   padding-top: 1.25rem !important; */
+	padding-right: 1rem !important;
+  }
+  
+  .athleteImage {
+	height: 2rem;
+	border-radius: 50%;
+	border: 2px solid #cc9900;
+  }
+  

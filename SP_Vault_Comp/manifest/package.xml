@@ -68,6 +68,11 @@
 		<members>scoreSubmission</members>
 		<members>workoutDisplay</members>
 		<members>workoutTile</members>
+		<members>twentytwoLeaderboard</members>
+		<members>twentytwoMonthly</members>
+		<members>twentytwoSubmit</members>
+		<members>twentytwoWorkout</members>
+		<members>twentytwoWrapper</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
@@ -98,6 +103,7 @@
 	<types>
 		<members>SPCompAthletes</members>
 		<members>SPCompImages</members>
+		<members>twentytwoImages</members>
 		<name>StaticResource</name>
 	</types>
 	<version>51.0</version>
