@@ -26,13 +26,15 @@
 			<h2>Results</h2>
 		  </div>
 		  <div class="results-list">
-			<ul>
-			  <li>1. Lorem Ispum - 15 rds 3 reps @ 40lbs</li>
-			  <li>1. Lorem Ispum - 15 rds 3 reps @ 40lbs</li>
-			  <li>1. Lorem Ispum - 15 rds 3 reps @ 40lbs</li>
-			  <li>1. Lorem Ispum - 15 rds 3 reps @ 40lbs</li>
-			  <li>1. Lorem Ispum - 15 rds 3 reps @ 40lbs</li>
-			</ul>
+			<table>
+				<template for:each={workout.top3results} for:item="rank">
+					<tr key={workout.Id}>
+						<td class="rank">{rank.rank}</td>
+						<td class="name">{rank.athleteName}</td>
+						<td>{rank.topScoreString}</td>
+					</tr>
+				</template>
+			</table>
 		  </div>
 		</div>
 	  </div>

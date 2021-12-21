@@ -4,6 +4,7 @@
             <div class="graph">
 				<div class="details">
 					<h2>{labels.challengeTitle}</h2>
+					<h3>{labels.challengeSubTitle}</h3>
 					<div class="legend">
 						<span class="movement-1">{labels.movement1}</span>
 						<template if:true={labels.movement2}>
@@ -108,13 +109,16 @@
                 </table>
                 <br>
                 <p class="buttonErrorMessage">{buttonErrorMessage}</p>
-                <lightning-button
+                <!-- <lightning-button
                     variant="brand"
                     label="Submit Score" 
                     title="Submit Score" 
                     onclick={handleSubmitRecord} 
                     class="slds-m-left_x-small slds-align_absolute-center">
-                </lightning-button>
+                </lightning-button> -->
+				<div class="button-wrapper">
+					<button onclick={handleSubmitRecord}>Submit Challenge Score</button>
+				</div>
                 <template if:true={errorSubmitting}>
                     <div class="error">
                         <p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>

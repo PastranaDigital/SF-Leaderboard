@@ -20,7 +20,8 @@ export default class TwentytwoMonthly extends LightningElement {
     optionsAthleteList = [];
 
 	labels = {
-		challengeTitle: `${this.totalChallengeCount} Calories (Run, Bike, Row)`,
+		challengeTitle: `${this.totalChallengeCount} Calories`,
+		challengeSubTitle: 'Run, Bike, Row',
 		movement1: 'Calories',
 		movement2: '',
 		checkbox: 'Did Street Parking WOD?',

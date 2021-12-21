@@ -12,16 +12,24 @@
     /* background-color: #16181e; */
     color: #999;
 	height: 50%;
-    padding: 2rem 2.5rem 4rem;
+    padding: 0 2rem 4rem;
   }
 
   .details {
     padding: 0 0 2rem 0;
-    display: grid;
+    /* display: grid;
 	gap: 1rem;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: 1fr auto; */
+
     /* justify-content: space-between;	   */
+
+	display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    justify-items: center;
   }
+
+  
 
   .legend {
 	display: flex;
@@ -31,10 +39,11 @@
   .movement-1,
   .movement-2 {
     color: #16181e;
-    padding: 0.5rem 1rem;
-    border-radius: .75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: .5rem;
     text-align: center;
     margin: auto 0.25rem;
+	font-size: .5rem;
   }
 
   .movement-1 {
@@ -110,7 +119,7 @@
   .submissionForm {
     /* background-color: #94928f; */
     background-color: #e9e9e9;
-    padding: 1rem 1.5rem 2rem 1.5rem;
+    padding: 2rem 1.5rem;
     font-size: 0.8rem;
     color: #555;
 	border-radius: 1rem;
@@ -119,29 +128,29 @@
   .submittedResults {
     /* text-align: center; */
     /* background-color: #1f232c; */
-    padding: 1rem 2.5rem 2rem 2.5rem;
+    padding: 2rem 2.5rem;
     font-size: .8rem;
     color: #16181e;
   }
 
   h2 {
-    font-size: 2rem;
+    color: var(--color-dark-text);
+  	font-size: 2rem;
     font-weight: 600;
-    color: #16181e;
-    font-family: Georgia, serif;
-	/* padding-bottom: 2rem; */
+	font-family: 'Salesforce Sans';
   }
 
   h3 {
-    color: #16181e;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: #2d2e31;
+    font-size: 1.25rem;
+	line-height: 1rem;
   }
   
 
   .main {
     width: 100%;
     overflow: hidden;
+	padding-bottom: 4rem;
   }
 
   .buttonErrorMessage {
@@ -159,6 +168,31 @@
     font-size: 0.75rem;
   }
 
+  .button-wrapper {
+	display: flex;
+	justify-content: center;
+  }
+
+  button {
+	cursor: pointer;
+	/* color: revert; */
+	color: white;
+	font-size: 1rem;
+	border: 0;
+	padding: 0.5rem 3rem;
+	box-shadow: 0px 4px 4px
+	  rgba(var(--color-dark-1-rgb), var(--box-shadow-opacity));
+	border-radius: 0.5rem;
+	/* background: linear-gradient(150deg, var(--color1), var(--color2)); */
+	background: var(--color-movement-2);
+  }
+  
+  button:hover {
+	/* background: var(--color2); */
+	background: #2b4b89;
+	box-shadow: none;
+  }
+
   lightning-combobox,
   lightning-input,
   select:focus,
@@ -167,9 +201,9 @@
   }
 
   @media (max-width: 600px) {
-    .details {
+    /* .details {
 	  display: block;
-	}
+	} */
 
 	.bar {
 	  margin-bottom: 1rem;

@@ -1,0 +1,68 @@
+h2 {
+	color: var(--color-dark-text);
+  	font-size: 2rem;
+    font-weight: 600;
+	font-family: 'Salesforce Sans';
+  }
+
+.main {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+
+.workout {
+	padding: 0 2rem 5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr; /* auto since image is set? */
+	width: 100%;
+	margin: 0 auto;
+	gap: 0.75rem;
+	/*   width: 200px; */
+	/*   border-radius: 0.75rem; */
+	/*   padding: 1rem; */
+	  /* background: var(--color-workout); */
+  /*   background: linear-gradient(to top, var(--color2), var(--color1)); */
+	/*   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  }
+  
+  .workout .workout-title {
+	grid-column: 1 / -1;
+	/*   font-size: 1.5rem;
+	font-weight: 600; */
+	text-align: center;
+  }
+  
+  .workout > img {
+	--size: 200px;
+	/*   grid-column: 2 / span 1; */
+	max-width: var(--size);
+	max-height: var(--size);
+	justify-self: right;
+  }
+  
+  .workout-body {
+	font-size: 0.75rem;
+  }
+  
+  .workout-body p {
+	padding-bottom: 0.5rem;
+  }
+  
+  .workout .results {
+	padding-top: 2rem;
+	grid-column: 1 / -1;
+  }
+  
+  .workout .results h2 {
+	text-align: center;
+  }
+  
+  .workout .results-list {
+	grid-column: 1 / span 2;
+	padding: 0 2rem;
+	display: flex;
+	justify-content: center;
+  }
+  
