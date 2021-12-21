@@ -155,7 +155,7 @@ export default class MonthlyChallenge extends LightningElement {
         // console.log(athList.data[0].Name);
 		const date = Number((new Date()).getDate());
 		// console.log(`date: ${date}`);
-		this.pacer.pace = (+date / this.daysInMonth * this.divisor).toFixed(0);
+		this.pacer.pace = (+date / this.daysInMonth * this.totalChallengeCount).toFixed(0);
 		// console.log('this.pacer.pace', this.pacer.pace);
 		this.pacer.barFill = `width: ${(+date / this.daysInMonth * 100).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
