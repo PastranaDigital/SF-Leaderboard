@@ -100,7 +100,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Alpha WOD',
@@ -109,7 +109,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Alpha WOD',
@@ -118,7 +118,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Alpha WOD',
@@ -127,7 +127,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Bravo WOD',
@@ -136,7 +136,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Bravo WOD',
@@ -145,7 +145,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 			{
 				workoutName: 'Bravo WOD',
@@ -154,7 +154,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				score1st: 4,
 				score2nd: 28,
 				weightUsed: 40,
-				topScoreString: `${element.Score_1st__c} ${row.First_Label__c}`,
+				topScoreString: '${element.Score_1st__c} ${row.First_Label__c}',
 			},
 		],
 	};

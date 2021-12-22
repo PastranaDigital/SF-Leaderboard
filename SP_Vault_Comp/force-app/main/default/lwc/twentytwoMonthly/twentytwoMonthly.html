@@ -3,6 +3,7 @@
         <div class="main">
             <div class="graph">
 				<div class="details">
+					<p>{labels.month}</p>
 					<h2>{labels.challengeTitle}</h2>
 					<h3>{labels.challengeSubTitle}</h3>
 					<div class="legend">
@@ -24,7 +25,10 @@
 				<template for:each={data} for:item="athlete">
 					<div key={athlete.Id} class="bar">
 						<p class="bar-athlete-name">{athlete.Name}</p>
-						<p class="bar-athlete-percentage">{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+						<div class="bar-athlete-percentage">
+							<p>{athlete.Did_SP_Workout__c} SPs</p>
+							<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+						</div>
 						<div class="bar-background">
 							<div class="bar-filler" style={athlete.barFill}></div>
 							<div class="bar-filler-movement-1" style={athlete.barFillMovement1}></div>

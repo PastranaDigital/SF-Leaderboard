@@ -38,10 +38,12 @@
 		</div>
 
 		<template if:false={showMonthlyPage}>
+		<template if:false={showSubmitPage}>
 			<div class="bottom-spacer"></div>
 			<footer>
 				<a onclick={handleSubmitClick}><button>Submit Vault Score</button></a>
 			</footer>
+		</template>
 		</template>
 
 	</div>

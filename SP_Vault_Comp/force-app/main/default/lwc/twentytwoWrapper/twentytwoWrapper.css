@@ -112,18 +112,7 @@ body {
 	width: calc(1.5vw + 20px);
 	cursor: pointer;
   }
-  
 
-  
- 
-  .submit-form {
-	padding: 2rem 1.5rem;
-  }
-  
-  .submit-form h2 {
-	text-align: center;
-	padding: 1rem 0;
-  }
   
   .bottom-spacer {
 	padding: 2rem;

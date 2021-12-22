@@ -25,7 +25,7 @@ export default class TwentytwoMonthly extends LightningElement {
 		movement1: 'Calories',
 		movement2: '',
 		checkbox: 'Did Street Parking WOD?',
-		month: 'December',
+		month: 'December 2021',
 	}
 
 	pacer = {
@@ -81,6 +81,7 @@ export default class TwentytwoMonthly extends LightningElement {
 					let rowData = {};
 					rowData.Id = row.Id;
 					rowData.Name = row.Name;
+					rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
 					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;

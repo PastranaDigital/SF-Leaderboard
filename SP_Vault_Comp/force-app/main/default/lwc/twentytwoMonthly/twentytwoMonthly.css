@@ -70,6 +70,8 @@
 	position: absolute; 
 	margin-top: 1.5rem; 
 	font-size: 1rem;
+	display: flex;
+	gap: 1.5rem;
   }
   
   .pacer-background,
@@ -120,9 +122,14 @@
     /* background-color: #94928f; */
     background-color: #e9e9e9;
     padding: 2rem 1.5rem;
+	margin: 0 1.5rem;
     font-size: 0.8rem;
     color: #555;
 	border-radius: 1rem;
+  }
+
+  .submissionForm td {
+	padding: 0.5rem 0;
   }
 
   .submittedResults {

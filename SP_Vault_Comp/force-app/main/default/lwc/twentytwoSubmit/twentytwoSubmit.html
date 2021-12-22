@@ -1,6 +1,141 @@
 <template>
-    <div class="submit-form">
-		<h2>Submit Your Score</h2>
+	<div class="main">
+		<template if:false={scoreSubmitted}>
+		<div class="submissionForm">
+			<table>
+				<tr>
+					<td colspan="6">
+						<lightning-combobox
+							name="Athlete"
+							label="Athlete's Name"
+							value={value}
+							placeholder="Select Athlete"
+							options={options}
+							onchange={handleAthleteChange}
+							required >
+						</lightning-combobox>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						<lightning-input 
+							name="Vault Workout"
+							label="Vault Workout"
+							type="text"
+							placeholder={workoutName}
+							disabled>
+						</lightning-input>
+					</td>
+				</tr>
+				<tr>
+					<template if:true={secondLabel}>
+						<td colspan="3">
+							<lightning-input 
+								type="number" 
+								name="firstLabel"
+								value=''
+								onchange={handleScore1Change} 
+								label={firstLabel}
+								class="slds-p-right_small"
+								required>
+							</lightning-input>
+						</td>
+						<td colspan="3">
+							<lightning-input 
+								type="number" 
+								name="secondLabel" 
+								value=''
+								onchange={handleScore2Change}
+								label={secondLabel}
+								class="slds-p-left_small"
+								required>
+							</lightning-input>
+						</td>
+					</template>
+					<template if:false={secondLabel}>
+						<td colspan="6">
+							<lightning-input 
+								type="number" 
+								name="firstLabel" 
+								value=''
+								onchange={handleScore1Change}
+								label={firstLabel}
+								required>
+							</lightning-input>
+						</td>
+					</template>
+				</tr>
+				<template if:true={workoutRxWeight}>
+					<tr>
+						<td colspan="6">
+							<lightning-input 
+								type="number" 
+								name="weightUsed" 
+								value=''
+								onchange={handleWeightUsedChange}
+								label="Weight Used"
+								required>
+							</lightning-input>
+						</td>
+					</tr>
+				</template>
+				<tr>
+					<td colspan="6">
+						<lightning-input 
+							type="text" 
+							value=''
+							onchange={handleNotesChange}
+							label="Notes">
+						</lightning-input>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<p class="buttonErrorMessage">{buttonErrorMessage}</p>
+			<div class="button-wrapper">
+				<button onclick={handleSubmitRecord}>Submit Vault Score</button>
+			</div>
+			<template if:true={errorSubmitting}>
+				<div class="error">
+					<p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
+					<p>{error.body.pageErrors.message}</p>
+				</div>
+			</template>
+		</div>
+		</template>
+		<template if:true={scoreSubmitted}>
+			<div class="submittedResults">
+				<p class="date">Score successfully submitted, results below</p>
+				<img class="athleteImage" src={scoreSubmittedAthleteImage.Image}/>
+				<h3>{scoreSubmittedAthleteImage.Name}</h3>
+				<p><b>Vault Workout:</b> {workoutName}</p>
+				<p><b>{firstLabel}:</b> {newRecord.Score_1st__c}</p>
+				<template if:true={secondLabel}>
+					<p><b>{secondLabel}:</b> {newRecord.Score_2nd__c}</p>
+				</template>
+				<template if:true={workoutRxWeight}>
+					<p><b>Weight Used:</b> {newRecord.Weight_Used__c}</p>
+				</template>
+				<p><b>Notes:</b></p><p>{newRecord.Notes__c}</p>
+			</div>
+		</template>
+		<div class="workout">
+			<div class="header">
+				<h2>{workoutName}</h2>
+				<p class="date">{workoutDate} &nbsp; | &nbsp; <a href={workoutURL}>Full SP Workout Details</a></p>
+			</div>
+			<div class="workoutDetails">
+				<div class="workoutDescription">
+					<slot name="description">{workoutDescription}</slot>
+				</div>
+				<p><b>Goal: </b>{workoutGoal}</p>
+				<template if:true={workoutRxWeight}>
+					<p><b>RX Weight (Male): </b>{workoutRxWeight} lbs</p>
+				</template>
+			</div>
+		</div>
+	</div>
+    <!-- <div class="submit-form">
 		<input type="text" name="title" maxlength="255" value="" placeholder="Athlete Name">
 		<textarea rows="10" cols="40" name="description" placeholder="No description"></textarea>
 		<p>
@@ -12,6 +147,5 @@
 		  10 Clusters<br>
 		  12 Burpee Box Jump Overs<br><br>
 		</p>
-	</div>
-	<div class="bottom-spacer"></div>
+	</div> -->
 </template>
