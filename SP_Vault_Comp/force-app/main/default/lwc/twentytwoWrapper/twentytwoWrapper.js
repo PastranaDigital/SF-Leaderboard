@@ -3,10 +3,29 @@ import imageResource from '@salesforce/resourceUrl/twentytwoImages';
 
 export default class TwentytwoWrapper extends LightningElement {
     headerTitle = 'Leaderboard';
-    showLeaderboardPage = true;
-    showSubmitPage = false;
-    showWorkoutPage = false;
-    showMonthlyPage = false;
+	showLeaderboardPage = true;
+	showSubmitPage = false;
+	showWorkoutPage = false;
+	showMonthlyPage = false;
+	pages = [
+		{
+			name: 'showLeaderboardPage',
+			active: true
+		},
+		{
+			name: 'showSubmitPage',
+			active: false
+		},
+		{
+			name: 'showWorkoutPage',
+			active: false
+		},
+		{
+			name: 'showMonthlyPage',
+			active: false
+		},
+	];
+
 
     labels = {
         ComponentFooter: '2022 Vault',
@@ -16,6 +35,7 @@ export default class TwentytwoWrapper extends LightningElement {
     nav_leaderboard = imageResource + '/leaderboard.png';
     nav_monthly = imageResource + '/monthly.png';
     nav_workout = imageResource + '/workout.png';
+    nav_score = imageResource + '/score.png';
     
 	idealData = {
 		//? workouts ordered by date ASC
@@ -159,12 +179,19 @@ export default class TwentytwoWrapper extends LightningElement {
 		],
 	};
 
+	addActiveClass() {
+		this.pages.forEach(page => {
+			console.log(page);
+		});
+	}
+
     handleLeaderboardClick() {
         this.showLeaderboardPage = true;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
         this.headerTitle = 'Leaderboard';
+		this.addActiveClass();
     }
 
     handleSubmitClick() {

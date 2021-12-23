@@ -85,7 +85,9 @@ export default class TwentytwoMonthly extends LightningElement {
 					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;
-					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+					
+					rowData.barFill = `width: ${Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+
 					rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}

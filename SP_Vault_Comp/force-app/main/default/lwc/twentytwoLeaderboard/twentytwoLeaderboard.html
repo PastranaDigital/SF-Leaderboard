@@ -14,7 +14,7 @@
 			<template for:each={data} for:item="athlete">
 				<tr key={athlete.Id}>
 				<td class="rank">{athlete.Rank}</td>
-				<td class="name" id={athlete.Id} onclick={openModal}>
+				<td class="name" id={athlete.Id}> <!-- onclick={openModal}-->
 					<img class="athleteImage" src={athlete.Profile_Pic_URL__c}/>
 					{athlete.Name}
 				</td>

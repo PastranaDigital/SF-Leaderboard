@@ -5,17 +5,6 @@
 			<img src={img_logo} alt="Leaderboard" />
 			<h1><i>{headerTitle}</i></h1>
 		  </div>
-		  <nav>
-			<a class="nav-btn active" onclick={handleLeaderboardClick}>
-			  <img src={nav_leaderboard} alt="Leaderboard" title="Leaderboard" />
-			</a>
-			<a class="nav-btn" onclick={handleWorkoutClick}>
-			  <img src={nav_workout} alt="Workout" title="Workout" />
-			</a>
-			<a class="nav-btn" onclick={handleMonthlyClick}>
-			  <img src={nav_monthly} alt="Monthly Challenge" title="Monthly Challenge" />
-			</a>
-		  </nav>
 		</header>
 		<div class="top-spacer"></div>
 
@@ -37,61 +26,28 @@
 			</template>
 		</div>
 
-		<template if:false={showMonthlyPage}>
-		<template if:false={showSubmitPage}>
+		<!-- <template if:false={pages.showMonthlyPage}>
+		<template if:false={pages.showSubmitPage}> -->
 			<div class="bottom-spacer"></div>
 			<footer>
-				<a onclick={handleSubmitClick}><button>Submit Vault Score</button></a>
+				<nav>
+					<a class="nav-btn" onclick={handleLeaderboardClick}>
+					  <img src={nav_leaderboard} alt="Leaderboard" title="Leaderboard" />
+					</a>
+					<a class="nav-btn" onclick={handleSubmitClick}>
+					  <img src={nav_score} alt="Submit" title="Submit" />
+					</a>
+					<a class="nav-btn" onclick={handleWorkoutClick}>
+					  <img src={nav_workout} alt="Workout" title="Workout" />
+					</a>
+					<a class="nav-btn" onclick={handleMonthlyClick}>
+					  <img src={nav_monthly} alt="Monthly Challenge" title="Monthly Challenge" />
+					</a>
+				  </nav>
+				  <!-- <button onclick={handleSubmitClick}>Submit Vault Score</button> -->
 			</footer>
-		</template>
-		</template>
+		<!-- </template>
+		</template> -->
 
 	</div>
-
-		
-		
-    <!-- <div class="leaderboard">
-        <div class="header">
-            <h1>{headerTitle}</h1>
-            <img class="topImage" src={mainLogo}/>
-            <template if:true={showLeaderboardPage}>
-                <nav>
-                    <a onclick={handleLeaderboardClick} class="active">Board</a>
-                    <a onclick={handleWorkoutsClick}>Events</a>
-                    <a onclick={handleSubmitClick}>Submit</a>
-                </nav>
-            </template>
-            <template if:true={showSubmitPage}>
-                <nav>
-                    <a onclick={handleLeaderboardClick}>Board</a>
-                    <a onclick={handleWorkoutsClick}>Events</a>
-                    <a onclick={handleSubmitClick} class="active">Submit</a>
-                </nav>
-            </template>
-            <template if:true={showWorkoutsPage}>
-                <nav>
-                    <a onclick={handleLeaderboardClick}>Board</a>
-                    <a onclick={handleWorkoutsClick} class="active">Events</a>
-                    <a onclick={handleSubmitClick}>Submit</a>
-                </nav>
-            </template>
-            
-        </div>
-
-
-        <template if:true={showLeaderboardPage}>
-            <c-twentytwo-leaderboard></c-twentytwo-leaderboard>
-        </template>
-        <template if:true={showSubmitPage}>
-            <c-score-submission></c-score-submission>
-        </template>
-        <template if:true={showWorkoutsPage}>
-            <c-workout-display></c-workout-display>
-        </template>
-
-
-        <div class="footer">
-            <p>{labels.ComponentFooter}</p>
-        </div>
-    </div> -->
 </template>

@@ -194,11 +194,10 @@
 	background: var(--color-movement-2);
   }
   
-  button:hover {
-	/* background: var(--color2); */
+  /* button:hover {
 	background: #2b4b89;
 	box-shadow: none;
-  }
+  } */
 
   lightning-combobox,
   lightning-input,

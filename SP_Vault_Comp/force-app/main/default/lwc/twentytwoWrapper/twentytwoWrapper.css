@@ -23,7 +23,7 @@ body {
   
   h1 {
 	color: white;
-  	font-size: 3.2rem;
+  	font-size: 3rem;
     font-weight: 600;
     /* line-height: 2.5rem;
     margin-left: 4rem;
@@ -62,7 +62,7 @@ body {
   }
 
   .top-spacer {
-	padding: 5rem;
+	padding: 4rem;
   }
   
   .content {
@@ -99,18 +99,23 @@ body {
   
   nav {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 1rem;
 	/*   background: #c9c9c9; */
-	width: 85%;
+	width: 100%;
 	margin: 0 auto;
 	justify-items: center;
   }
   
   nav img {
-	/*   width: 1rem; */
-	width: calc(1.5vw + 20px);
+	  width: 1.5rem;
+	/* width: calc(1.5vw + 20px); */
 	cursor: pointer;
+  }
+
+  nav a.active {
+	border-bottom: 4px solid var(--color2); /* var(--color-dark-text) */
+	padding: .25rem;
   }
 
   
@@ -131,7 +136,7 @@ body {
   
   footer button {
 	cursor: pointer;
-	color: revert;
+	color: var(--color-dark-text);
 	border: 0;
 	padding: 0.5rem 3rem;
 	box-shadow: 0px 4px 4px
@@ -140,9 +145,9 @@ body {
 	background: linear-gradient(150deg, var(--color1), var(--color2));
   }
   
-  footer button:hover {
+  /* footer button:hover {
 	background: var(--color2);
 	box-shadow: none;
-  }
+  } */
   
   

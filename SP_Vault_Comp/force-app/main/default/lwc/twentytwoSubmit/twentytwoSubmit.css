@@ -124,20 +124,17 @@
 
   button {
 	cursor: pointer;
-	/* color: revert; */
-	color: white;
+	color: var(--color-dark-text);
 	font-size: 1rem;
 	border: 0;
 	padding: 0.5rem 3rem;
 	box-shadow: 0px 4px 4px
 	  rgba(var(--color-dark-1-rgb), var(--box-shadow-opacity));
 	border-radius: 0.5rem;
-	/* background: linear-gradient(150deg, var(--color1), var(--color2)); */
-	background: var(--color-movement-2);
+	background: linear-gradient(150deg, var(--color1), var(--color2));
   }
   
-  button:hover {
-	/* background: var(--color2); */
-	background: #2b4b89;
+  /* button:hover {
+	background: var(--color2);
 	box-shadow: none;
-  }
+  } */
