@@ -71,7 +71,7 @@ export default class TwentytwoMonthly extends LightningElement {
             let currentData = [];
 			this.divisor = this.totalChallengeCount;
             result.data.forEach((score) => {
-				this.divisor = score.Challenge_Total__c > this.divisor ? score.Challenge_Total__c : this.divisor;
+				// this.divisor = score.Challenge_Total__c > this.divisor ? score.Challenge_Total__c : this.divisor;
 				// console.log(score.Challenge_Total__c);
 				console.log(score.Challenge_Total__c, this.divisor);
 			});
@@ -85,10 +85,14 @@ export default class TwentytwoMonthly extends LightningElement {
 					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 					rowData.Challenge_Total__c = row.Challenge_Total__c;
-					
-					rowData.barFill = `width: ${Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
 
-					rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
+					rowData.completed = row.Challenge_Total__c > this.totalChallengeCount ? '★' : '';
+					
+					// rowData.barFill = `width: ${Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+
+					// rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
+					rowData.barFillMovement1 = `width: ${row.Total_Movement_1__c > this.totalChallengeCount ? 100 : (row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}
             });
@@ -142,7 +146,7 @@ export default class TwentytwoMonthly extends LightningElement {
 
     handleSubmitRecord() {
         this.checkRequiredFieldsBoolean[0] = Boolean(this.newRecord.Athlete__c);
-        this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Movement_1__c);
+        // this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Movement_1__c);
         // this.checkRequiredFieldsBoolean[2] = Boolean(this.newRecord.Movement_2__c);
         // this.checkRequiredFieldsBoolean[3] = Boolean(this.newRecord.Daily_Checkbox__c);
         console.log(this.checkRequiredFieldsBoolean);

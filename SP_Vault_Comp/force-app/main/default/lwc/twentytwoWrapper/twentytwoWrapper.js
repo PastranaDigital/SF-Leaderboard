@@ -207,7 +207,7 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showSubmitPage = false;
         this.showWorkoutPage = true;
         this.showMonthlyPage = false;
-        this.headerTitle = 'Workout';
+        this.headerTitle = 'Workouts';
     }
 
     handleMonthlyClick(){

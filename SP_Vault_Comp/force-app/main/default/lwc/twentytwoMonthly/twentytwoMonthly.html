@@ -24,7 +24,7 @@
 
 				<template for:each={data} for:item="athlete">
 					<div key={athlete.Id} class="bar">
-						<p class="bar-athlete-name">{athlete.Name}</p>
+						<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
 						<div class="bar-athlete-percentage">
 							<p>{athlete.Did_SP_Workout__c} SPs</p>
 							<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
