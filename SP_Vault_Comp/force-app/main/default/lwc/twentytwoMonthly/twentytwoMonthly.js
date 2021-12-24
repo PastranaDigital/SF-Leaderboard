@@ -9,6 +9,7 @@ import { refreshApex } from "@salesforce/apex";
 export default class TwentytwoMonthly extends LightningElement {
 	//? both should begin as FALSE values
     scoreSubmitted = false;
+	buttonPressed = false;
     errorSubmitting = false;
     buttonErrorMessage = '';
     checkRequiredFieldsBoolean = [];
@@ -156,7 +157,8 @@ export default class TwentytwoMonthly extends LightningElement {
         } else {
 			this.buttonErrorMessage = 'Please complete required fields';
             console.log('Please complete required fields');
-        }        
+        }    
+		this.buttonPressed = true;    
     }
 
     connectedCallback() {
