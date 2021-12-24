@@ -120,9 +120,11 @@
                     onclick={handleSubmitRecord} 
                     class="slds-m-left_x-small slds-align_absolute-center">
                 </lightning-button> -->
-				<div class="button-wrapper">
-					<button onclick={handleSubmitRecord}>Submit Challenge Score</button>
-				</div>
+				<template if:false={buttonPressed}>
+					<div class="button-wrapper">
+						<button onclick={handleSubmitRecord}>Submit Challenge Score</button>
+					</div>
+				</template>
                 <template if:true={errorSubmitting}>
                     <div class="error">
                         <p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
