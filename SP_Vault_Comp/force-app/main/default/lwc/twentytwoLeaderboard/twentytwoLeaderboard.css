@@ -96,3 +96,102 @@
 	border: 2px solid #cc9900;
 }
   
+
+
+/* MODAL --------------------------- */
+
+  /* .spotlightRank,
+  .spotlightLocation {
+    text-align: left;
+  } */
+
+  .spotlightRank {
+	  grid-column: 1/-1;
+  }
+
+  .sum-line {
+	  grid-column: 1/-1;
+	  border-top: 2px solid #999;
+  }
+
+  /* .spotlightLocation {
+    width: 14rem;
+  } */
+
+  .spotlightAge {
+	text-align: right;
+	padding-bottom: 2rem;
+  }
+
+.spotlightImage {
+    height: 10rem;
+	width: 10rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    background: #cc9900;
+	border: 6px solid #c90;
+  }
+
+  .modalEntire {
+    /* max-height: 90%; */
+    width: 100%;
+    overflow: hidden;
+    margin: 1rem;
+  }
+
+  .modalHeader {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    color: #16181e;
+  }
+
+  .modalBody {
+    padding: 1rem;
+  }
+
+  button {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 0;
+    background-color: #fff;
+    color: #16181e;
+    text-align: center; 
+    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  /* MODAL CONTENT */
+
+  .score-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.5rem;
+	min-width: 50vw;
+	padding: 0 1rem 1rem;
+  }
+  
+  .score-name {
+    color: #cc9900;
+    font-weight: 600;
+    font-size: 1rem;
+	grid-column: 1 / span 1;
+  }
+
+  .score-total {
+	/* border-top: 2px solid #999; */
+	font-weight: 600;
+	color: #16181e;
+  }
+
+  .score-value {
+	text-align: right;
+	color: #999;
+    font-size: 1rem;
+  }
