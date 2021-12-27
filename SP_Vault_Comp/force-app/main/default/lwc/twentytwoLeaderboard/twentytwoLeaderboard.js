@@ -1,10 +1,13 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
 import imageResource from '@salesforce/resourceUrl/twentytwoImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getAllAthletes from "@salesforce/apex/AthleteLwcController.getAllAthletes";
 import getAllScoreSubmissions from "@salesforce/apex/AthleteLwcController.getAllScoreSubmissions";
 
 export default class TwentytwoLeaderboard extends LightningElement {
+	@api incomingData;
+	
+	
 	displayAthleteScore; // Expand all onclick Boolean value
 	buildDataComplete = false;
 
@@ -24,11 +27,10 @@ export default class TwentytwoLeaderboard extends LightningElement {
         this.athName = event.target.innerHTML;
         this.athName = this.athName.split('>');
         this.athName = this.athName[1];
-		console.table(this.athId, this.athName);
         
         if(this.scoreData && !this.buildDataComplete) {
-            console.log(this.scoreData.length);
-            console.log('Building Data');
+            // console.log(this.scoreData.length);
+            // console.log('Building Data');
             this.buildData(this.data);
         }
 
@@ -36,7 +38,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
             this.data.forEach(element => {
                 // console.log('checking: ', element.Id, this.athId);
                 if (element.Id == this.athId) {
-                    console.log(`element.Id: ${element.Id}`);
+                    // console.log(`element.Id: ${element.Id}`);
                     this.athSpotlight.Id = element.Id;
                     this.athSpotlight.Name = element.Name;
                     this.athSpotlight.Location = element.Location__c;
@@ -113,7 +115,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
                 currentData.push(rowData);
             });
             this.scoreData = currentData;
-            console.log("Successful workoutsOrgByAthlete retrieval");
+            // console.log("Successful workoutsOrgByAthlete retrieval");
         } else if (result.error) {
             window.console.log(result.error);
         }
@@ -160,7 +162,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
             this.data = currentData;
             // console.log(currentData[0].Name);
             // console.log(this.data[0].Rank);
-            console.log("Successful data retrieval");
+            // console.log("Successful data retrieval");
         } else if (result.error) {
             window.console.log(result.error);
         }
@@ -206,8 +208,8 @@ export default class TwentytwoLeaderboard extends LightningElement {
     }
 
     buildData(incomingArray){
-        console.log('Executing building of data');
-        console.log(incomingArray);
+        // console.log('Executing building of data');
+        // console.log(incomingArray);
         let currentData = [];
         incomingArray.forEach(row => {
             let rowData = row;
@@ -252,9 +254,9 @@ export default class TwentytwoLeaderboard extends LightningElement {
             rowData.allWorkouts = athWorkouts;
             currentData.push(rowData);
         });
-        console.log(currentData);
+        // console.log(currentData);
         this.data = currentData;
-        console.log('Complete building the data');
+        // console.log('Complete building the data');
         this.buildDataComplete = true;
     }
 
@@ -262,11 +264,13 @@ export default class TwentytwoLeaderboard extends LightningElement {
         this.displayAthleteScore = false;
         console.log('connected');
     }
-
+	
     renderedCallback() {
+		// console.log('incomingData', this.incomingData.currentWorkout.URL__c);
+		console.log('JSON', JSON.parse(JSON.stringify(this.incomingData)));
         if(this.scoreData && !this.buildDataComplete) {
-            console.log(this.scoreData.length);
-            console.log('Building Data');
+            // console.log(this.scoreData.length);
+            // console.log('Building Data');
             this.buildData(this.data);
         }
         console.log('rendered');

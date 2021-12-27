@@ -1,7 +1,7 @@
 import { LightningElement, wire } from 'lwc';
 import imageResource from '@salesforce/resourceUrl/SPCompImages';
 import getAllChallengeScores from '@salesforce/apex/ChallengeLwcController.getAllChallengeScores';
-import createChallengeSubmission from '@salesforce/apex/ChallengeLwcController.createChallengeSubmission';
+import createChallengeSubmission from '@salesforce/apex/LeaderboardController.createChallengeSubmission';
 import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
 
 import { refreshApex } from "@salesforce/apex";
@@ -39,6 +39,7 @@ export default class TwentytwoMonthly extends LightningElement {
         Movement_1__c: '',
         Movement_2__c: '',
         Daily_Checkbox__c: '',
+		Challenge__c: 'a0K5e000006TO44EAG', //? Hardcoded Dec Challenge
     };
     
     keyLogo = imageResource + '/Images/key_logo.png';
