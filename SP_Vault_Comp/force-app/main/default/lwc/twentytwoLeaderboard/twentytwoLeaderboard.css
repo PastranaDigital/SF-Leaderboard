@@ -173,7 +173,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 0.5rem;
-	min-width: 50vw;
+	width: 82.5vw;
 	padding: 0 1rem 1rem;
   }
   
