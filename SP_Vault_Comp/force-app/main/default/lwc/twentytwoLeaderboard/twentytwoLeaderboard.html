@@ -58,6 +58,7 @@
 				<td class="name" id={athlete.Id} onclick={openModal}><img class="athleteImage" id={athlete.Id} src={athlete.Profile_Pic_URL__c}/>
 					{athlete.Name}
 					<template if:true={displayAthleteScore}>
+						content
 						<div class="content">
 						<template for:each={athlete.allWorkouts} for:item="score">
 							<c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athlete.Id} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
@@ -65,7 +66,7 @@
 						</div>
 					</template>
 				</td>
-				<td class="score">{athlete.Total_Points__c}</td>
+				<td class="score">{athlete.Grand_Total__c}</td>
 				</tr>
 			</template>
 		  </tbody>

@@ -1,17 +1,11 @@
-import { LightningElement, wire, api } from 'lwc';
-import imageResource from '@salesforce/resourceUrl/twentytwoImages';
-import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
-import getAllAthletes from "@salesforce/apex/AthleteLwcController.getAllAthletes";
-import getAllScoreSubmissions from "@salesforce/apex/AthleteLwcController.getAllScoreSubmissions";
+import { LightningElement, api } from 'lwc';
 
 export default class TwentytwoLeaderboard extends LightningElement {
-	@api incomingData;
-	
+	@api incomingAthletes;
+	@api incomingScores;
 	
 	displayAthleteScore; // Expand all onclick Boolean value
 	buildDataComplete = false;
-
-
 
     //! Boolean tracked variable to indicate if modal is open or not default value is false as modal is closed when page is loaded 
     isModalOpen = false;
@@ -50,9 +44,9 @@ export default class TwentytwoLeaderboard extends LightningElement {
                     
                     this.athSpotlight.RankNumber = this.getRankNumber(this.athSpotlight.Rank);
 
-                    this.athSpotlight.ChallengeTotal = element.Challenge_Total__c;
+                    this.athSpotlight.ChallengeTotal = element.Challenges_Completed__c;
                     this.athSpotlight.SPWorkouts = element.Did_SP_Workout__c * 10;
-                    this.athSpotlight.GrandTotal = this.athSpotlight.TotalPoints + this.athSpotlight.ChallengeTotal + this.athSpotlight.SPWorkouts;
+                    this.athSpotlight.GrandTotal = element.Grand_Total__c;
 
                 }
             });
@@ -79,94 +73,13 @@ export default class TwentytwoLeaderboard extends LightningElement {
     //! ----------------------------------------------------------------
 
 
-    
+    scoreData = [];
+    data = [];
 
-    wiredScoreData = [];
-    // scoreData = [];
-
-    //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
-    data =[];
-    wireAthleteList = []; // used for refreshApex
-
-    keyLogo = imageResource + '/Images/key_logo.png';
-    
-    // @wire(getAllScoreSubmissions) scoreData;
-    @wire(getAllScoreSubmissions) workoutsOrgByAthlete(result) {
-        this.wiredScoreData = result;
-        if (result.data) {
-            let currentData = [];
-            result.data.forEach((row) => {
-                let rowData = {};
-                rowData.Id = row.Id; // score submission Id
-                rowData.AthleteId = row.Athlete_Name__c;
-                rowData.AthleteName = row.Athlete_Name__r.Name;
-                rowData.WorkoutName = row.Vault_Workout__r.Name;
-                rowData.Is_Score_Between_Goal__c = row.Is_Score_Between_Goal__c;
-                rowData.Points_Based_on_Rank__c = row.Points_Based_on_Rank__c;
-                rowData.Total_Points__c = row.Total_Workout_Points__c;
-
-                rowData.Score_1st__c = row.Score_1st__c;
-                rowData.First_Label__c = row.Vault_Workout__r.First_Label__c;
-                rowData.Score_2nd__c = row.Score_2nd__c;
-                rowData.Second_Label__c = row.Vault_Workout__r.Second_Label__c;
-                rowData.Weight_Used__c = row.Weight_Used__c;
-                rowData.RX_Weight_Male__c = row.Vault_Workout__r.RX_Weight_Male__c;
-
-                currentData.push(rowData);
-            });
-            this.scoreData = currentData;
-            // console.log("Successful workoutsOrgByAthlete retrieval");
-        } else if (result.error) {
-            window.console.log(result.error);
-        }
-    }
-
-
-    @wire(getAllAthletes) athList(result) {
-        this.wireAthleteList = result;
-        // console.log('scoreData: ' + this.scoreData.data);
-        if (result.data) {
-            let currentData = [];
-            let rank = 1;
-            result.data.forEach((row) => {
-              let rowData = {};
-              rowData.Rank = rank;
-              rowData.Id = row.Id; // Athlete Id
-              rowData.Name = row.Name;
-              rowData.Total_Points__c = row.Total_Points__c;
-              rowData.Age__c = row.Age__c;
-              rowData.Location__c = row.Location__c;
-              rowData.Profile_Pic_URL__c = athleteResource + '/Athletes/' + row.Profile_Pic_URL__c;
-
-			  rowData.Challenge_Total__c = row.Challenge_Total__c;
-			  rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
-            
-            
-            //   let athWorkouts = [];
-            //   this.scoreData.forEach((element) => {
-            //     let athScore = {};
-            //     if (row.Id == element.AthleteId) {
-            //         athScore.WorkoutName = element.WorkoutName;
-            //         athScore.Is_Score_Between_Goal__c = element.Is_Score_Between_Goal__c;
-            //         athScore.Points_Based_on_Rank__c = element.Points_Based_on_Rank__c;
-            //         athScore.Total_Points__c = element.Total_Workout_Points__c;
-            //     }
-            //     athWorkouts.push(athScore);
-            //   });
-            //   rowData.allWorkouts = athWorkouts;
-
-
-              currentData.push(rowData);
-              rank++;
-            });
-            this.data = currentData;
-            // console.log(currentData[0].Name);
-            // console.log(this.data[0].Rank);
-            // console.log("Successful data retrieval");
-        } else if (result.error) {
-            window.console.log(result.error);
-        }
-    }
+	assignData() {
+		this.data = this.incomingAthletes;
+		this.scoreData = this.incomingScores;
+	}
 
 	handleAthleteClick(event) {
         // console.log(this.displayAthleteScore);
@@ -208,7 +121,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
     }
 
     buildData(incomingArray){
-        // console.log('Executing building of data');
+        console.log('Executing building of data');
         // console.log(incomingArray);
         let currentData = [];
         incomingArray.forEach(row => {
@@ -217,7 +130,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
             this.scoreData.forEach((element) => {
                 let athScore = {};
                 if (row.Id == element.AthleteId) {
-                    athScore.WorkoutName = element.WorkoutName;
+					athScore.WorkoutName = element.WorkoutName;
 
                     athScore.Score_1st__c = element.Score_1st__c;
                     athScore.First_Label__c = element.First_Label__c;
@@ -256,18 +169,19 @@ export default class TwentytwoLeaderboard extends LightningElement {
         });
         // console.log(currentData);
         this.data = currentData;
+		console.log('this.data: ', this.data);
         // console.log('Complete building the data');
         this.buildDataComplete = true;
     }
 
     connectedCallback() {
         this.displayAthleteScore = false;
-        console.log('connected');
     }
 	
     renderedCallback() {
-		// console.log('incomingData', this.incomingData.currentWorkout.URL__c);
-		console.log('JSON', JSON.parse(JSON.stringify(this.incomingData)));
+		this.assignData();
+		// console.log('incomingAthletes', this.incomingAthletes.currentWorkout.URL__c);
+		// console.log('JSON', JSON.parse(JSON.stringify(this.incomingAthletes)));
         if(this.scoreData && !this.buildDataComplete) {
             // console.log(this.scoreData.length);
             // console.log('Building Data');

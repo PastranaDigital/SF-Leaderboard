@@ -9,20 +9,25 @@
 		<div class="top-spacer"></div>
 
 		<div class="content">
-			<template if:true={showLeaderboardPage}>
-				<c-twentytwo-leaderboard incoming-data={outboundModel}></c-twentytwo-leaderboard>
+			<template if:true={loading}>
+				<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
 			</template>
+			<template if:false={loading}>
+				<template if:true={showLeaderboardPage}>
+					<c-twentytwo-leaderboard incoming-athletes={allAthleteInfo} incoming-scores={allScoreSubmissions}></c-twentytwo-leaderboard>
+				</template>
 
-			<template if:true={showWorkoutPage}>
-				<c-twentytwo-workout></c-twentytwo-workout>
-			</template>
+				<template if:true={showWorkoutPage}>
+					<c-twentytwo-workout></c-twentytwo-workout>
+				</template>
 
-			<template if:true={showMonthlyPage}>
-				<c-twentytwo-monthly></c-twentytwo-monthly>
-			</template>
+				<template if:true={showMonthlyPage}>
+					<c-twentytwo-monthly></c-twentytwo-monthly>
+				</template>
 
-			<template if:true={showSubmitPage}>
-				<c-twentytwo-submit></c-twentytwo-submit>
+				<template if:true={showSubmitPage}>
+					<c-twentytwo-submit></c-twentytwo-submit>
+				</template>
 			</template>
 		</div>
 
