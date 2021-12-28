@@ -149,5 +149,9 @@ body {
 	background: var(--color2);
 	box-shadow: none;
   } */
+
+  lightning-spinner {
+	  top: 15rem !important;
+  }
   
   

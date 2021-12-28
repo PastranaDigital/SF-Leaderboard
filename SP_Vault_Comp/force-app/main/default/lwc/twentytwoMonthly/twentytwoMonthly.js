@@ -72,28 +72,21 @@ export default class TwentytwoMonthly extends LightningElement {
         if (result.data) {
             let currentData = [];
 			this.divisor = this.totalChallengeCount;
-            result.data.forEach((score) => {
-				// this.divisor = score.Challenge_Total__c > this.divisor ? score.Challenge_Total__c : this.divisor;
-				// console.log(score.Challenge_Total__c);
-				console.log(score.Challenge_Total__c, this.divisor);
-			});
-			console.log('divisor',this.divisor);
+            // console.log('divisor',this.divisor);
 			result.data.forEach((row) => {
-                if (row.Challenge_Total__c > 0) {
+                if (row.Challenge_Total__c-2001 > 0) {
 					let rowData = {};
 					rowData.Id = row.Id;
 					rowData.Name = row.Name;
 					rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
 					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
-					rowData.Challenge_Total__c = row.Challenge_Total__c;
+					rowData.Challenge_Total__c = row.Challenge_Total__c-2001;
 
-					rowData.completed = row.Challenge_Total__c > this.totalChallengeCount ? '★' : '';
+					rowData.completed = row.Challenge_Total__c-2001 > this.totalChallengeCount ? '★' : '';
 					
-					// rowData.barFill = `width: ${Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
-					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c-2001 / this.divisor * 100).toFixed(1)}%;`;
 
-					// rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
 					rowData.barFillMovement1 = `width: ${row.Total_Movement_1__c > this.totalChallengeCount ? 100 : (row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
 					currentData.push(rowData);
 				}

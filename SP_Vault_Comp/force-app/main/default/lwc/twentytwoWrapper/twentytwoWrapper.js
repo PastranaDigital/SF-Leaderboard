@@ -7,6 +7,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	inboundModel = {};
 	allAthleteInfo = [];
 	allScoreSubmissions = [];
+	allAthleteScores = [];
 	loading = true;
 	
     connectedCallback() {
@@ -27,17 +28,17 @@ export default class TwentytwoWrapper extends LightningElement {
 			.finally(() => {
 				this.buildAthleteInfo(this.outboundModel.allAthleteInfo);
 				this.buildScoreSubmissions(this.outboundModel.allScoreSubmissions);
+				this.buildAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
 
 				this.loading = false;
 			});
-			
 	}
 
-	buildAthleteInfo(incomingArray) {
-		if (!incomingArray) return;
+	buildAthleteInfo(incomingAthletes) {
+		if (!incomingAthletes) return;
 		let rank = 1;
 		let currentData = [];
-		incomingArray.forEach((row) => {
+		incomingAthletes.forEach((row) => {
 			let rowData = {};
 			rowData.Age__c = row.Age__c;
 			rowData.Total_Movement_1__c = row.Total_Movement_1__c;
@@ -55,6 +56,7 @@ export default class TwentytwoWrapper extends LightningElement {
 			rowData.Location__c = row.Location__c;
 			rowData.Challenges_Completed__c = row.Challenges_Completed__c;
 
+			//? additions to data
 			rowData.Rank = rank;
 			rowData.Profile_Pic_URL__c = athleteResource + '/Athletes/' + row.Profile_Pic_URL__c;
 
@@ -64,10 +66,10 @@ export default class TwentytwoWrapper extends LightningElement {
 		this.allAthleteInfo = currentData;
 	}
 
-	buildScoreSubmissions(incomingArray) {
-		if (!incomingArray) return;
+	buildScoreSubmissions(incomingScores) {
+		if (!incomingScores) return;
 		let currentData = [];
-		incomingArray.forEach((row) => {
+		incomingScores.forEach((row) => {
 			let rowData = {};
 			rowData.Id = row.Id; // score submission Id
 			rowData.AthleteId = row.Athlete_Name__c;
@@ -88,6 +90,76 @@ export default class TwentytwoWrapper extends LightningElement {
 		});
 		this.allScoreSubmissions = currentData;
 	}
+
+	buildAthleteScores(incomingAthletes, incomingScores) {
+		if (!incomingAthletes || !incomingScores) return;
+		let currentData = [];
+        incomingAthletes.forEach(athlete => {
+            let rowData = athlete;
+            let athWorkouts = [];
+            incomingScores.forEach((score) => {
+                let athScore = {};
+                if (athlete.Id == score.AthleteId) {
+					athScore.WorkoutName = score.WorkoutName;
+
+                    athScore.Score_1st__c = score.Score_1st__c;
+                    athScore.First_Label__c = score.First_Label__c;
+                    athScore.Score_2nd__c = score.Score_2nd__c;
+                    athScore.Second_Label__c = score.Second_Label__c;
+                    athScore.Weight_Used__c = score.Weight_Used__c;
+                    athScore.RX_Weight_Male__c = score.RX_Weight_Male__c;
+
+                    athScore.Is_Score_Between_Goal__c = score.Is_Score_Between_Goal__c;
+                    athScore.Points_Based_on_Rank__c = score.Points_Based_on_Rank__c;
+                    athScore.Total_Points__c = score.Total_Points__c;
+                    
+                    let RankNumber = ((105 - score.Points_Based_on_Rank__c) / 5);
+        
+                    athScore.RankNumber = this.getRankNumber(RankNumber);
+
+                    //? takes the Score Submission and make it into a string
+                    let ScoreString = `${score.Score_1st__c} ${score.First_Label__c}`;
+                    //! needs to be done here
+                    if (score.Second_Label__c) {
+                        ScoreString += ` ${score.Score_2nd__c} ${score.Second_Label__c}`;
+                    } 
+                    if (score.RX_Weight_Male__c) {
+                        ScoreString += ` @ ${score.Weight_Used__c} lbs`;
+                    };
+                    athScore.ScoreString = ScoreString;
+
+                    athWorkouts.push(athScore);
+                }
+            });
+            rowData.allWorkouts = athWorkouts;
+            currentData.push(rowData);
+        });
+		this.allAthleteScores = currentData;
+	}
+
+	getRankNumber(incomingRank) {
+        let RankNumber = incomingRank;
+        let lastDigit = RankNumber % 10;
+        let lastTwoDigits = RankNumber % 100;
+        if(lastTwoDigits == 11 || lastTwoDigits == 12 || lastTwoDigits == 13 ) {
+            lastDigit = 0;
+        }
+        switch (lastDigit) {
+            case 1:
+                RankNumber += 'st';
+                break;
+            case 2:
+                RankNumber += 'nd';
+                break;
+            case 3:
+                RankNumber += 'rd';
+                break;
+            default:
+                RankNumber += 'th';
+                break;
+        }
+        return RankNumber;
+    }
 
 	handleError(error) {
 		console.log(error);

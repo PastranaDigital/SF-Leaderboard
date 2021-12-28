@@ -75,15 +75,20 @@
   
   .rank {
 	text-align: center;
+    vertical-align: top;
 	width: 2ch;
 	padding-left: 1rem !important;
   }
-  
+
+  tbody .rank {
+	padding-top: 1.4rem !important;
+  }
+
   .score {
 	text-align: center;
-	/*   vertical-align: top; */
-	width: 5ch;
-	/*   padding-top: 1.25rem !important; */
+	vertical-align: top;
+	width: 6ch;
+	padding-top: 1.4rem !important;
 	padding-right: 1rem !important;
   }
   

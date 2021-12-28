@@ -14,7 +14,7 @@
 			</template>
 			<template if:false={loading}>
 				<template if:true={showLeaderboardPage}>
-					<c-twentytwo-leaderboard incoming-athletes={allAthleteInfo} incoming-scores={allScoreSubmissions}></c-twentytwo-leaderboard>
+					<c-twentytwo-leaderboard incoming-scores={allScoreSubmissions} incoming-athlete-scores={allAthleteScores}></c-twentytwo-leaderboard>
 				</template>
 
 				<template if:true={showWorkoutPage}>
