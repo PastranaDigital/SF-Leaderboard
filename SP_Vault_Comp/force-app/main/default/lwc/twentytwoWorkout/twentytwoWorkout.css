@@ -1,98 +1,80 @@
-.header {
+  .header {
 	grid-column: 1 / -1;
 	justify-self: center;
 	text-align: center;
-}
+  }
 
-h2 {
+  h2 {
 	color: var(--color-dark-text);
-  	font-size: 2rem;
+  	font-size: 1rem;
     font-weight: 600;
 	font-family: 'Salesforce Sans';
   }
 
-.main {
-	width: 100%;
-	/* display: flex; */
-	display: grid;
-	gap: 0.5rem;
-	padding: 0 0.5rem;
-	grid-template-columns: 1fr 1fr; /* auto since image is set? */
-
-	justify-content: center;
-	/* align-items: center; */
+  h3 {
+    color: var(--color-dark-text);
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
-.workout {
-	/* padding: 0 1rem 5rem; */
-	display: grid;
-	/* grid-template-columns: 1fr 1fr; auto since image is set? */
-	width: 100%;
-	margin: 0 auto;
-	gap: 0.75rem;
-	/*   width: 200px; */
-	/*   border-radius: 0.75rem; */
-	/*   padding: 1rem; */
-	  /* background: var(--color-workout); */
-  /*   background: linear-gradient(to top, var(--color2), var(--color1)); */
-	/*   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-  }
-  
-  .workout .workout-title {
-	grid-column: 1 / -1;
-	/*   font-size: 1.5rem;
-	font-weight: 600; */
-	text-align: center;
-  }
-  
-  .workout > img {
-	--size: 200px;
-	/*   grid-column: 2 / span 1; */
-	max-width: var(--size);
-	max-height: var(--size);
-	justify-self: right;
-  }
-  
-  .workout-body {
-	font-size: 0.75rem;
-  }
-  
-  .workout-body p {
-	padding-bottom: 0.5rem;
-  }
-  
-  .workout .results {
-	padding-top: 2rem;
-	grid-column: 1 / -1;
-  }
-  
-  .workout .results h3 {
-	text-align: center;
-	font-weight: 800;
-  }
-
-  .workout .results p {
-	font-size: .5rem;
-  }
-  
-  .workout .results-list {
-	grid-column: 1 / span 2;
-	padding: 0 2rem;
+  .main-container {
 	display: flex;
-	justify-content: center;
+    gap: 0.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
-  .workoutDetails {
-    font-size: .8rem;
+
+  .workout-content:first-child {
+	background: #fff5d2;
+    border: 1px solid #cc9900;
   }
-  
-  /* .workoutDescription {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  } */
+
+  .workout-content {
+	width: 350px;
+    border-radius: 0.5rem;
+    border: 1px solid lightgrey;
+    padding: 1rem;
+  }
+
+  .workout-header-container {
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
   
   .date {
-    font-size: .8rem;
-    font-weight: 600;
-    color: #cc9900;
+	font-size: 0.6rem;
+	font-weight: 600;
+	color: #cc9900;
+	text-align: right;
+  }
+
+  .date a {
+	text-decoration: underline;
+  }
+
+  .workout-details {
+    font-size: 0.5rem;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+    align-items: start;
+    padding-top: 0.25rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid lightgrey;
+  }
+
+  .workout-body p {
+	padding: 0.25rem 0;
+  }
+
+  .results-section {
+	display: grid;
+	gap: 0 0.5rem;
+	grid-template-columns: auto auto;
+  }
+	
+  .workout-details h3 {
+	grid-column: 1 / -1;
   }

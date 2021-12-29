@@ -22,7 +22,7 @@
 				</template>
 
 				<template if:true={showWorkoutPage}>
-					<c-twentytwo-workout></c-twentytwo-workout>
+					<c-twentytwo-workout current-workout={outboundModel.currentWorkout} workout-results={allWorkoutResults}></c-twentytwo-workout>
 				</template>
 
 				<template if:true={showMonthlyPage}>

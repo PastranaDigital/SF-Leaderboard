@@ -1,120 +1,36 @@
 <template>
-    <template if:true={data}>
-		<lightning-accordion class="example-accordion"
-			onsectiontoggle={handleToggleSection}
-			active-section-name={accordionSection}
-			allow-multiple-sections-open>
-			<template for:each={data} for:item="workout">
-				<!-- <tr key={workout.Id} >
-					<div class="workout" key={workout.Id}> -->
-				<lightning-accordion-section key={workout.Id} name={workout.AccordionName} label={workout.AccordionTitle}>
-					<div class="workout">
-						<div class="workoutText">
-							<h2>{workout.Name}</h2>
-							<p class="detailDate">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout Details</a></p>
-							<div class="workoutDetails">
-								<div class="workoutDescription">
-									<slot name="description">{workout.Plain_Description__c}</slot>
-								</div>
-								<p><b>Goal: </b>{workout.Goal__c}</p>
-								<template if:true={workout.RX_Weight_Male__c}>
-									<p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
-								</template>
-								<br>
-								<template if:true={scoreData}>
-								<h3>Results</h3>
-								<table>
-									<template for:each={workout.top3results} for:item="rank">
-										<tr key={workout.Id}>
-											<td class="rank">{rank.rank}</td>
-											<td class="name">{rank.athleteName}</td>
-											<td>{rank.topScoreString}</td>
-										</tr>
-									</template>
-								</table>
-								</template>
-							</div>
-						</div>
-						<div class="workoutImage">
-							<img class="vaultImage" src={workout.Image_File__c}/> 
-						</div>
+    <div class="main-container">
+		<template for:each={workoutResults} for:item="workout">
+			<div key={workout.Id} class="workout-content">
+				<div class="workout-text">
+					
+					<div class="workout-header-container">
+						<h2>{workout.Order__c}. {workout.Name}</h2>
+						<p class="date">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout</a></p>
 					</div>
-				</lightning-accordion-section>
-				<!-- </tr> -->
-			</template>
-			</lightning-accordion>
-	</template>
-	
-	<div class="main">
-		<!-- <div class="header">
-			<h2>{workoutName}</h2>
-			<p class="date">{workoutDate} &nbsp; | &nbsp; <a href={workoutURL}>Full SP Workout Details</a></p>
-		</div>
-		<div class="workout">
-			<div class="workoutDetails">
-				<div class="workoutDescription">
-					<slot name="description">{workoutDescription}</slot>
+					
+					<div class="workout-details">
+						
+						<div class="workout-body">
+							<h3>Details</h3>
+							<slot name="description">{workout.Plain_Description__c}</slot>
+							<p><b>Goal: </b>{workout.Goal__c}</p>
+							<template if:true={workout.RX_Weight_Male__c}>
+								<p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
+							</template>
+						</div>
+							
+						<div class="results-section">
+							<h3>Results</h3>
+							<template for:each={workout.allResults} for:item="result">
+								<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
+								<p key={result.Id}>{result.ScoreString}</p>
+							</template>
+						</div>
+
+					</div>
 				</div>
-				<p><b>Goal: </b>{workoutGoal}</p>
-				<template if:true={workoutRxWeight}>
-					<p><b>RX Weight (Male): </b>{workoutRxWeight} lbs</p>
-				</template>
 			</div>
-		</div> -->
-
-
-		<!-- <div class="results">
-			<h3>Results</h3>
-			<p>
-				1. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-				2. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-				3. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-				4. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-				5. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-				6. Lorem Ipsum 5 rounds 30 reps @ 40lbs<br>
-			</p>
-		</div> -->
-		
-		<!-- <div class="workout">
-		  <h2 class="workout-title">Alpha</h2>
-		  <img src={img_workout} />
-		  <div class="workout-body">
-			<p>
-			  <b>25 Minute AMRAP</b><br>
-			  30 Power Cleans<br>
-			  12 Burpee Box Jump Overs<br>
-			  20 Squat Cleans<br>
-			  12 Burpee Box Jump Overs<br>
-			  10 Clusters<br>
-			  12 Burpee Box Jump Overs<br><br>
-			</p>
-			<p>
-			  <b>Suggested Weight:</b><br>
-			  Men: 95#<br>
-		  </p>
-			<p>
-			  <b>Score:</b><br>
-			  Total # of Completed Rounds + Any Additional Reps
-			</p>
-		  </div> -->
-
-
-		  <!-- <div class="results">
-			<h2>Results</h2>
-		  </div>
-		  <div class="results-list">
-			<table>
-				<template for:each={workout.top3results} for:item="rank">
-					<tr key={workout.Id}>
-						<td class="rank">{rank.rank}</td>
-						<td class="name">{rank.athleteName}</td>
-						<td>{rank.topScoreString}</td>
-					</tr>
-				</template>
-			</table>
-		  </div> -->
-
-
-		<!-- </div> -->
+		</template>
 	  </div>
 </template>

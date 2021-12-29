@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 import imageResource from '@salesforce/resourceUrl/twentytwoImages';
+import workoutImages from '@salesforce/resourceUrl/SPCompImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getViewModel from '@salesforce/apex/LeaderboardController.getViewModel';
 export default class TwentytwoWrapper extends LightningElement {
@@ -20,6 +21,7 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 	
 	getModel() {
+		console.log('getting model');
 		getViewModel()
 			.then((result) => {
 				console.log('ViewModel: ', result);
@@ -165,6 +167,19 @@ export default class TwentytwoWrapper extends LightningElement {
 			let rowData = {};
 			rowData.Name = workout.Name;
 			rowData.Id = workout.Id;
+			rowData.AccordionName = String(workout.Order__c);
+			rowData.AccordionTitle = `#${workout.Order__c} ${workout.Name} - ${workout.Workout_Date__c}`;
+			rowData.Plain_Description__c = workout.Plain_Description__c;
+			rowData.Description__c = workout.Description__c;
+			rowData.First_Label__c = workout.First_Label__c;
+			rowData.Second_Label__c = workout.Second_Label__c;
+			rowData.Order__c = workout.Order__c;
+			rowData.Active__c = workout.Active__c;
+			rowData.Goal__c = workout.Goal__c;
+			rowData.Image_File__c = workoutImages + '/Images/' + workout.Image_File__c;
+			rowData.RX_Weight_Male__c = workout.RX_Weight_Male__c;
+			rowData.URL__c = workout.URL__c;
+			rowData.Workout_Date__c = workout.Workout_Date__c;
 			// console.log('rowData: ', rowData);
             let workoutScores = [];
 			// console.log('workout.Id: ', workout.Id);
@@ -286,7 +301,8 @@ export default class TwentytwoWrapper extends LightningElement {
 	}
 
     handleLeaderboardClick() {
-        this.showLeaderboardPage = true;
+        this.getModel();
+		this.showLeaderboardPage = true;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
@@ -295,7 +311,8 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 
     handleSubmitClick() {
-        this.showLeaderboardPage = false;
+        this.getModel();
+		this.showLeaderboardPage = false;
         this.showSubmitPage = true;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
@@ -303,7 +320,8 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 
     handleWorkoutClick() {
-        this.showLeaderboardPage = false;
+        this.getModel();
+		this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = true;
         this.showMonthlyPage = false;
@@ -311,7 +329,8 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 
     handleMonthlyClick(){
-        this.showLeaderboardPage = false;
+        this.getModel();
+		this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = true;
