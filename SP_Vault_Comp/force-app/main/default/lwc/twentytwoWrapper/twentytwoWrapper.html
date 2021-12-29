@@ -16,6 +16,10 @@
 				<template if:true={showLeaderboardPage}>
 					<c-twentytwo-leaderboard incoming-scores={allScoreSubmissions} incoming-athlete-scores={allAthleteScores}></c-twentytwo-leaderboard>
 				</template>
+				
+				<template if:true={showSubmitPage}>
+					<c-twentytwo-submit current-workout={outboundModel.currentWorkout} athlete-options={allAthleteOptions} workout-results={allWorkoutResults}></c-twentytwo-submit>
+				</template>
 
 				<template if:true={showWorkoutPage}>
 					<c-twentytwo-workout></c-twentytwo-workout>
@@ -23,10 +27,6 @@
 
 				<template if:true={showMonthlyPage}>
 					<c-twentytwo-monthly></c-twentytwo-monthly>
-				</template>
-
-				<template if:true={showSubmitPage}>
-					<c-twentytwo-submit></c-twentytwo-submit>
 				</template>
 			</template>
 		</div>

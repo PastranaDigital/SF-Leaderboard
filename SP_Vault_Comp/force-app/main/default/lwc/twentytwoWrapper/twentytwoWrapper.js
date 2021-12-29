@@ -5,9 +5,14 @@ import getViewModel from '@salesforce/apex/LeaderboardController.getViewModel';
 export default class TwentytwoWrapper extends LightningElement {
 	outboundModel = {};
 	inboundModel = {};
+
+	//? outgoing variables to child components
 	allAthleteInfo = [];
 	allScoreSubmissions = [];
 	allAthleteScores = [];
+	allAthleteOptions = [];
+	allWorkoutResults = [];
+	
 	loading = true;
 	
     connectedCallback() {
@@ -17,7 +22,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	getModel() {
 		getViewModel()
 			.then((result) => {
-				console.log('result', result);
+				console.log('ViewModel: ', result);
 				this.outboundModel = Object.assign({}, result.outboundModel);
 				// console.log('this.outboundModel', this.outboundModel.currentWorkout.URL__c);
 				this.inboundModel = Object.assign({}, result.inboundModel);
@@ -29,6 +34,8 @@ export default class TwentytwoWrapper extends LightningElement {
 				this.buildAthleteInfo(this.outboundModel.allAthleteInfo);
 				this.buildScoreSubmissions(this.outboundModel.allScoreSubmissions);
 				this.buildAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
+				this.buildAthleteOptions(this.allAthleteInfo);
+				this.buildWorkoutResults(this.outboundModel.allWorkouts, this.allScoreSubmissions);
 
 				this.loading = false;
 			});
@@ -72,6 +79,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		incomingScores.forEach((row) => {
 			let rowData = {};
 			rowData.Id = row.Id; // score submission Id
+			rowData.WorkoutId = row.Vault_Workout__c;
 			rowData.AthleteId = row.Athlete_Name__c;
 			rowData.AthleteName = row.Athlete_Name__r.Name;
 			rowData.WorkoutName = row.Vault_Workout__r.Name;
@@ -135,6 +143,77 @@ export default class TwentytwoWrapper extends LightningElement {
             currentData.push(rowData);
         });
 		this.allAthleteScores = currentData;
+	}
+
+	buildAthleteOptions(incomingAthletes) {
+		if (!incomingAthletes) return;
+		let currentData = [];
+        incomingAthletes.forEach(athlete => {
+			let rowData = {};
+			rowData.label = athlete.Name;
+			rowData.value = athlete.Id;
+			currentData.push(rowData);
+		});
+		this.allAthleteOptions = currentData;
+	}
+
+	buildWorkoutResults(incomingWorkouts, incomingScores) {
+		if (!incomingWorkouts || !incomingScores) return;
+		let currentData = [];
+        incomingWorkouts.forEach(workout => {
+            // let rowData = workout;
+			let rowData = {};
+			rowData.Name = workout.Name;
+			rowData.Id = workout.Id;
+			// console.log('rowData: ', rowData);
+            let workoutScores = [];
+			// console.log('workout.Id: ', workout.Id);
+            incomingScores.forEach((score) => {
+                let athScore = {};
+                if (workout.Id === score.WorkoutId) {
+					athScore.WorkoutName = score.WorkoutName;
+                    
+					let RankNumber = ((105 - score.Points_Based_on_Rank__c) / 5);
+					athScore.Rank = RankNumber;
+					
+					athScore.AthleteName = score.AthleteName;
+					athScore.WorkoutId = score.WorkoutId;
+					athScore.Id = score.Id;
+					// console.log('athScore.WorkoutName: ', athScore.WorkoutName);
+                    athScore.Score_1st__c = score.Score_1st__c;
+                    athScore.First_Label__c = score.First_Label__c;
+                    athScore.Score_2nd__c = score.Score_2nd__c;
+                    athScore.Second_Label__c = score.Second_Label__c;
+                    athScore.Weight_Used__c = score.Weight_Used__c;
+                    athScore.RX_Weight_Male__c = score.RX_Weight_Male__c;
+
+                    athScore.Is_Score_Between_Goal__c = score.Is_Score_Between_Goal__c;
+                    athScore.Points_Based_on_Rank__c = score.Points_Based_on_Rank__c;
+                    athScore.Total_Points__c = score.Total_Points__c;
+                    
+					
+                    athScore.RankNumber = this.getRankNumber(RankNumber);
+
+                    //? takes the Score Submission and make it into a string
+                    let ScoreString = `${score.Score_1st__c} ${score.First_Label__c}`;
+                    //! needs to be done here
+                    if (score.Second_Label__c) {
+                        ScoreString += ` ${score.Score_2nd__c} ${score.Second_Label__c}`;
+                    } 
+                    if (score.RX_Weight_Male__c) {
+                        ScoreString += ` @ ${score.Weight_Used__c} lbs`;
+                    };
+                    athScore.ScoreString = ScoreString;
+
+                    workoutScores.push(athScore);
+                }
+            });
+			workoutScores.sort((a,b) => (a.Rank > b.Rank) ? 1 : ((b.Rank > a.Rank) ? -1 : 0))
+            rowData.allResults = workoutScores;
+            currentData.push(rowData);
+        });
+		this.allWorkoutResults = currentData;
+		// console.log('this.allWorkoutResults: ', this.allWorkoutResults);
 	}
 
 	getRankNumber(incomingRank) {
