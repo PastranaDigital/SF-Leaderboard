@@ -136,15 +136,8 @@
 			<div class="results-section">
 				<h3>Results</h3>
 				<template for:each={currentWorkoutResults} for:item="result">
-					<p key={result.Id}>
-						{result.RankNumber}
-					</p>
-					<p key={result.Id}>
-						{result.AthleteName}
-					</p>
-					<p key={result.Id}>
-						{result.ScoreString}
-					</p>
+					<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
+					<p key={result.Id}>{result.ScoreString}</p>
 				</template>
 			</div>
 		</div>
