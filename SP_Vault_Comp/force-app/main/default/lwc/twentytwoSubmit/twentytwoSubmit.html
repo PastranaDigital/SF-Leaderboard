@@ -10,7 +10,7 @@
 							label="Athlete's Name"
 							value={value}
 							placeholder="Select Athlete"
-							options={options}
+							options={athleteOptions}
 							onchange={handleAthleteChange}
 							required >
 						</lightning-combobox>
@@ -22,20 +22,20 @@
 							name="Vault Workout"
 							label="Vault Workout"
 							type="text"
-							placeholder={workoutName}
+							placeholder={currentWorkout.Name}
 							disabled>
 						</lightning-input>
 					</td>
 				</tr>
 				<tr>
-					<template if:true={secondLabel}>
+					<template if:true={currentWorkout.Second_Label__c}>
 						<td colspan="3">
 							<lightning-input 
 								type="number" 
 								name="firstLabel"
 								value=''
 								onchange={handleScore1Change} 
-								label={firstLabel}
+								label={currentWorkout.First_Label__c}
 								class="slds-p-right_small"
 								required>
 							</lightning-input>
@@ -46,26 +46,26 @@
 								name="secondLabel" 
 								value=''
 								onchange={handleScore2Change}
-								label={secondLabel}
+								label={currentWorkout.Second_Label__c}
 								class="slds-p-left_small"
 								required>
 							</lightning-input>
 						</td>
 					</template>
-					<template if:false={secondLabel}>
+					<template if:false={currentWorkout.Second_Label__c}>
 						<td colspan="6">
 							<lightning-input 
 								type="number" 
 								name="firstLabel" 
 								value=''
 								onchange={handleScore1Change}
-								label={firstLabel}
+								label={currentWorkout.First_Label__c}
 								required>
 							</lightning-input>
 						</td>
 					</template>
 				</tr>
-				<template if:true={workoutRxWeight}>
+				<template if:true={currentWorkout.RX_Weight_Male__c}>
 					<tr>
 						<td colspan="6">
 							<lightning-input 
@@ -108,44 +108,38 @@
 				<p class="date">Score successfully submitted, results below</p>
 				<img class="athleteImage" src={scoreSubmittedAthleteImage.Image}/>
 				<h3>{scoreSubmittedAthleteImage.Name}</h3>
-				<p><b>Vault Workout:</b> {workoutName}</p>
-				<p><b>{firstLabel}:</b> {newRecord.Score_1st__c}</p>
-				<template if:true={secondLabel}>
-					<p><b>{secondLabel}:</b> {newRecord.Score_2nd__c}</p>
+				<p><b>Vault Workout:</b> {currentWorkout.Name}</p>
+				<p><b>{currentWorkout.First_Label__c}:</b> {newRecord.Score_1st__c}</p>
+				<template if:true={currentWorkout.Second_Label__c}>
+					<p><b>{currentWorkout.Second_Label__c}:</b> {newRecord.Score_2nd__c}</p>
 				</template>
-				<template if:true={workoutRxWeight}>
-					<p><b>Weight Used:</b> {newRecord.Weight_Used__c}</p>
+				<template if:true={currentWorkout.RX_Weight_Male__c}>
+					<p><b>Weight Used:</b> {newRecord.Weight_Used__c}lbs</p>
 				</template>
 				<p><b>Notes:</b></p><p>{newRecord.Notes__c}</p>
 			</div>
 		</template>
 		<div class="workout">
 			<div class="header">
-				<h2>{workoutName}</h2>
-				<p class="date">{workoutDate} &nbsp; | &nbsp; <a href={workoutURL}>Full SP Workout Details</a></p>
+				<h2>{currentWorkout.Name}</h2>
+				<p class="date">{currentWorkout.Workout_Date__c} &nbsp; | &nbsp; <a href={currentWorkout.URL__c}>Full SP Workout Details</a></p>
 			</div>
 			<div class="workoutDetails">
 				<div class="workoutDescription">
-					<slot name="description">{workoutDescription}</slot>
+					<slot name="description">{currentWorkout.Description__c}</slot>
 				</div>
-				<p><b>Goal: </b>{workoutGoal}</p>
-				<template if:true={workoutRxWeight}>
-					<p><b>RX Weight (Male): </b>{workoutRxWeight} lbs</p>
+				<p><b>Goal: </b>{currentWorkout.Goal__c}</p>
+				<template if:true={currentWorkout.RX_Weight_Male__c}>
+					<p><b>RX Weight (Male): </b>{currentWorkout.RX_Weight_Male__c} lbs</p>
+				</template>
+			</div>
+			<div class="results-section">
+				<h3>Results</h3>
+				<template for:each={currentWorkoutResults} for:item="result">
+					<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
+					<p key={result.Id}>{result.ScoreString}</p>
 				</template>
 			</div>
 		</div>
 	</div>
-    <!-- <div class="submit-form">
-		<input type="text" name="title" maxlength="255" value="" placeholder="Athlete Name">
-		<textarea rows="10" cols="40" name="description" placeholder="No description"></textarea>
-		<p>
-		  <b>25 Minute AMRAP</b><br>
-		  30 Power Cleans<br>
-		  12 Burpee Box Jump Overs<br>
-		  20 Squat Cleans<br>
-		  12 Burpee Box Jump Overs<br>
-		  10 Clusters<br>
-		  12 Burpee Box Jump Overs<br><br>
-		</p>
-	</div> -->
 </template>

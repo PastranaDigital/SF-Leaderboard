@@ -1,32 +1,33 @@
-import { LightningElement, wire } from 'lwc';
-import imageResource from '@salesforce/resourceUrl/SPCompImages';
-import getAllChallengeScores from '@salesforce/apex/ChallengeLwcController.getAllChallengeScores';
-import createChallengeSubmission from '@salesforce/apex/ChallengeLwcController.createChallengeSubmission';
-import getAllAthletesForOptions from "@salesforce/apex/AthleteLwcController.getAllAthletesForOptions";
+import { LightningElement, wire, api } from 'lwc';
+import createChallengeSubmission from '@salesforce/apex/LeaderboardController.createChallengeSubmission';
 
 import { refreshApex } from "@salesforce/apex";
+import { sortArray } from './helper.js';
 
 export default class TwentytwoMonthly extends LightningElement {
-	//? both should begin as FALSE values
+	@api currentChallenge;
+	@api athleteOptions;
+	@api challengeTotals;
+	@api challengeEntries;
+	updtdChallengeTotals;
+
+	//? should begin as FALSE values
+	buildDataComplete = false;
     scoreSubmitted = false;
 	buttonPressed = false;
     errorSubmitting = false;
+
     buttonErrorMessage = '';
     checkRequiredFieldsBoolean = [];
 
-	totalChallengeCount = 3000;
-	daysInMonth = 30;
+	totalChallengeCount;
+	daysInMonth;
 	divisor = 0;
 
-    optionsAthleteList = [];
+    // optionsAthleteList = [];
 
 	labels = {
-		challengeTitle: `${this.totalChallengeCount} Calories`,
-		challengeSubTitle: 'Run, Bike, Row',
-		movement1: 'Calories',
-		movement2: '',
 		checkbox: 'Did Street Parking WOD?',
-		month: 'December 2021',
 	}
 
 	pacer = {
@@ -39,73 +40,98 @@ export default class TwentytwoMonthly extends LightningElement {
         Movement_1__c: '',
         Movement_2__c: '',
         Daily_Checkbox__c: '',
+		Challenge__c: '',
+		Is_Challenge_Active__c: true
     };
     
-    keyLogo = imageResource + '/Images/key_logo.png';
+    // keyLogo = imageResource + '/Images/key_logo.png';
 
-	@wire(getAllAthletesForOptions) athleteList(result) {
-        this.wireAthleteList = result;
-        if(result.data) {
-            let endResult = [];
-            result.data.forEach((row) => {
-                let rowData = {};
-                rowData.label = row.Name;
-                rowData.value = row.Id;
-                endResult.push(rowData);
-            });
-            this.optionsAthleteList = endResult;
-        }
-    }
+	// @wire(getAllAthletesForOptions) athleteList(result) {
+    //     this.wireAthleteList = result;
+    //     if(result.data) {
+    //         let endResult = [];
+    //         result.data.forEach((row) => {
+    //             let rowData = {};
+    //             rowData.label = row.Name;
+    //             rowData.value = row.Id;
+    //             endResult.push(rowData);
+    //         });
+    //         this.optionsAthleteList = endResult;
+    //     }
+    // }
 
-    get options() {
-        return this.optionsAthleteList;
-    }
+    // get options() {
+    //     return this.optionsAthleteList;
+    // }
     
-    data = [];
-    //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
-    wireChallengeScores = []; //? used for refreshApex
+    // data = [];
+    // //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
+    // wireChallengeScores = []; //? used for refreshApex
 
 
-    @wire(getAllChallengeScores) challengeScores(result) {
-        this.wireChallengeScores = result;
-        if (result.data) {
-            let currentData = [];
-			this.divisor = this.totalChallengeCount;
-            result.data.forEach((score) => {
-				// this.divisor = score.Challenge_Total__c > this.divisor ? score.Challenge_Total__c : this.divisor;
-				// console.log(score.Challenge_Total__c);
-				console.log(score.Challenge_Total__c, this.divisor);
-			});
-			console.log('divisor',this.divisor);
-			result.data.forEach((row) => {
-                if (row.Challenge_Total__c > 0) {
-					let rowData = {};
-					rowData.Id = row.Id;
-					rowData.Name = row.Name;
-					rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
-					rowData.Total_Movement_1__c = row.Total_Movement_1__c;
-					rowData.Total_Movement_2__c = row.Total_Movement_2__c;
-					rowData.Challenge_Total__c = row.Challenge_Total__c;
+	updateChallengeTotals(incomingTotals) {
+		let currentData = [];
+		this.divisor = this.totalChallengeCount;
+		// console.log('divisor',this.divisor);
+		incomingTotals.forEach((row) => {
+			if (row.Challenge_Total__c > 0) {
+				let rowData = {};
+				rowData.Id = row.Id;
+				rowData.Name = row.Name;
+				rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
+				rowData.Total_Movement_1__c = row.Total_Movement_1__c;
+				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
+				rowData.Challenge_Total__c = row.Challenge_Total__c;
 
-					rowData.completed = row.Challenge_Total__c > this.totalChallengeCount ? '★' : '';
+				rowData.completed = row.Challenge_Total__c >= this.totalChallengeCount ? '★' : '';
+				
+				rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(0)}%;`;
+
+				rowData.barFillMovement1 = `width: ${row.Total_Movement_1__c > this.totalChallengeCount ? 100 : (row.Total_Movement_1__c / this.divisor * 100).toFixed(0)}%;`;
+				currentData.push(rowData);
+			}
+		});
+		if (currentData.length > 0) {
+			this.updtdChallengeTotals = currentData;
+			sortArray(this.updtdChallengeTotals, 'Challenge_Total__c', true);
+		}
+		console.log('this.updtdChallengeTotals: ', this.updtdChallengeTotals);
+		this.buildDataComplete = true;
+	}
+
+    // @wire(getAllChallengeScores) challengeScores(result) {
+    //     this.wireChallengeScores = result;
+    //     if (result.data) {
+    //         let currentData = [];
+	// 		this.divisor = this.totalChallengeCount;
+    //         // console.log('divisor',this.divisor);
+	// 		result.data.forEach((row) => {
+    //             if (row.Challenge_Total__c-2001 > 0) {
+	// 				let rowData = {};
+	// 				rowData.Id = row.Id;
+	// 				rowData.Name = row.Name;
+	// 				rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
+	// 				rowData.Total_Movement_1__c = row.Total_Movement_1__c;
+	// 				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
+	// 				rowData.Challenge_Total__c = row.Challenge_Total__c-2001;
+
+	// 				rowData.completed = row.Challenge_Total__c-2001 > this.totalChallengeCount ? '★' : '';
 					
-					// rowData.barFill = `width: ${Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
-					rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(1)}%;`;
+	// 				rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c-2001 / this.divisor * 100).toFixed(1)}%;`;
 
-					// rowData.barFillMovement1 = `width: ${(row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
-					rowData.barFillMovement1 = `width: ${row.Total_Movement_1__c > this.totalChallengeCount ? 100 : (row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
-					currentData.push(rowData);
-				}
-            });
-            this.data = currentData;
-        } else if (result.error) {
-            window.console.log(result.error);
-        }
-    }
+	// 				rowData.barFillMovement1 = `width: ${row.Total_Movement_1__c > this.totalChallengeCount ? 100 : (row.Total_Movement_1__c / this.divisor * 100).toFixed(1)}%;`;
+	// 				currentData.push(rowData);
+	// 			}
+    //         });
+    //         this.data = currentData;
+    //     } else if (result.error) {
+    //         window.console.log(result.error);
+    //     }
+    // }
 
 	refreshScores() {
 		console.log('refreshing...');
-		refreshApex(this.wireChallengeScores);
+		// refreshApex(this.wireChallengeScores);
 	}
 
     createScoreApex() {
@@ -128,6 +154,7 @@ export default class TwentytwoMonthly extends LightningElement {
 	handleAthleteChange(event) {
         this.newRecord.Athlete__c = event.detail.value;
         console.log(this.newRecord.Athlete__c);
+		this.newRecord.Challenge__c = this.currentChallenge.Id;
     }
 
     handleScore1Change(event) {
@@ -147,31 +174,32 @@ export default class TwentytwoMonthly extends LightningElement {
 
     handleSubmitRecord() {
         this.checkRequiredFieldsBoolean[0] = Boolean(this.newRecord.Athlete__c);
-        // this.checkRequiredFieldsBoolean[1] = Boolean(this.newRecord.Movement_1__c);
-        // this.checkRequiredFieldsBoolean[2] = Boolean(this.newRecord.Movement_2__c);
-        // this.checkRequiredFieldsBoolean[3] = Boolean(this.newRecord.Daily_Checkbox__c);
-        console.log(this.checkRequiredFieldsBoolean);
         
+		this.buttonPressed = true;    
         if (!this.checkRequiredFieldsBoolean.includes(false)) {
             this.createScoreApex();
         } else {
 			this.buttonErrorMessage = 'Please complete required fields';
             console.log('Please complete required fields');
         }    
-		this.buttonPressed = true;    
     }
 
     connectedCallback() {
-        // console.log(athList.data[0].Name);
-		const date = Number((new Date()).getDate());
-		// console.log(`date: ${date}`);
-		this.pacer.pace = (+date / this.daysInMonth * this.totalChallengeCount).toFixed(0);
-		// console.log('this.pacer.pace', this.pacer.pace);
-		this.pacer.barFill = `width: ${(+date / this.daysInMonth * 100).toFixed(1)}%;`;
-		// console.log('this.pacer.pace', this.pacer.barFill);
-    }
+		this.buildDataComplete = false;
+	}
 
 	renderedCallback() {
-
+		this.totalChallengeCount = this.currentChallenge.Total_Challenge_Count__c;
+		this.daysInMonth = this.currentChallenge.Days_in_Month__c;
+		// console.log(athList.data[0].Name);
+		const date = Number((new Date()).getDate());
+		// console.log(`date: ${date}`);
+		this.pacer.pace = ((+date / this.daysInMonth * this.totalChallengeCount) > this.totalChallengeCount ? this.totalChallengeCount : (+date / this.daysInMonth * this.totalChallengeCount)).toFixed(0);
+		// console.log('this.pacer.pace', this.pacer.pace);
+		this.pacer.barFill = `width: ${((+date / this.daysInMonth * 100) > 100 ? 100 : (+date / this.daysInMonth * 100)).toFixed(1)}%;`;
+		// console.log('this.pacer.pace', this.pacer.barFill);
+		if(!this.buildDataComplete) {
+			this.updateChallengeTotals(this.challengeTotals);
+		}
 	}
 }

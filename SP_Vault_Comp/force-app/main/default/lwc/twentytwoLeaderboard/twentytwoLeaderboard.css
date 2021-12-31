@@ -7,7 +7,7 @@
 .wrapper {
 	display: flex;
 	margin: 0 auto;
-	padding: 0;
+	padding: 0 0.5rem;
 	flex-direction: column;
 	align-items: center;
   }
@@ -27,7 +27,8 @@
   
   .mainTable {
 	color: rgb(95, 95, 95);
-	width: 90%;
+	/* width: 90%; */
+
 	border-collapse: collapse;
 	border-radius: 1rem;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -75,15 +76,20 @@
   
   .rank {
 	text-align: center;
+    vertical-align: top;
 	width: 2ch;
 	padding-left: 1rem !important;
   }
-  
+
+  tbody .rank {
+	padding-top: 1.4rem !important;
+  }
+
   .score {
 	text-align: center;
-	/*   vertical-align: top; */
-	width: 5ch;
-	/*   padding-top: 1.25rem !important; */
+	vertical-align: top;
+	width: 6ch;
+	padding-top: 1.4rem !important;
 	padding-right: 1rem !important;
   }
   
@@ -123,7 +129,7 @@
 	padding-bottom: 2rem;
   }
 
-.spotlightImage {
+  .spotlightImage {
     height: 10rem;
 	width: 10rem;
     margin-bottom: 1rem;
@@ -173,7 +179,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 0.5rem;
-	min-width: 50vw;
+	/* width: 82.5vw; */
 	padding: 0 1rem 1rem;
   }
   

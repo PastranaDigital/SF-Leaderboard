@@ -67,7 +67,7 @@
   }
 
   h3 {
-    color: #999;
+    color: var(--color-dark-text);
     font-size: 1.1rem;
     font-weight: 600;
   }
@@ -138,3 +138,27 @@
 	background: var(--color2);
 	box-shadow: none;
   } */
+
+  .athleteImage {
+    height: 6rem;
+    width: 6rem;
+    margin: 1rem 0;
+    border-radius: 50%;
+    border: 4px solid #cc9900;
+  }
+
+  .results-section {
+	margin: 2rem 0 0;
+	display: grid;
+	gap: 0 .5rem;
+	grid-template-columns: auto 1fr;
+  }
+	
+  .results-section h3 {
+	grid-column: 1 / -1;
+  }
+
+  .results-section p {
+	text-align: left;
+	font-size: .8rem;
+  }
