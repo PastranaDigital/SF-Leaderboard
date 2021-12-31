@@ -83,7 +83,7 @@ export default class TwentytwoMonthly extends LightningElement {
 				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 				rowData.Challenge_Total__c = row.Challenge_Total__c;
 
-				rowData.completed = row.Challenge_Total__c > this.totalChallengeCount ? '★' : '';
+				rowData.completed = row.Challenge_Total__c >= this.totalChallengeCount ? '★' : '';
 				
 				rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(0)}%;`;
 
@@ -194,9 +194,9 @@ export default class TwentytwoMonthly extends LightningElement {
 		// console.log(athList.data[0].Name);
 		const date = Number((new Date()).getDate());
 		// console.log(`date: ${date}`);
-		this.pacer.pace = (+date / this.daysInMonth * this.totalChallengeCount).toFixed(0);
+		this.pacer.pace = ((+date / this.daysInMonth * this.totalChallengeCount) > this.totalChallengeCount ? this.totalChallengeCount : (+date / this.daysInMonth * this.totalChallengeCount)).toFixed(0);
 		// console.log('this.pacer.pace', this.pacer.pace);
-		this.pacer.barFill = `width: ${(+date / this.daysInMonth * 100).toFixed(1)}%;`;
+		this.pacer.barFill = `width: ${((+date / this.daysInMonth * 100) > 100 ? 100 : (+date / this.daysInMonth * 100)).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
 		if(!this.buildDataComplete) {
 			this.updateChallengeTotals(this.challengeTotals);

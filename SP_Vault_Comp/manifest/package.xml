@@ -2,6 +2,9 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>AthleteLwcController</members>
+		<members>ChallengeLwcController</members>
+		<members>ChallengeTriggerHelper</members>
+		<members>LeaderboardController</members>
 		<members>RecursionBlock</members>
 		<members>ResultsLwcController</members>
 		<members>ScoreSubmissionTriggerHelper</members>
@@ -17,7 +20,8 @@
 		<name>ApexPage</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>ChallengeTrigger</members>
+		<members>ScoreSubmissionTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
@@ -34,6 +38,9 @@
 	</types>
 	<types>
 		<members>Athlete__c</members>
+		<members>Challenge_Completed__c</members>
+		<members>Challenge_Entry__c</members>
+		<members>Challenge__c</members>
 		<members>Score_Submission__c</members>
 		<members>Vault_Workout__c</members>
 		<name>CustomObject</name>
@@ -66,13 +73,13 @@
 		<members>leaderboard</members>
 		<members>results</members>
 		<members>scoreSubmission</members>
-		<members>workoutDisplay</members>
-		<members>workoutTile</members>
 		<members>twentytwoLeaderboard</members>
 		<members>twentytwoMonthly</members>
 		<members>twentytwoSubmit</members>
 		<members>twentytwoWorkout</members>
 		<members>twentytwoWrapper</members>
+		<members>workoutDisplay</members>
+		<members>workoutTile</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
