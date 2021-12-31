@@ -3,6 +3,7 @@ import imageResource from '@salesforce/resourceUrl/twentytwoImages';
 import workoutImages from '@salesforce/resourceUrl/SPCompImages';
 import athleteResource from '@salesforce/resourceUrl/SPCompAthletes';
 import getViewModel from '@salesforce/apex/LeaderboardController.getViewModel';
+import { sortArray } from './helper.js';
 export default class TwentytwoWrapper extends LightningElement {
 	outboundModel = {};
 	inboundModel = {};
@@ -13,6 +14,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	allAthleteScores = [];
 	allAthleteOptions = [];
 	allWorkoutResults = [];
+	allChallengeEntries = [];
 	
 	loading = true;
 	
@@ -38,6 +40,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				this.buildAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
 				this.buildAthleteOptions(this.allAthleteInfo);
 				this.buildWorkoutResults(this.outboundModel.allWorkouts, this.allScoreSubmissions);
+				this.buildChallengeEntries(this.outboundModel.allChallenges, this.outboundModel.allChallengeEntries);
 
 				this.loading = false;
 			});
@@ -50,14 +53,16 @@ export default class TwentytwoWrapper extends LightningElement {
 		incomingAthletes.forEach((row) => {
 			let rowData = {};
 			rowData.Age__c = row.Age__c;
-			rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 			rowData.Total_Tie_Break_Points__c = row.Total_Tie_Break_Points__c;
 			rowData.Is_RX__c = row.Is_RX__c;
-			rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 			rowData.Grand_Total__c = row.Grand_Total__c;
-			rowData.Challenge_Total__c = row.Challenge_Total__c;
-			rowData.Profile_Pic_URL__c = row.Profile_Pic_URL__c;
+			
 			rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
+			rowData.Total_Movement_1__c = row.Total_Movement_1__c;
+			rowData.Total_Movement_2__c = row.Total_Movement_2__c;
+			rowData.Challenge_Total__c = row.Challenge_Total__c;
+			
+			rowData.Profile_Pic_URL__c = row.Profile_Pic_URL__c;
 			rowData.Name = row.Name;
 			rowData.Total_Points__c = row.Total_Points__c;
 			rowData.Id = row.Id;
@@ -68,7 +73,7 @@ export default class TwentytwoWrapper extends LightningElement {
 			//? additions to data
 			rowData.Rank = rank;
 			rowData.Profile_Pic_URL__c = athleteResource + '/Athletes/' + row.Profile_Pic_URL__c;
-
+			
 			currentData.push(rowData);
 			rank++;
 		});
@@ -223,12 +228,52 @@ export default class TwentytwoWrapper extends LightningElement {
                     workoutScores.push(athScore);
                 }
             });
-			workoutScores.sort((a,b) => (a.Rank > b.Rank) ? 1 : ((b.Rank > a.Rank) ? -1 : 0))
+			sortArray(workoutScores, 'Rank');
+			// workoutScores.sort((a,b) => (a.Rank > b.Rank) ? 1 : ((b.Rank > a.Rank) ? -1 : 0))
             rowData.allResults = workoutScores;
             currentData.push(rowData);
         });
 		this.allWorkoutResults = currentData;
 		// console.log('this.allWorkoutResults: ', this.allWorkoutResults);
+	}
+
+	buildChallengeEntries(incomingChallenges, incomingEntries) {
+		if (!incomingChallenges || !incomingEntries) return;
+		let currentData = [];
+        incomingChallenges.forEach(challenge => {
+            // let rowData = challenge;
+			let rowData = {};
+			rowData.Active__c = challenge.Active__c;
+			rowData.Days_in_Month__c = challenge.Days_in_Month__c;
+			rowData.Id = challenge.Id;
+			rowData.Movement_1__c = challenge.Movement_1__c;
+			rowData.Movement_2__c = challenge.Movement_2__c;
+			rowData.Name = challenge.Name;
+			rowData.Start_Date__c = challenge.Start_Date__c;
+			rowData.Subtitle__c = challenge.Subtitle__c;
+			rowData.Total_Challenge_Count__c = challenge.Total_Challenge_Count__c;
+			
+			// console.log('rowData: ', rowData);
+            let challengeEntries = [];
+			incomingEntries.forEach((entry) => {
+                let athEntry = {};
+                if (challenge.Id === entry.Challenge__c) {
+					athEntry.Athlete__c = entry.Athlete__c;
+					athEntry.AthleteName = entry.Athlete__r.Name;
+					athEntry.Challenge__c = entry.Challenge__c;
+					athEntry.WorkoutName = entry.Challenge__r.Name;
+					athEntry.Checkbox_Points__c = entry.Checkbox_Points__c;
+					athEntry.Daily_Checkbox__c = entry.Daily_Checkbox__c;
+					athEntry.Entry_Total__c = entry.Entry_Total__c;
+					athEntry.Id = entry.Id;
+					athEntry.Movement_1__c = entry.Movement_1__c;
+					
+					challengeEntries.push(athEntry);
+                }
+            });
+			currentData.push(rowData);
+        });
+		this.allChallengeEntries = currentData;
 	}
 
 	getRankNumber(incomingRank) {

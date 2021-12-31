@@ -179,7 +179,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 0.5rem;
-	width: 82.5vw;
+	/* width: 82.5vw; */
 	padding: 0 1rem 1rem;
   }
   

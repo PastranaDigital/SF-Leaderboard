@@ -3,37 +3,42 @@
         <div class="main">
             <div class="graph">
 				<div class="details">
-					<p>{labels.month}</p>
-					<h2>{labels.challengeTitle}</h2>
-					<h3>{labels.challengeSubTitle}</h3>
+					<p>{currentChallenge.Name}</p>
+					<h2>{currentChallenge.Total_Challenge_Count__c} {currentChallenge.Movement_1__c}</h2>
+					<h3>{currentChallenge.Subtitle__c}</h3>
 					<div class="legend">
-						<span class="movement-1">{labels.movement1}</span>
-						<template if:true={labels.movement2}>
-							<span class="movement-2">{labels.movement2}</span>
+						<span class="movement-1">{currentChallenge.Movement_1__c}</span>
+						<template if:true={currentChallenge.Movement_2__c}>
+							<span class="movement-2">{currentChallenge.Movement_2__c}</span>
 						</template>
 					</div>
 				</div>
 
-				<div class="bar">
-					<!-- <p class="bar-athlete-name">Pacer</p> -->
-					<p class="bar-athlete-percentage">Pace: {pacer.pace} / {totalChallengeCount}</p>
-					<div class="pacer-background">
-						<div class="pacer-filler" style={pacer.barFill}></div>
+				<template if:false={updtdChallengeTotals}>
+					<h2 style="text-align: center;">No Entries Yet,<br>get this party started!</h2>
+				</template>
+				<template if:true={updtdChallengeTotals}>
+					<div class="bar">
+						<!-- <p class="bar-athlete-name">Pacer</p> -->
+						<p class="bar-athlete-percentage">Pace: {pacer.pace} / {totalChallengeCount}</p>
+						<div class="pacer-background">
+							<div class="pacer-filler" style={pacer.barFill}></div>
+						</div>
 					</div>
-				</div>
 
-				<template for:each={data} for:item="athlete">
-					<div key={athlete.Id} class="bar">
-						<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
-						<div class="bar-athlete-percentage">
-							<p>{athlete.Did_SP_Workout__c} SPs</p>
-							<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+					<template for:each={updtdChallengeTotals} for:item="athlete">
+						<div key={athlete.Id} class="bar">
+							<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
+							<div class="bar-athlete-percentage">
+								<p>{athlete.Did_SP_Workout__c} SPs</p>
+								<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+							</div>
+							<div class="bar-background">
+								<div class="bar-filler" style={athlete.barFill}></div>
+								<div class="bar-filler-movement-1" style={athlete.barFillMovement1}></div>
+							</div>
 						</div>
-						<div class="bar-background">
-							<div class="bar-filler" style={athlete.barFill}></div>
-							<div class="bar-filler-movement-1" style={athlete.barFillMovement1}></div>
-						</div>
-					</div>
+					</template>
 				</template>
 				
             </div>
@@ -53,21 +58,21 @@
                                 label="Athlete's Name"
                                 value={value}
                                 placeholder="Select Athlete"
-                                options={options}
+                                options={athleteOptions}
                                 onchange={handleAthleteChange}
                                 required >
 							</lightning-combobox>
                         </td>
                     </tr>
                     <tr>
-						<template if:true={labels.movement2}>
+						<template if:true={currentChallenge.Movement_2__c}>
 							<td colspan="3">
 								<lightning-input 
 									type="number" 
 									name="firstLabel"
 									value=''
 									onchange={handleScore1Change} 
-									label={labels.movement1}
+									label={currentChallenge.Movement_1__c}
 									>
 								</lightning-input>
 							</td>
@@ -77,19 +82,19 @@
 								name="secondLabel" 
 								value=''
 								onchange={handleScore2Change}
-								label={labels.movement2}
+								label={currentChallenge.Movement_2__c}
 								>
 								</lightning-input>
 							</td>
 						</template>
-						<template if:false={labels.movement2}>
+						<template if:false={currentChallenge.Movement_2__c}>
 							<td colspan="6">
 								<lightning-input 
 									type="number" 
 									name="firstLabel"
 									value=''
 									onchange={handleScore1Change} 
-									label={labels.movement1}
+									label={currentChallenge.Movement_1__c}
 									>
 								</lightning-input>
 							</td>
