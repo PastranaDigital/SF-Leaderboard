@@ -11,7 +11,7 @@ export default class TwentytwoSubmit extends LightningElement {
     errorSubmitting = false;
     buttonErrorMessage = '';
     checkRequiredFieldsBoolean = [];
-	currentWorkoutResults = [];
+	currentWorkoutResults;
 	
 	comboboxValue = '';
 
@@ -157,6 +157,7 @@ export default class TwentytwoSubmit extends LightningElement {
     }
 
 	getCurrentWorkoutResults() {
+		if (this.workoutResults) return;
 		this.workoutResults.forEach((workout) => {
 			if (workout.Name === this.currentWorkout.Name) {
 				this.currentWorkoutResults = workout.allResults;
@@ -166,6 +167,6 @@ export default class TwentytwoSubmit extends LightningElement {
     
     renderedCallback() {
     	this.getCurrentWorkoutResults();
-		this.template.querySelector('slot').innerHTML = this.currentWorkout.Description__c;
+		if (!this.workoutResults) this.template.querySelector('slot').innerHTML = this.currentWorkout.Description__c;
     }
 }

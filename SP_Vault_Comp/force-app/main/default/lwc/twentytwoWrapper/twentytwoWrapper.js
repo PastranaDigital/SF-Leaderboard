@@ -72,6 +72,7 @@ export default class TwentytwoWrapper extends LightningElement {
 
 			//? additions to data
 			rowData.Rank = rank;
+			rowData.RankText = this.getRankNumber(rank);
 			rowData.Profile_Pic_URL__c = athleteResource + '/Athletes/' + row.Profile_Pic_URL__c;
 			
 			currentData.push(rowData);
@@ -161,6 +162,7 @@ export default class TwentytwoWrapper extends LightningElement {
 			rowData.value = athlete.Id;
 			currentData.push(rowData);
 		});
+		sortArray(currentData, 'label');
 		this.allAthleteOptions = currentData;
 	}
 

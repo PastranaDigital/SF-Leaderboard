@@ -4,6 +4,7 @@
 		<members>AthleteLwcController</members>
 		<members>ChallengeLwcController</members>
 		<members>ChallengeTriggerHelper</members>
+		<members>ChallengeEntryTriggerHelper</members>
 		<members>LeaderboardController</members>
 		<members>RecursionBlock</members>
 		<members>ResultsLwcController</members>
@@ -21,6 +22,7 @@
 	</types>
 	<types>
 		<members>ChallengeTrigger</members>
+		<members>ChallengeEntryTrigger</members>
 		<members>ScoreSubmissionTrigger</members>
 		<name>ApexTrigger</name>
 	</types>

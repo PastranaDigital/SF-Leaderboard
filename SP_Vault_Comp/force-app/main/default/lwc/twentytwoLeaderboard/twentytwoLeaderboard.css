@@ -111,7 +111,8 @@
     text-align: left;
   } */
 
-  .spotlightRank {
+  .spotlightRank,
+  .spotlightLocation {
 	  grid-column: 1/-1;
   }
 
