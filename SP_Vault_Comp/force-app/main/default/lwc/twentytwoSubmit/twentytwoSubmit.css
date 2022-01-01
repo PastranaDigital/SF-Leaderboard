@@ -6,6 +6,15 @@
     box-sizing: border-box; */
   }
 
+
+  .no-data {
+	text-align: center;	
+	color: var(--color-dark-text);
+	font-size: 1rem;
+	font-weight: 600;
+	font-family: 'Salesforce Sans';
+  }
+
   .submit-form {
 	padding: 2rem 1.5rem;
   }

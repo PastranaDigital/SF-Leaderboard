@@ -28,6 +28,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
 				this.athSpotlight.Age = element.Age__c;
 				this.athSpotlight.Pic = element.Profile_Pic_URL__c;
 				this.athSpotlight.Rank = element.Rank;
+				this.athSpotlight.RankText = element.RankText;
 				this.athSpotlight.TotalPoints = element.Total_Points__c;
 				this.athSpotlight.allWorkouts = element.allWorkouts;
 				

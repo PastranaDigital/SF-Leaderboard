@@ -27,7 +27,7 @@ export default class TwentytwoMonthly extends LightningElement {
     // optionsAthleteList = [];
 
 	labels = {
-		checkbox: 'Did Street Parking WOD?',
+		checkbox: 'Did a Workout Today? (If you did a Vault, no need to submit a checkbox here)',
 	}
 
 	pacer = {
@@ -155,6 +155,7 @@ export default class TwentytwoMonthly extends LightningElement {
         this.newRecord.Athlete__c = event.detail.value;
         console.log(this.newRecord.Athlete__c);
 		this.newRecord.Challenge__c = this.currentChallenge.Id;
+		this.buttonErrorMessage = '';
     }
 
     handleScore1Change(event) {
@@ -175,9 +176,9 @@ export default class TwentytwoMonthly extends LightningElement {
     handleSubmitRecord() {
         this.checkRequiredFieldsBoolean[0] = Boolean(this.newRecord.Athlete__c);
         
-		this.buttonPressed = true;    
         if (!this.checkRequiredFieldsBoolean.includes(false)) {
-            this.createScoreApex();
+			this.createScoreApex();
+			this.buttonPressed = true;    
         } else {
 			this.buttonErrorMessage = 'Please complete required fields';
             console.log('Please complete required fields');

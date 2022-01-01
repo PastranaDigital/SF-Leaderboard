@@ -3,10 +3,11 @@ import { LightningElement, api } from 'lwc';
 export default class TwentytwoWorkout extends LightningElement {
     @api currentWorkout;
 	@api workoutResults;
-	newWorkoutResults = [];
+	newWorkoutResults;
 	buildDataComplete = false;
 
 	setCurrent(incomingArray, value) {
+		if (incomingArray || value) return;
 		//? remove current item 
 		//? move current item to top of list
 		let putFirst = {};

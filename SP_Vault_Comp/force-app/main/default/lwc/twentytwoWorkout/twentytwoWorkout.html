@@ -1,36 +1,41 @@
 <template>
     <div class="main-container">
-		<template for:each={newWorkoutResults} for:item="workout">
-			<div key={workout.Id} class="workout-content">
-				<div class="workout-text">
-					
-					<div class="workout-header-container">
-						<h2>{workout.Order__c}. {workout.Name}</h2>
-						<p class="date">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout</a></p>
-					</div>
-					
-					<div class="workout-details">
+		<template if:false={newWorkoutResults}>
+			<h2>No workout to show yet... be patient</h2>
+		</template>
+		<template if:true={newWorkoutResults}>
+			<template for:each={newWorkoutResults} for:item="workout">
+				<div key={workout.Id} class="workout-content">
+					<div class="workout-text">
 						
-						<div class="workout-body">
-							<h3>Details</h3>
-							<slot name="description">{workout.Plain_Description__c}</slot>
-							<p><b>Goal: </b>{workout.Goal__c}</p>
-							<template if:true={workout.RX_Weight_Male__c}>
-								<p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
-							</template>
+						<div class="workout-header-container">
+							<h2>{workout.Order__c}. {workout.Name}</h2>
+							<p class="date">{workout.Workout_Date__c} &nbsp; | &nbsp; <a href={workout.URL__c}>Full SP Workout</a></p>
 						</div>
+						
+						<div class="workout-details">
 							
-						<div class="results-section">
-							<h3>Results</h3>
-							<template for:each={workout.allResults} for:item="result">
-								<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
-								<p key={result.Id}>{result.ScoreString}</p>
-							</template>
-						</div>
+							<div class="workout-body">
+								<h3>Details</h3>
+								<slot name="description">{workout.Plain_Description__c}</slot>
+								<p><b>Goal: </b>{workout.Goal__c}</p>
+								<template if:true={workout.RX_Weight_Male__c}>
+									<p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
+								</template>
+							</div>
+								
+							<div class="results-section">
+								<h3>Results</h3>
+								<template for:each={workout.allResults} for:item="result">
+									<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
+									<p key={result.Id}>{result.ScoreString}</p>
+								</template>
+							</div>
 
+						</div>
 					</div>
 				</div>
-			</div>
+			</template>
 		</template>
 	  </div>
 </template>
