@@ -150,6 +150,7 @@
 
   .modalHeader {
     padding: 1rem;
+	min-width: 320px;
   }
 
   h2 {
@@ -174,14 +175,27 @@
     vertical-align: middle;
   }
 
+  .report-container {
+	align-self: flex-start;
+    margin-left: 2rem;
+  }
+
+  .report-wrapper {
+	gap: 0 0.5rem;
+  }
+
+  .score-wrapper,
+  .report-wrapper {
+	display: grid;
+    grid-template-columns: 2fr 1fr;
+	/* width: 82.5vw; */
+	padding: 0 1rem 1rem;
+  }
+
   /* MODAL CONTENT */
 
   .score-wrapper {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
     gap: 0.5rem;
-	/* width: 82.5vw; */
-	padding: 0 1rem 1rem;
   }
   
   .score-name {

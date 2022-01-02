@@ -1,4 +1,5 @@
 import { LightningElement, api } from 'lwc';
+import { sortArray } from './helper.js';
 
 export default class TwentytwoLeaderboard extends LightningElement {
 	@api incomingScores;
@@ -35,7 +36,7 @@ export default class TwentytwoLeaderboard extends LightningElement {
 				this.athSpotlight.RankNumber = element.RankNumber;
 
 				this.athSpotlight.ChallengeTotal = element.Challenges_Completed__c;
-				this.athSpotlight.SPWorkouts = element.Did_SP_Workout__c * 10;
+				this.athSpotlight.SPWorkouts = element.Did_SP_Workout__c;
 				this.athSpotlight.GrandTotal = element.Grand_Total__c;
 			}
 		});
@@ -56,10 +57,49 @@ export default class TwentytwoLeaderboard extends LightningElement {
 
     scoreData = [];
     data = [];
+	vaultReport = [];
+	challengeReport = [];
+	workoutReport = [];
+	buildReportComplete = false;
 
 	assignData() {
 		this.scoreData = this.incomingScores;
 		this.data = this.incomingAthleteScores;
+		
+		if (!this.buildReportComplete) {
+			//? build vault report data
+			this.data.forEach((element) => {
+				let rowData = {};
+				rowData.Id = element.Id;
+				rowData.Name = element.Name;
+				rowData.Total_Points__c = element.Total_Points__c;
+				this.vaultReport.push(rowData);
+				sortArray(this.vaultReport, 'Total_Points__c', true); //? true for descending
+			});
+			
+			//? build challenge report data
+			this.data.forEach((element) => {
+				let rowData = {};
+				rowData.Id = element.Id;
+				rowData.Name = element.Name;
+				rowData.Challenges_Completed__c = element.Challenges_Completed__c;
+				this.challengeReport.push(rowData);
+				sortArray(this.challengeReport, 'Challenges_Completed__c', true); //? true for descending
+			});
+			
+			//? build workout report data
+			this.data.forEach((element) => {
+				let rowData = {};
+				rowData.Id = element.Id;
+				rowData.Name = element.Name;
+				rowData.Did_SP_Workout__c = element.Did_SP_Workout__c;
+				this.workoutReport.push(rowData);
+				sortArray(this.workoutReport, 'Did_SP_Workout__c', true); //? true for descending
+			});
+
+			this.buildReportComplete = true;
+		}
+
 	}
 
 	handleAthleteClick(event) {
