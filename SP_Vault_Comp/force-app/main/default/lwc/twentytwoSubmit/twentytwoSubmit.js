@@ -59,6 +59,16 @@ export default class TwentytwoSubmit extends LightningElement {
         // console.log(this.newRecord.Notes__c);
     }
 
+	refreshScores() {
+		console.log('refreshing to Parent...');
+
+		const custEvent = new CustomEvent(
+            'callgetmodel', {
+                detail: 'payload' 
+            });
+        this.dispatchEvent(custEvent);
+	}
+
     createScoreSubmission() {
         const fields = this.newRecord;
         const recordInput = {
@@ -71,6 +81,7 @@ export default class TwentytwoSubmit extends LightningElement {
             console.log("Score Submission has been created : ", response.id);
             this.recordId = response.id;
             this.scoreSubmitted = true;
+			this.refreshScores();
           })
           .catch((error) => {
             this.errorSubmitting = true;

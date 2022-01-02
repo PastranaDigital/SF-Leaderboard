@@ -95,7 +95,7 @@ export default class TwentytwoMonthly extends LightningElement {
 			this.updtdChallengeTotals = currentData;
 			sortArray(this.updtdChallengeTotals, 'Challenge_Total__c', true);
 		}
-		console.log('this.updtdChallengeTotals: ', this.updtdChallengeTotals);
+		// console.log('this.updtdChallengeTotals: ', this.updtdChallengeTotals);
 		this.buildDataComplete = true;
 	}
 
@@ -130,8 +130,13 @@ export default class TwentytwoMonthly extends LightningElement {
     // }
 
 	refreshScores() {
-		console.log('refreshing...');
-		// refreshApex(this.wireChallengeScores);
+		console.log('refreshing to Parent...');
+
+		const custEvent = new CustomEvent(
+            'callgetmodel', {
+                detail: 'payload' 
+            });
+        this.dispatchEvent(custEvent);
 	}
 
     createScoreApex() {
