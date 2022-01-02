@@ -352,6 +352,10 @@ export default class TwentytwoWrapper extends LightningElement {
 		});
 	}
 
+	scrollToTop() {
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	}
+
     handleLeaderboardClick() {
         // this.getModel();
 		this.showLeaderboardPage = true;
@@ -361,6 +365,7 @@ export default class TwentytwoWrapper extends LightningElement {
         this.headerTitle = '';
 		this.headerTitle = 'Leaderboard';
 		this.addActiveClass();
+		this.scrollToTop();
     }
 
     handleSubmitClick() {
@@ -371,7 +376,8 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showMonthlyPage = false;
         this.headerTitle = '';
 		this.headerTitle = 'Submit Vault';
-    }
+		this.scrollToTop();
+	}
 
     handleWorkoutClick() {
         // this.getModel();
@@ -381,7 +387,8 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showMonthlyPage = false;
         this.headerTitle = '';
 		this.headerTitle = 'Workouts';
-    }
+		this.scrollToTop();
+	}
 
     handleMonthlyClick(){
         // this.getModel();
@@ -391,5 +398,6 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showMonthlyPage = true;
         this.headerTitle = '';
 		this.headerTitle = 'Challenge';
-    }
+		this.scrollToTop();
+	}
 }
