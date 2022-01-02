@@ -131,7 +131,7 @@ export default class TwentytwoMonthly extends LightningElement {
 
 	refreshScores() {
 		console.log('refreshing to Parent...');
-
+		//? https://www.emizentech.com/blog/child-to-parent-communication-in-lwc.html
 		const custEvent = new CustomEvent(
             'callgetmodel', {
                 detail: 'payload' 

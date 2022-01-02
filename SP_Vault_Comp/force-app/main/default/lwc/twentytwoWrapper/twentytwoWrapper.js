@@ -62,7 +62,7 @@ export default class TwentytwoWrapper extends LightningElement {
 			rowData.Is_RX__c = row.Is_RX__c;
 			rowData.Grand_Total__c = row.Grand_Total__c;
 			
-			rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
+			rowData.Did_SP_Workout__c = row.Did_SP_Workout__c * 10;
 			rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 			rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 			rowData.Challenge_Total__c = row.Challenge_Total__c;
@@ -358,7 +358,8 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
-        this.headerTitle = 'Leaderboard';
+        this.headerTitle = '';
+		this.headerTitle = 'Leaderboard';
 		this.addActiveClass();
     }
 
@@ -368,7 +369,8 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showSubmitPage = true;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
-        this.headerTitle = 'Submit Vault';
+        this.headerTitle = '';
+		this.headerTitle = 'Submit Vault';
     }
 
     handleWorkoutClick() {
@@ -377,7 +379,8 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showSubmitPage = false;
         this.showWorkoutPage = true;
         this.showMonthlyPage = false;
-        this.headerTitle = 'Workouts';
+        this.headerTitle = '';
+		this.headerTitle = 'Workouts';
     }
 
     handleMonthlyClick(){
@@ -386,6 +389,7 @@ export default class TwentytwoWrapper extends LightningElement {
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = true;
-        this.headerTitle = 'Challenge';
+        this.headerTitle = '';
+		this.headerTitle = 'Challenge';
     }
 }

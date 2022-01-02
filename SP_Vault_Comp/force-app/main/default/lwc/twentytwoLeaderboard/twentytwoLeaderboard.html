@@ -42,34 +42,63 @@
     </template>
 	
 	<div class="wrapper">
-    <div class="leaderboard">
-		<table class="mainTable">
-		  <thead>
-			<tr>
-			  <th class="rank"><button onclick={handleAthleteClick}>&#9650;</button></th>
-			  <th class="name">Athlete</th>
-			  <th class="score">Score</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<template for:each={data} for:item="athlete">
-				<tr key={athlete.Id}>
-				<td class="rank">{athlete.Rank}</td>
-				<td class="name" id={athlete.Id} onclick={openModal}><img class="athleteImage" id={athlete.Id} src={athlete.Profile_Pic_URL__c}/>
-					{athlete.Name}
-					<template if:true={displayAthleteScore}>
-						<div class="content">
-						<template for:each={athlete.allWorkouts} for:item="score">
-							<c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athlete.Id} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
-						</template>
-						</div>
+		<div class="leaderboard">
+			<table class="mainTable">
+				<thead>
+					<tr>
+					<th class="rank"><button onclick={handleAthleteClick}>&#9650;</button></th>
+					<th class="name">Athlete</th>
+					<th class="score">Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template for:each={data} for:item="athlete">
+						<tr key={athlete.Id}>
+						<td class="rank">{athlete.Rank}</td>
+						<td class="name" id={athlete.Id} onclick={openModal}><img class="athleteImage" id={athlete.Id} src={athlete.Profile_Pic_URL__c}/>
+							{athlete.Name}
+							<template if:true={displayAthleteScore}>
+								<div class="content">
+								<template for:each={athlete.allWorkouts} for:item="score">
+									<c-athlete-scoresheet key={score.Name} ath-score={score} ath-id={athlete.Id} display-athlete-score={displayAthleteScore}></c-athlete-scoresheet>
+								</template>
+								</div>
+							</template>
+						</td>
+						<td class="score">{athlete.Grand_Total__c}</td>
+						</tr>
 					</template>
-				</td>
-				<td class="score">{athlete.Grand_Total__c}</td>
-				</tr>
-			</template>
-		  </tbody>
-		</table>
-	  </div>
-	  </div>
+				</tbody>
+			</table>
+		</div>
+		<div class="report-container">
+			<div class="vault-report">
+				<h2>Vault Points</h2>
+				<div class="report-wrapper"> <!-- WILL ACT LIKE TABLE -->
+					<template for:each={vaultReport} for:item="athlete">
+						<div key={athlete.Id} class="score-name">{athlete.Name}</div>
+						<div key={athlete.Id} class="score-value">{athlete.Total_Points__c}</div>
+					</template>
+				</div>
+			</div>
+			<div class="challenge-report">
+				<h2>Challenge Points</h2>
+				<div class="report-wrapper"> <!-- WILL ACT LIKE TABLE -->
+					<template for:each={challengeReport} for:item="athlete">
+						<div key={athlete.Id} class="score-name">{athlete.Name}</div>
+						<div key={athlete.Id} class="score-value">{athlete.Challenges_Completed__c}</div>
+					</template>
+				</div>
+			</div>
+			<div class="workout-report">
+				<h2>Workout Points</h2>
+				<div class="report-wrapper"> <!-- WILL ACT LIKE TABLE -->
+					<template for:each={workoutReport} for:item="athlete">
+						<div key={athlete.Id} class="score-name">{athlete.Name}</div>
+						<div key={athlete.Id} class="score-value">{athlete.Did_SP_Workout__c}</div>
+					</template>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
