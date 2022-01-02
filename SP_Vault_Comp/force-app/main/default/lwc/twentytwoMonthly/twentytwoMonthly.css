@@ -29,6 +29,10 @@
     justify-items: center;
   }
 
+  .details > * {
+	text-align: center;
+  }
+
   
 
   .legend {

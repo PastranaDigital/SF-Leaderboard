@@ -21,9 +21,14 @@ export default class TwentytwoWrapper extends LightningElement {
     connectedCallback() {
 		this.getModel();
     }
+
+	consoleSomething() {
+		console.log('something');
+	}
 	
 	getModel() {
 		console.log('getting model');
+		this.loading = true;
 		getViewModel()
 			.then((result) => {
 				console.log('ViewModel: ', result);
@@ -348,7 +353,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	}
 
     handleLeaderboardClick() {
-        this.getModel();
+        // this.getModel();
 		this.showLeaderboardPage = true;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
@@ -358,16 +363,16 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 
     handleSubmitClick() {
-        this.getModel();
+        // this.getModel();
 		this.showLeaderboardPage = false;
         this.showSubmitPage = true;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
-        this.headerTitle = 'Submit Score';
+        this.headerTitle = 'Submit Vault';
     }
 
     handleWorkoutClick() {
-        this.getModel();
+        // this.getModel();
 		this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = true;
@@ -376,7 +381,7 @@ export default class TwentytwoWrapper extends LightningElement {
     }
 
     handleMonthlyClick(){
-        this.getModel();
+        // this.getModel();
 		this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;

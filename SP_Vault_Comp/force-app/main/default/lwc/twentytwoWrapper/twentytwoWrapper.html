@@ -22,6 +22,7 @@
 				
 				<template if:true={showSubmitPage}>
 					<c-twentytwo-submit 
+						oncallgetmodel={getModel}
 						current-workout={outboundModel.currentWorkout} 
 						athlete-options={allAthleteOptions} 
 						workout-results={allWorkoutResults}>
@@ -37,6 +38,7 @@
 
 				<template if:true={showMonthlyPage}>
 					<c-twentytwo-monthly 
+						oncallgetmodel={getModel}
 						current-challenge={outboundModel.currentChallenge} 
 						athlete-options={allAthleteOptions}
 						challenge-totals={allAthleteInfo}

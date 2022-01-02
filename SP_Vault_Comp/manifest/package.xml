@@ -73,6 +73,7 @@
 		<members>athleteScoresheet</members>
 		<members>athleteSpotlight</members>
 		<members>leaderboard</members>
+		<members>pubsub</members>
 		<members>results</members>
 		<members>scoreSubmission</members>
 		<members>twentytwoLeaderboard</members>
