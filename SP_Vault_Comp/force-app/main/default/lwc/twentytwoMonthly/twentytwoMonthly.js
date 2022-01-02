@@ -78,7 +78,7 @@ export default class TwentytwoMonthly extends LightningElement {
 				let rowData = {};
 				rowData.Id = row.Id;
 				rowData.Name = row.Name;
-				rowData.Did_SP_Workout__c = row.Did_SP_Workout__c;
+				rowData.Did_SP_Workout__c = row.Did_SP_Workout__c / 10;
 				rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 				rowData.Challenge_Total__c = row.Challenge_Total__c;
@@ -137,6 +137,11 @@ export default class TwentytwoMonthly extends LightningElement {
                 detail: 'payload' 
             });
         this.dispatchEvent(custEvent);
+		const custEvent2 = new CustomEvent(
+            'callscrolltotop', {
+                detail: 'payload' 
+            });
+        this.dispatchEvent(custEvent2);
 	}
 
     createScoreApex() {

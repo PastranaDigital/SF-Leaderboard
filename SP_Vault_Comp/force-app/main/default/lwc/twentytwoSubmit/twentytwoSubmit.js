@@ -67,6 +67,11 @@ export default class TwentytwoSubmit extends LightningElement {
                 detail: 'payload' 
             });
         this.dispatchEvent(custEvent);
+		const custEvent2 = new CustomEvent(
+            'callscrolltotop', {
+                detail: 'payload' 
+            });
+        this.dispatchEvent(custEvent2);
 	}
 
     createScoreSubmission() {
