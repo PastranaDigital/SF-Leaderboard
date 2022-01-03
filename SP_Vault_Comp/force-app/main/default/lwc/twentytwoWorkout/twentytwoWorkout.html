@@ -1,9 +1,9 @@
 <template>
     <div class="main-container">
-		<template if:false={newWorkoutResults}>
+		<template if:false={currentWorkout}>
 			<h2>No workout to show yet... be patient</h2>
 		</template>
-		<template if:true={newWorkoutResults}>
+		<template if:true={currentWorkout}>
 			<template for:each={newWorkoutResults} for:item="workout">
 				<div key={workout.Id} class="workout-content">
 					<div class="workout-text">

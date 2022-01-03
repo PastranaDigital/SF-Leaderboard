@@ -199,6 +199,63 @@ export default class TwentytwoMonthly extends LightningElement {
 		this.buildDataComplete = false;
 	}
 
+	numberWithCommas(x) {
+		var parts = x.toString().split(".");
+		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return parts.join(".");
+	}
+	
+	// function test(x, expect) {
+	// 	const result = numberWithCommas(x);
+	// 	const pass = result === expect;
+	// 	console.log(`${pass ? "✓" : "ERROR ====>"} ${x} => ${result}`);
+	// 	return pass;
+	// }
+	
+	// let failures = 0;
+	// failures += !test(0              , "0");
+	// failures += !test(0.123456       , "0.123456");
+	// failures += !test(100            , "100");
+	// failures += !test(100.123456     , "100.123456");
+	// failures += !test(1000           , "1,000");
+	// failures += !test(1000.123456    , "1,000.123456");
+	// failures += !test(10000          , "10,000");
+	// failures += !test(10000.123456   , "10,000.123456");
+	// failures += !test(100000         , "100,000");
+	// failures += !test(100000.123456  , "100,000.123456");
+	// failures += !test(1000000        , "1,000,000");
+	// failures += !test(1000000.123456 , "1,000,000.123456");
+	// failures += !test(10000000       , "10,000,000");
+	// failures += !test(10000000.123456, "10,000,000.123456");
+	// if (failures) {
+	// 	console.log(`${failures} test(s) failed`);
+	// } else {
+	// 	console.log("All tests passed");
+	// }
+
+	// createDisplayText(incomingArray) {
+	// 	let currentData = [];
+	// 	incomingArray.forEach(challenge => {
+	// 		let rowData = {};
+	// 		rowData.Active__c = challenge.Active__c;
+	// 		rowData.Days_in_Month__c = challenge.Days_in_Month__c;
+	// 		rowData.Id = challenge.Id;
+	// 		rowData.Movement_1__c = challenge.Movement_1__c;
+	// 		rowData.Movement_2__c = challenge.Movement_2__c;
+	// 		rowData.Name = challenge.Name;
+	// 		rowData.Start_Date__c = challenge.Start_Date__c;
+	// 		rowData.Subtitle__c = challenge.Subtitle__c;
+	// 		rowData.Total_Challenge_Count__c = challenge.Total_Challenge_Count__c;
+	// 		rowData.DisplayTotalCount = this.formatBigNumber(challenge.Total_Challenge_Count__c);
+
+	// 		currentData.push(rowData);
+	// 	});
+
+	// 	return currentData;
+	// }
+
+	DisplayTotalCount;
+	
 	renderedCallback() {
 		this.totalChallengeCount = this.currentChallenge.Total_Challenge_Count__c;
 		this.daysInMonth = this.currentChallenge.Days_in_Month__c;
@@ -210,6 +267,9 @@ export default class TwentytwoMonthly extends LightningElement {
 		this.pacer.barFill = `width: ${((+date / this.daysInMonth * 100) > 100 ? 100 : (+date / this.daysInMonth * 100)).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
 		if(!this.buildDataComplete) {
+			this.DisplayTotalCount = this.numberWithCommas(this.currentChallenge.Total_Challenge_Count__c);
+			console.log('this.currentChallenge.DisplayTotalCount: ', this.currentChallenge.DisplayTotalCount);
+			console.log('this.currentChallenge.Total_Challenge_Count__c: ', this.currentChallenge.Total_Challenge_Count__c.toString());
 			this.updateChallengeTotals(this.challengeTotals);
 		}
 	}
