@@ -2,17 +2,19 @@
     <div class="leaderboard">
         <div class="main">
             <div class="graph">
-				<div class="details">
-					<p>{currentChallenge.Name}</p>
-					<h2>{currentChallenge.Total_Challenge_Count__c} {currentChallenge.Movement_1__c}</h2>
-					<h3>{currentChallenge.Subtitle__c}</h3>
-					<div class="legend">
-						<span class="movement-1">{currentChallenge.Movement_1__c}</span>
-						<template if:true={currentChallenge.Movement_2__c}>
-							<span class="movement-2">{currentChallenge.Movement_2__c}</span>
-						</template>
+				<template if:true={buildDataComplete}>
+					<div class="details">
+						<p>{currentChallenge.Name}</p>
+						<h2>{DisplayTotalCount} {currentChallenge.Movement_1__c}</h2>
+						<h3>{currentChallenge.Subtitle__c}</h3>
+						<div class="legend">
+							<span class="movement-1">{currentChallenge.Movement_1__c}</span>
+							<template if:true={currentChallenge.Movement_2__c}>
+								<span class="movement-2">{currentChallenge.Movement_2__c}</span>
+							</template>
+						</div>
 					</div>
-				</div>
+				</template>
 
 				<template if:false={updtdChallengeTotals}>
 					<h2 style="text-align: center;">No Entries Yet,<br>get this party started!</h2>
@@ -28,10 +30,12 @@
 
 					<template for:each={updtdChallengeTotals} for:item="athlete">
 						<div key={athlete.Id} class="bar">
-							<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
-							<div class="bar-athlete-percentage">
-								<p>{athlete.Did_SP_Workout__c} WPs</p>
-								<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+							<div class="details-container">
+								<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
+								<div class="bar-athlete-percentage">
+									<p>{athlete.Did_SP_Workout__c} WPs</p>
+									<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+								</div>
 							</div>
 							<div class="bar-background">
 								<div class="bar-filler" style={athlete.barFill}></div>

@@ -41,7 +41,7 @@ body {
   }
   
   header {
-	width: 100%;
+	width: 100vw;
 	background: linear-gradient(to top, var(--color3), var(--color2));
 	border-bottom: 2px solid var(--color-dark-text);
 	text-transform: uppercase;
@@ -74,7 +74,8 @@ body {
 	display: flex;
 	align-items: center;
 	width: 100%;
-	padding: 1rem 1rem 1.5rem;
+	/* padding: 1rem 1rem 1.5rem; */
+	min-height: 14vh;
 	justify-content: center;
 	/* justify-content: center; DON'T NEED WITH NEW TITLE STYLE */ 
   }
@@ -98,13 +99,13 @@ body {
   }
   
   nav {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 1rem;
-	/*   background: #c9c9c9; */
-	width: 100%;
-	margin: 0 auto;
-	justify-items: center;
+	display: flex;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    justify-content: space-around;
+    /* gap: 1rem; */
+    width: 100vw;
+    /* margin: 0 auto; */
+    /* justify-items: center; */
   }
   
   nav img {

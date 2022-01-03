@@ -1,150 +1,154 @@
 <template>
 	<div class="main">
-		<template if:false={currentWorkoutResults}>
+		<template if:false={currentWorkout}>
 			<h2 class="no-data">No workout to show yet... be patient</h2>
 		</template>
-		<template if:true={currentWorkoutResults}>
-			<template if:false={scoreSubmitted}>
-			<div class="submissionForm">
-				<table>
-					<tr>
-						<td colspan="6">
-							<lightning-combobox
-								name="Athlete"
-								label="Athlete's Name"
-								value={value}
-								placeholder="Select Athlete"
-								options={athleteOptions}
-								onchange={handleAthleteChange}
-								required >
-							</lightning-combobox>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="6">
-							<lightning-input 
-								name="Vault Workout"
-								label="Vault Workout"
-								type="text"
-								placeholder={currentWorkout.Name}
-								disabled>
-							</lightning-input>
-						</td>
-					</tr>
-					<tr>
-						<template if:true={currentWorkout.Second_Label__c}>
-							<td colspan="3">
-								<lightning-input 
-									type="number" 
-									name="firstLabel"
-									value=''
-									onchange={handleScore1Change} 
-									label={currentWorkout.First_Label__c}
-									class="slds-p-right_small"
-									required>
-								</lightning-input>
-							</td>
-							<td colspan="3">
-								<lightning-input 
-									type="number" 
-									name="secondLabel" 
-									value=''
-									onchange={handleScore2Change}
-									label={currentWorkout.Second_Label__c}
-									class="slds-p-left_small"
-									required>
-								</lightning-input>
-							</td>
-						</template>
-						<template if:false={currentWorkout.Second_Label__c}>
-							<td colspan="6">
-								<lightning-input 
-									type="number" 
-									name="firstLabel" 
-									value=''
-									onchange={handleScore1Change}
-									label={currentWorkout.First_Label__c}
-									required>
-								</lightning-input>
-							</td>
-						</template>
-					</tr>
-					<template if:true={currentWorkout.RX_Weight_Male__c}>
-						<tr>
-							<td colspan="6">
-								<lightning-input 
-									type="number" 
-									name="weightUsed" 
-									value=''
-									onchange={handleWeightUsedChange}
-									label="Weight Used"
-									required>
-								</lightning-input>
-							</td>
-						</tr>
+		<template if:true={currentWorkout}>
+			<div class="container">
+				<div class="submission-container">
+					<template if:false={scoreSubmitted}>
+						<div class="submissionForm">
+							<table>
+								<tr>
+									<td colspan="6">
+										<lightning-combobox
+											name="Athlete"
+											label="Athlete's Name"
+											value={value}
+											placeholder="Select Athlete"
+											options={athleteOptions}
+											onchange={handleAthleteChange}
+											required >
+										</lightning-combobox>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="6">
+										<lightning-input 
+											name="Vault Workout"
+											label="Vault Workout"
+											type="text"
+											placeholder={currentWorkout.Name}
+											disabled>
+										</lightning-input>
+									</td>
+								</tr>
+								<tr>
+									<template if:true={currentWorkout.Second_Label__c}>
+										<td colspan="3">
+											<lightning-input 
+												type="number" 
+												name="firstLabel"
+												value=''
+												onchange={handleScore1Change} 
+												label={currentWorkout.First_Label__c}
+												class="slds-p-right_small"
+												required>
+											</lightning-input>
+										</td>
+										<td colspan="3">
+											<lightning-input 
+												type="number" 
+												name="secondLabel" 
+												value=''
+												onchange={handleScore2Change}
+												label={currentWorkout.Second_Label__c}
+												class="slds-p-left_small"
+												required>
+											</lightning-input>
+										</td>
+									</template>
+									<template if:false={currentWorkout.Second_Label__c}>
+										<td colspan="6">
+											<lightning-input 
+												type="number" 
+												name="firstLabel" 
+												value=''
+												onchange={handleScore1Change}
+												label={currentWorkout.First_Label__c}
+												required>
+											</lightning-input>
+										</td>
+									</template>
+								</tr>
+								<template if:true={currentWorkout.RX_Weight_Male__c}>
+									<tr>
+										<td colspan="6">
+											<lightning-input 
+												type="number" 
+												name="weightUsed" 
+												value=''
+												onchange={handleWeightUsedChange}
+												label="Weight Used"
+												required>
+											</lightning-input>
+										</td>
+									</tr>
+								</template>
+								<tr>
+									<td colspan="6">
+										<lightning-input 
+											type="text" 
+											value=''
+											onchange={handleNotesChange}
+											label="Notes">
+										</lightning-input>
+									</td>
+								</tr>
+							</table>
+							<br>
+							<p class="buttonErrorMessage">{buttonErrorMessage}</p>
+							<div class="button-wrapper">
+								<button onclick={handleSubmitRecord}>Submit Vault Score</button>
+							</div>
+							<template if:true={errorSubmitting}>
+								<div class="error">
+									<p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
+									<p>{error.body.pageErrors.message}</p>
+								</div>
+							</template>
+						</div>
 					</template>
-					<tr>
-						<td colspan="6">
-							<lightning-input 
-								type="text" 
-								value=''
-								onchange={handleNotesChange}
-								label="Notes">
-							</lightning-input>
-						</td>
-					</tr>
-				</table>
-				<br>
-				<p class="buttonErrorMessage">{buttonErrorMessage}</p>
-				<div class="button-wrapper">
-					<button onclick={handleSubmitRecord}>Submit Vault Score</button>
+					<template if:true={scoreSubmitted}>
+						<div class="submittedResults">
+							<p class="date">Score successfully submitted, results below</p>
+							<img class="athleteImage" src={scoreSubmittedAthleteImage.Image}/>
+							<h3>{scoreSubmittedAthleteImage.Name}</h3>
+							<p><b>Vault Workout:</b> {currentWorkout.Name}</p>
+							<p><b>{currentWorkout.First_Label__c}:</b> {newRecord.Score_1st__c}</p>
+							<template if:true={currentWorkout.Second_Label__c}>
+								<p><b>{currentWorkout.Second_Label__c}:</b> {newRecord.Score_2nd__c}</p>
+							</template>
+							<template if:true={currentWorkout.RX_Weight_Male__c}>
+								<p><b>Weight Used:</b> {newRecord.Weight_Used__c}lbs</p>
+							</template>
+							<p><b>Notes:</b></p><p>{newRecord.Notes__c}</p>
+						</div>
+					</template>
 				</div>
-				<template if:true={errorSubmitting}>
-					<div class="error">
-						<p>I'm sorry, there seems to be an error submitting. Please contact Omar Pastrana</p>
-						<p>{error.body.pageErrors.message}</p>
+				<div class="workout-container">
+					<div class="header">
+						<h2>{currentWorkout.Name}</h2>
+						<p class="date">{currentWorkout.Workout_Date__c} &nbsp; | &nbsp; <a href={currentWorkout.URL__c}>Full SP Workout Details</a></p>
 					</div>
-				</template>
+					<div class="workoutDetails">
+						<div class="workoutDescription">
+							<slot name="description">{currentWorkout.Description__c}</slot>
+						</div>
+						<p><b>Goal: </b>{currentWorkout.Goal__c}</p>
+						<template if:true={currentWorkout.RX_Weight_Male__c}>
+							<p><b>RX Weight (Male): </b>{currentWorkout.RX_Weight_Male__c} lbs</p>
+						</template>
+					</div>
+					<div class="results-section">
+						<h3>Results</h3>
+						<template for:each={currentWorkoutResults} for:item="result">
+							<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
+							<p key={result.Id}>{result.ScoreString}</p>
+						</template>
+					</div>
+				</div>		
 			</div>
-			</template>
-			<template if:true={scoreSubmitted}>
-				<div class="submittedResults">
-					<p class="date">Score successfully submitted, results below</p>
-					<img class="athleteImage" src={scoreSubmittedAthleteImage.Image}/>
-					<h3>{scoreSubmittedAthleteImage.Name}</h3>
-					<p><b>Vault Workout:</b> {currentWorkout.Name}</p>
-					<p><b>{currentWorkout.First_Label__c}:</b> {newRecord.Score_1st__c}</p>
-					<template if:true={currentWorkout.Second_Label__c}>
-						<p><b>{currentWorkout.Second_Label__c}:</b> {newRecord.Score_2nd__c}</p>
-					</template>
-					<template if:true={currentWorkout.RX_Weight_Male__c}>
-						<p><b>Weight Used:</b> {newRecord.Weight_Used__c}lbs</p>
-					</template>
-					<p><b>Notes:</b></p><p>{newRecord.Notes__c}</p>
-				</div>
-			</template>
-			<div class="workout">
-				<div class="header">
-					<h2>{currentWorkout.Name}</h2>
-					<p class="date">{currentWorkout.Workout_Date__c} &nbsp; | &nbsp; <a href={currentWorkout.URL__c}>Full SP Workout Details</a></p>
-				</div>
-				<div class="workoutDetails">
-					<div class="workoutDescription">
-						<slot name="description">{currentWorkout.Description__c}</slot>
-					</div>
-					<p><b>Goal: </b>{currentWorkout.Goal__c}</p>
-					<template if:true={currentWorkout.RX_Weight_Male__c}>
-						<p><b>RX Weight (Male): </b>{currentWorkout.RX_Weight_Male__c} lbs</p>
-					</template>
-				</div>
-				<div class="results-section">
-					<h3>Results</h3>
-					<template for:each={currentWorkoutResults} for:item="result">
-						<p key={result.Id}>{result.Rank}. {result.AthleteName}</p>
-						<p key={result.Id}>{result.ScoreString}</p>
-					</template>
-				</div>
-			</div>		
 		</template>
 	</div>
 </template>

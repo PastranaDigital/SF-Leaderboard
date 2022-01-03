@@ -40,18 +40,18 @@ export default class TwentytwoWrapper extends LightningElement {
 				this.handleError(error);
 			})
 			.finally(() => {
-				this.buildAthleteInfo(this.outboundModel.allAthleteInfo);
-				this.buildScoreSubmissions(this.outboundModel.allScoreSubmissions);
-				this.buildAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
-				this.buildAthleteOptions(this.allAthleteInfo);
-				this.buildWorkoutResults(this.outboundModel.allWorkouts, this.allScoreSubmissions);
-				this.buildChallengeEntries(this.outboundModel.allChallenges, this.outboundModel.allChallengeEntries);
+				this.buildAllAthleteInfo(this.outboundModel.allAthleteInfo);
+				this.buildAllScoreSubmissions(this.outboundModel.allScoreSubmissions);
+				this.buildAllAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
+				this.buildAllAthleteOptions(this.allAthleteInfo);
+				this.buildAllWorkoutResults(this.outboundModel.allWorkouts, this.allScoreSubmissions);
+				this.buildAllChallengeEntries(this.outboundModel.allChallenges, this.outboundModel.allChallengeEntries);
 
 				this.loading = false;
 			});
 	}
 
-	buildAthleteInfo(incomingAthletes) {
+	buildAllAthleteInfo(incomingAthletes) {
 		if (!incomingAthletes) return;
 		let rank = 1;
 		let currentData = [];
@@ -86,7 +86,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		this.allAthleteInfo = currentData;
 	}
 
-	buildScoreSubmissions(incomingScores) {
+	buildAllScoreSubmissions(incomingScores) {
 		if (!incomingScores) return;
 		let currentData = [];
 		incomingScores.forEach((row) => {
@@ -112,7 +112,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		this.allScoreSubmissions = currentData;
 	}
 
-	buildAthleteScores(incomingAthletes, incomingScores) {
+	buildAllAthleteScores(incomingAthletes, incomingScores) {
 		if (!incomingAthletes || !incomingScores) return;
 		let currentData = [];
         incomingAthletes.forEach(athlete => {
@@ -158,7 +158,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		this.allAthleteScores = currentData;
 	}
 
-	buildAthleteOptions(incomingAthletes) {
+	buildAllAthleteOptions(incomingAthletes) {
 		if (!incomingAthletes) return;
 		let currentData = [];
         incomingAthletes.forEach(athlete => {
@@ -171,7 +171,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		this.allAthleteOptions = currentData;
 	}
 
-	buildWorkoutResults(incomingWorkouts, incomingScores) {
+	buildAllWorkoutResults(incomingWorkouts, incomingScores) {
 		if (!incomingWorkouts || !incomingScores) return;
 		let currentData = [];
         incomingWorkouts.forEach(workout => {
@@ -244,7 +244,7 @@ export default class TwentytwoWrapper extends LightningElement {
 		// console.log('this.allWorkoutResults: ', this.allWorkoutResults);
 	}
 
-	buildChallengeEntries(incomingChallenges, incomingEntries) {
+	buildAllChallengeEntries(incomingChallenges, incomingEntries) {
 		if (!incomingChallenges || !incomingEntries) return;
 		let currentData = [];
         incomingChallenges.forEach(challenge => {

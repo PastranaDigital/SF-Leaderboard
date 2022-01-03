@@ -6,6 +6,13 @@
     box-sizing: border-box; */
   }
 
+  .main {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+
 
   .no-data {
 	text-align: center;	
@@ -13,6 +20,21 @@
 	font-size: 1rem;
 	font-weight: 600;
 	font-family: 'Salesforce Sans';
+  }
+
+  .container {
+	display: flex;
+	/* width: 100%; */
+    overflow: hidden;
+	padding-bottom: 4rem;
+	align-items: flex-start;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+  }
+
+  .container > * {
+	width: 100%;
+	max-width: 400px;
   }
 
   .submit-form {
@@ -24,13 +46,13 @@
 	padding: 1rem 0;
   }
 
-  .workout {
+  .workout-container {
     /* background-color: #16181e; */
     color: #999;
     padding: 2rem 1.5rem;
   }
 
-  .workout .header {
+  .workout-container .header {
 	  display: flex;
 	  flex-direction: column;
 	  align-items: center;
@@ -40,7 +62,7 @@
     /* background-color: #94928f; */
     background-color: #e9e9e9;
     padding: 2rem 1.5rem;
-	margin: 0 0.5rem;
+	/* margin: 0 0.5rem; */
     font-size: 0.8rem;
     color: #555;
 	border-radius: 1rem;
@@ -95,13 +117,6 @@
     font-size: .8rem;
     font-weight: 600;
     color: #cc9900;
-  }
-
-  .main {
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    width: 100%;
-    overflow: hidden;
   }
 
   .buttonErrorMessage {
