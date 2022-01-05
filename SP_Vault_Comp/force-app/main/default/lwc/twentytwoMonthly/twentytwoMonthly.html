@@ -21,8 +21,10 @@
 				</template>
 				<template if:true={updtdChallengeTotals}>
 					<div class="bar">
-						<!-- <p class="bar-athlete-name">Pacer</p> -->
-						<p class="bar-athlete-percentage">Pace: {pacer.pace} / {totalChallengeCount}</p>
+						<div class="pacer-container">
+							<p class="bar-athlete-percentage">Pace:</p>
+							<p class="bar-athlete-percentage">{pacer.pace} / {totalChallengeCountString}</p>
+						</div>
 						<div class="pacer-background">
 							<div class="pacer-filler" style={pacer.barFill}></div>
 						</div>
@@ -34,7 +36,7 @@
 								<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
 								<div class="bar-athlete-percentage">
 									<p>{athlete.Did_SP_Workout__c} WPs</p>
-									<p>{athlete.Challenge_Total__c} / {totalChallengeCount}</p>
+									<p>{athlete.Challenge_Total_String} / {totalChallengeCountString}</p>
 								</div>
 							</div>
 							<div class="bar-background">

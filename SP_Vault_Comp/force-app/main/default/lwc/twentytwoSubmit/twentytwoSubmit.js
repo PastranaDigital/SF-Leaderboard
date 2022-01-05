@@ -183,6 +183,7 @@ export default class TwentytwoSubmit extends LightningElement {
     
     renderedCallback() {
     	this.getCurrentWorkoutResults();
-		if (!this.workoutResults) this.template.querySelector('slot').innerHTML = this.currentWorkout.Description__c;
+		// if (!this.workoutResults) 
+		this.template.querySelector('slot').innerHTML = this.currentWorkout.Description__c;
     }
 }

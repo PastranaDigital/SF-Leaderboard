@@ -82,6 +82,7 @@ export default class TwentytwoMonthly extends LightningElement {
 				rowData.Total_Movement_1__c = row.Total_Movement_1__c;
 				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 				rowData.Challenge_Total__c = row.Challenge_Total__c;
+				rowData.Challenge_Total_String = this.numberWithCommas(row.Challenge_Total__c);
 
 				rowData.completed = row.Challenge_Total__c >= this.totalChallengeCount ? '★' : '';
 				
@@ -255,6 +256,7 @@ export default class TwentytwoMonthly extends LightningElement {
 	// }
 
 	DisplayTotalCount;
+	totalChallengeCountString;
 	
 	renderedCallback() {
 		this.totalChallengeCount = this.currentChallenge.Total_Challenge_Count__c;
@@ -263,6 +265,8 @@ export default class TwentytwoMonthly extends LightningElement {
 		const date = Number((new Date()).getDate());
 		// console.log(`date: ${date}`);
 		this.pacer.pace = ((+date / this.daysInMonth * this.totalChallengeCount) > this.totalChallengeCount ? this.totalChallengeCount : (+date / this.daysInMonth * this.totalChallengeCount)).toFixed(0);
+		this.pacer.pace = this.numberWithCommas(this.pacer.pace);
+		this.totalChallengeCountString = this.numberWithCommas(this.totalChallengeCount);
 		// console.log('this.pacer.pace', this.pacer.pace);
 		this.pacer.barFill = `width: ${((+date / this.daysInMonth * 100) > 100 ? 100 : (+date / this.daysInMonth * 100)).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);

@@ -82,6 +82,12 @@
 	margin-bottom: 0;
   }
 
+  .pacer-container {
+	display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+
   .details-container {
 	display: flex;
 	align-items: baseline;
@@ -181,7 +187,7 @@
   h3 {
     color: #2d2e31;
     font-size: 1.25rem;
-	line-height: 1rem;
+	line-height: 1.5rem;
   }
   
 
