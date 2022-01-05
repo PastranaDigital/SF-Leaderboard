@@ -17,7 +17,9 @@
 							
 							<div class="workout-body">
 								<h3>Details</h3>
-								<slot name="description">{workout.Plain_Description__c}</slot>
+								<c-twentytwo-workout-details 
+									workout-data={workout.Description__c}>
+								</c-twentytwo-workout-details>
 								<p><b>Goal: </b>{workout.Goal__c}</p>
 								<template if:true={workout.RX_Weight_Male__c}>
 									<p><b>RX Weight (Male): </b>{workout.RX_Weight_Male__c} lbs</p>
