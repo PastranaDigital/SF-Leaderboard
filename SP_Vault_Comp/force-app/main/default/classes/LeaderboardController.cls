@@ -175,4 +175,20 @@ public without sharing class LeaderboardController {
 			this.value = value;
 		}
 	}
+
+	public static List<SObject> reverseList(List<SObject> incomingList) {
+		System.debug(incomingList);
+		Map<Integer, SObject> mapName = new Map<Integer, SObject>();
+		Integer i = 1;
+		for (SObject obj : incomingList) {
+			mapName.put(i, obj);
+			i++;
+		}
+		List<SObject> listName = new List<SObject>();
+		for (Integer j = incomingList.size(); j > 0; j--) {
+			listName.add(mapName.get(j));
+		}
+		System.debug(listName);
+		return listName;
+	}
 }
