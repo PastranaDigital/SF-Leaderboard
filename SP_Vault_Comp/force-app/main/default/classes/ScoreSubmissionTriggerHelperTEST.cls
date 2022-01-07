@@ -143,7 +143,7 @@ private class ScoreSubmissionTriggerHelperTEST {
         }
         insert scoreSub;
         List<Score_Submission__c> subScores = [
-            SELECT Id, Name, Athlete_Name__r.Name, Vault_Workout__r.Name, Score_1st__c, Score_2nd__c, Weight_Used__c, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
+            SELECT Id, Athlete_Name__r.Name, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
             FROM Score_Submission__c
             ORDER BY Name ASC];
         System.debug('subScores: ' + subScores);
@@ -160,9 +160,9 @@ private class ScoreSubmissionTriggerHelperTEST {
             
         List<Integer> calculatedPoints = new List<Integer>{135, 135, 195, 180, 215, 215};
         List<Decimal> calculatedRankPoints = new List<Decimal>{135.05, 135.05, 195.05, 162, 193.5, 193.5};
-        List<Integer> goalPoints = new List<Integer>{ 100, 100,   0, 100,   0,   0};
+        List<Integer> goalPoints = new List<Integer>{ 100, 100, 100, 100,   0,   0};
         List<Integer> rankPoints = new List<Integer>{  80,  80, 100,  85,  95,  95};
-        List<Integer> totalPoints = new List<Integer>{180, 180, 100, 185,  95,  95};
+        List<Integer> totalPoints = new List<Integer>{180, 180, 200, 185,  95,  95};
             
         System.assertEquals(scores1.size(), subScores.size());
         for (Integer i = 0; i < subScores.size(); i++) {
@@ -176,7 +176,7 @@ private class ScoreSubmissionTriggerHelperTEST {
     
     @isTest static void TestUpdateScores_RepsWorkout() {
         //! Test data setup
-        List<Integer> scores1 = new List<Integer>{100, 100, 110, 135, 156, 156};
+        List<Integer> scores1 = new List<Integer>{ 90, 100, 110, 150, 150, 156};
         
         // Create a new Workout (Rounds Based - No Weight)
         Vault_Workout__c workoutsToInsert = new Vault_Workout__c(
@@ -242,11 +242,11 @@ private class ScoreSubmissionTriggerHelperTEST {
         // Round_Value__c = 1,
         // RX_Weight_Male__c = 0,
             
-        List<Integer> calculatedPoints = new List<Integer>{100, 100, 110, 135, 156, 156};
-        List<Decimal> calculatedRankPoints = new List<Decimal>{100.05, 100.05, 110.05, 135.05, 156.05, 156.05};
-        List<Integer> goalPoints = new List<Integer>{ 100, 100, 100, 100,   0,   0};
-        List<Integer> rankPoints = new List<Integer>{  80,  80,  85,  90, 100, 100};
-        List<Integer> totalPoints = new List<Integer>{180, 180, 185, 190, 100, 100};
+        List<Integer> calculatedPoints = new List<Integer>{90, 100, 110, 150, 150, 156};
+        List<Decimal> calculatedRankPoints = new List<Decimal>{90.05, 100.05, 110.05, 150.05, 150.05, 156.05};
+        List<Integer> goalPoints = new List<Integer>{   0, 100, 100, 100, 100, 100};
+        List<Integer> rankPoints = new List<Integer>{  75,  80,  85,  95,  95, 100};
+        List<Integer> totalPoints = new List<Integer>{ 75, 180, 185, 195, 195, 200};
             
         System.assertEquals(scores1.size(), subScores.size());
         for (Integer i = 0; i < subScores.size(); i++) {
