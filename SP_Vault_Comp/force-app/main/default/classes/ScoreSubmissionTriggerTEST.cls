@@ -21,7 +21,7 @@ private class ScoreSubmissionTriggerTEST {
     //     insert challengeToInsert;
         
 	// 	// SELECT Id, Name, Active__c, Total_Challenge_Count__c, Start_Date__c 
-	// 	// FROM Challenge__c WHERE Name = 'February 2022' LIMIT 1
+	// 	// FROM Challenge__c WHERE Name = 'February 2022' LIMIT 1 
     //     Challenge__c challenge = [
 	// 		SELECT Id, Name, Active__c, Movement_1__c, Movement_2__c, Subtitle__c, Total_Challenge_Count__c, Days_in_Month__c, Start_Date__c 
 	// 		FROM Challenge__c 
@@ -154,7 +154,14 @@ private class ScoreSubmissionTriggerTEST {
 			);
 			scoreSub.add(score);
 		}
-		insert scoreSub;
+
+		try {
+			if (scoreSub.size() > 0) insert scoreSub;
+		} catch (DmlException e) {
+			System.debug('The following exception has occurred: ' + e.getMessage());
+		}
+
+		
 		List<Score_Submission__c> subScores = [
 			SELECT Id, Name, Athlete_Name__r.Name, Vault_Workout__r.Name, Score_1st__c, Score_2nd__c, Weight_Used__c, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
 			FROM Score_Submission__c
@@ -241,7 +248,11 @@ private class ScoreSubmissionTriggerTEST {
 			);
 			scoreSub.add(score);
 		}
-		insert scoreSub;
+		try {
+			if (scoreSub.size() > 0) insert scoreSub;
+		} catch (DmlException e) {
+			System.debug('The following exception has occurred: ' + e.getMessage());
+		}
 		List<Score_Submission__c> subScores = [
 			SELECT Id, Athlete_Name__r.Name, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
 			FROM Score_Submission__c
@@ -324,7 +335,11 @@ private class ScoreSubmissionTriggerTEST {
 			);
 			scoreSub.add(score);
 		}
-		insert scoreSub;
+		try {
+			if (scoreSub.size() > 0) insert scoreSub;
+		} catch (DmlException e) {
+			System.debug('The following exception has occurred: ' + e.getMessage());
+		}
 		List<Score_Submission__c> subScores = [
 			SELECT Id, Name, Athlete_Name__r.Name, Vault_Workout__r.Name, Score_1st__c, Score_2nd__c, Weight_Used__c, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
 			FROM Score_Submission__c

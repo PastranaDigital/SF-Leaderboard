@@ -1,4 +1,4 @@
-public with sharing class ScoreSubmissionCreateChallengeEntry {
+public without sharing class ScoreSubmissionCreateChallengeEntry {
     List<Score_Submission__c> newList;
     
 	public ScoreSubmissionCreateChallengeEntry(List<Score_Submission__c> newList) {

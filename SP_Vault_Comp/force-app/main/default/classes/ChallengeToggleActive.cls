@@ -1,4 +1,4 @@
-public with sharing class ChallengeToggleActive {
+public without sharing class ChallengeToggleActive {
     List<Challenge__c> newList;
     
 	public ChallengeToggleActive(List<Challenge__c> newList) {

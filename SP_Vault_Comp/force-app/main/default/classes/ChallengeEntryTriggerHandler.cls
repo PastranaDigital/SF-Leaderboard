@@ -1,4 +1,4 @@
-public with sharing class ChallengeEntryTriggerHandler extends TriggerHandler {
+public without sharing class ChallengeEntryTriggerHandler extends TriggerHandler {
 
 	List<Challenge_Entry__c> newList;
 	
@@ -13,7 +13,7 @@ public with sharing class ChallengeEntryTriggerHandler extends TriggerHandler {
 	
 	protected override void afterInsert() {
 		System.debug('In the handler AFTER insert');
-		ChallengeEntrySameDay sameDay = new ChallengeEntrySameDay(this.newList);
+		// ChallengeEntrySameDay sameDay = new ChallengeEntrySameDay(this.newList);
 	}
 	
 	protected override void afterUpdate() {

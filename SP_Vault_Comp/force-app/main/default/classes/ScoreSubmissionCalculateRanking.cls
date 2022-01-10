@@ -1,4 +1,4 @@
-public with sharing class ScoreSubmissionCalculateRanking {
+public without sharing class ScoreSubmissionCalculateRanking {
 	List<Score_Submission__c> newList;
     
 	public ScoreSubmissionCalculateRanking(List<Score_Submission__c> newList) {

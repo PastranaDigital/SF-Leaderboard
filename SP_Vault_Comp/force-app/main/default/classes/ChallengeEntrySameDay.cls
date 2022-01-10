@@ -1,4 +1,4 @@
-public with sharing class ChallengeEntrySameDay {
+public without sharing class ChallengeEntrySameDay {
     List<Challenge_Entry__c> newList;
     
 	public ChallengeEntrySameDay(List<Challenge_Entry__c> newList) {

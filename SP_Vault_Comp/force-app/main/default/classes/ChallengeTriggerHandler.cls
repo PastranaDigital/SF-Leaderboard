@@ -1,4 +1,4 @@
-public with sharing class ChallengeTriggerHandler extends TriggerHandler {
+public without sharing class ChallengeTriggerHandler extends TriggerHandler {
 
 	List<Challenge__c> newList;
 	
