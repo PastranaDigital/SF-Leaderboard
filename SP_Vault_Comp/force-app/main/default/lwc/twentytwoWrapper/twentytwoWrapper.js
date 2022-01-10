@@ -21,10 +21,6 @@ export default class TwentytwoWrapper extends LightningElement {
     connectedCallback() {
 		this.getModel();
     }
-
-	consoleSomething() {
-		console.log('something');
-	}
 	
 	getModel() {
 		console.log('getting model');
@@ -316,26 +312,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	showSubmitPage = false;
 	showWorkoutPage = false;
 	showMonthlyPage = false;
-	pages = [
-		{
-			name: 'showLeaderboardPage',
-			active: true
-		},
-		{
-			name: 'showSubmitPage',
-			active: false
-		},
-		{
-			name: 'showWorkoutPage',
-			active: false
-		},
-		{
-			name: 'showMonthlyPage',
-			active: false
-		},
-	];
-
-
+	
     labels = {
         ComponentFooter: '2022 Vault',
     };

@@ -112,17 +112,24 @@
 					<template if:true={scoreSubmitted}>
 						<div class="submittedResults">
 							<p class="date">Score successfully submitted, results below</p>
-							<img class="athleteImage" src={scoreSubmittedAthleteImage.Image}/>
-							<h3>{scoreSubmittedAthleteImage.Name}</h3>
-							<p><b>Vault Workout:</b> {currentWorkout.Name}</p>
-							<p><b>{currentWorkout.First_Label__c}:</b> {newRecord.Score_1st__c}</p>
-							<template if:true={currentWorkout.Second_Label__c}>
-								<p><b>{currentWorkout.Second_Label__c}:</b> {newRecord.Score_2nd__c}</p>
-							</template>
-							<template if:true={currentWorkout.RX_Weight_Male__c}>
-								<p><b>Weight Used:</b> {newRecord.Weight_Used__c}lbs</p>
-							</template>
-							<p><b>Notes:</b></p><p>{newRecord.Notes__c}</p>
+							<img class="athleteImage" src={scoreSubmittedAthlete.Image}/>
+							<h3>{scoreSubmittedAthlete.Name}</h3>
+							<div class="submitted-container">
+								<p><b>Vault Workout:</b></p>
+								<p>{currentWorkout.Name}</p>
+								<p><b>{currentWorkout.First_Label__c}:</b></p>
+								<p>{newRecord.Score_1st__c}</p>
+								<template if:true={currentWorkout.Second_Label__c}>
+									<p><b>{currentWorkout.Second_Label__c}:</b></p>
+									<p>{newRecord.Score_2nd__c}</p>
+								</template>
+								<template if:true={currentWorkout.RX_Weight_Male__c}>
+									<p><b>Weight Used:</b></p>
+									<p>{newRecord.Weight_Used__c}lbs</p>
+								</template>
+							</div><br>
+							<p><b>Notes:</b></p>
+							<p>{newRecord.Notes__c}</p>
 						</div>
 					</template>
 				</div>

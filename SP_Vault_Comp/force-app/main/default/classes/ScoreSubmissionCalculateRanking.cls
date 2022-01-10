@@ -1,19 +1,22 @@
-public without sharing class ScoreSubmissionTriggerHelper {
-    public static void calculateRanking(List<Score_Submission__c> scoreList) {
-        // get User info
-        String usersName = UserInfo.getUserName();
-        System.debug('Email address: ' + usersName);        
-        
-        List<Id> scoreListWorkoutIds = new List<Id>();
+public without sharing class ScoreSubmissionCalculateRanking {
+	List<Score_Submission__c> newList;
+    
+	public ScoreSubmissionCalculateRanking(List<Score_Submission__c> newList) {
+		this.newList = newList;
+		calculate();
+	}
+
+	private void calculate() {
+		List<Id> scoreListWorkoutIds = new List<Id>();
         Map<Id, Boolean> workoutIsGoalTimeMap = new Map<Id, Boolean>();
-        for (Score_Submission__c s : scoreList) {
+        for (Score_Submission__c s : newList) {
             scoreListWorkoutIds.add(s.Vault_Workout__c);
         }
 
-        //! Doesn't handle BULK UPLOAD at this moment
+		//! Doesn't handle BULK UPLOAD at this moment
         //? Pull all Workouts and put them in rank order
         String endQueryString; 
-        if (scoreList[0].Is_Goal_Time__c) { 
+        if (newList[0].Is_Goal_Time__c) { 
             endQueryString = 'ASC'; //? Small to Larger if TIME (ASC)
         } else { 
             endQueryString = 'DESC'; //? Large to Smaller if NOT time (DESC)
@@ -47,5 +50,5 @@ public without sharing class ScoreSubmissionTriggerHelper {
         if (updatedScores.size() > 0) {
             update updatedScores;
         }
-    }
+	}
 }
