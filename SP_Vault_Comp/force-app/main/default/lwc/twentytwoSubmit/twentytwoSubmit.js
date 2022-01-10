@@ -5,6 +5,7 @@ export default class TwentytwoSubmit extends LightningElement {
 	@api currentWorkout;
 	@api athleteOptions;
 	@api workoutResults;
+	@api athleteInfo;
 
     //? both should begin as FALSE values
     scoreSubmitted = false;
@@ -16,8 +17,7 @@ export default class TwentytwoSubmit extends LightningElement {
 	comboboxValue = '';
 
     recordId;
-    scoreSubmittedAthlete = [];
-    scoreSubmittedAthleteImage = {
+    scoreSubmittedAthlete = {
         Image: '/leaderboard/webruntime/org-asset/c5107c6f53/resource/0815e000000jEeR/Athletes/default.png',
         Name: 'Test Testerson'
     };
@@ -60,55 +60,48 @@ export default class TwentytwoSubmit extends LightningElement {
     }
 
 	refreshScores() {
-		console.log('refreshing to Parent...');
-
-		const custEvent = new CustomEvent(
-            'callgetmodel', {
-                detail: 'payload' 
-            });
-        this.dispatchEvent(custEvent);
 		const custEvent2 = new CustomEvent(
-            'callscrolltotop', {
-                detail: 'payload' 
-            });
-        this.dispatchEvent(custEvent2);
+			'callscrolltotop', {
+				detail: 'payload' 
+			});
+		this.dispatchEvent(custEvent2);
+		this.delay(2500).then(() => {
+			console.log('refreshing to Parent...');
+
+			const custEvent = new CustomEvent(
+				'callgetmodel', {
+					detail: 'payload' 
+				});
+			this.dispatchEvent(custEvent);
+			// const custEvent2 = new CustomEvent(
+			// 	'callgotoleaderboard', {
+			// 		detail: 'payload' 
+			// 	});
+			// this.dispatchEvent(custEvent2);
+		});
 	}
 
-    createScoreSubmission() {
-        const fields = this.newRecord;
-        const recordInput = {
-          apiName: "Score_Submission__c",
-          fields
-        };
-        //? createRecord returns a promise
-        createRecord(recordInput)
-          .then((response) => {
-            console.log("Score Submission has been created : ", response.id);
-            this.recordId = response.id;
-            this.scoreSubmitted = true;
-			this.refreshScores();
-          })
-          .catch((error) => {
-            this.errorSubmitting = true;
-            console.log("Error in creating score submission : ", error.body.message);
-          });
+	delay(time) {
+		return new Promise(resolve => setTimeout(resolve, time));
 	}
-
+	
     createScoreApex() {
-        createScore({ score : this.newRecord })
-            .then(result => {
-                this.message = result;
-                this.error = undefined;
-                this.scoreSubmitted = true;                
-                // console.log(JSON.stringify(result));
-                console.log("result", this.message);
+		createScore({ score : this.newRecord })
+		.then(result => {
+				this.message = result;
+				this.error = undefined;
+				this.scoreSubmitted = true;                
+				// console.log(JSON.stringify(result));
+				console.log("result", this.message);
+				// this.refreshScores();
             })
             .catch(error => {
                 this.message = undefined;
                 this.error = error;
                 this.errorSubmitting = true;
                 console.log("error", JSON.stringify(this.error));
-            });
+            })
+			.finally(() => this.refreshScores());
     }
 
     // getSubmittedScoreApex() {
@@ -147,25 +140,12 @@ export default class TwentytwoSubmit extends LightningElement {
         if (!this.checkRequiredFieldsBoolean.includes(false)) {
             this.createScoreApex();
             
-            // this.getSubmittedScoreApex();
-            // for (let index = 0; index < 5; index++) {
-            //     if (!this.newRecord.Is_Score_Between_Goal__c) {
-            //         this.getSubmittedScoreApex();
-            //     }
-            // }
-            console.log('this.newRecord.Is_Score_Between_Goal__c: ' + this.newRecord.Is_Score_Between_Goal__c);
-            
-            this.scoreSubmittedAthlete.forEach(element => {
-                if (element.value == this.newRecord.Athlete_Name__c) {
-                    this.scoreSubmittedAthleteImage.Image = element.Profile_Pic_URL__c;
-                    this.scoreSubmittedAthleteImage.Name = element.label;
-                    this.newRecord.Is_Score_Between_Goal__c = this.newRecord.Is_Score_Between_Goal__c;
-                    this.newRecord.Points_Based_on_Rank__c = this.newRecord.Points_Based_on_Rank__c;
-                    this.newRecord.Total_Workout_Points__c = this.newRecord.Total_Workout_Points__c;
+            this.athleteInfo.forEach(element => {
+                if (element.Id == this.newRecord.Athlete_Name__c) {
+                    this.scoreSubmittedAthlete.Image = element.Profile_Pic_URL__c;
+                    this.scoreSubmittedAthlete.Name = element.Name;
                 }
             });
-            // refreshApex(this.workoutList);
-            // this.createScoreSubmission();
         } else {
             this.buttonErrorMessage = 'Please complete required fields';
             console.log('Please complete required fields');
@@ -173,10 +153,11 @@ export default class TwentytwoSubmit extends LightningElement {
     }
 
 	getCurrentWorkoutResults() {
-		if (this.workoutResults) return;
+		if (!this.workoutResults) return;
 		this.workoutResults.forEach((workout) => {
 			if (workout.Name === this.currentWorkout.Name) {
 				this.currentWorkoutResults = workout.allResults;
+				console.log('this.currentWorkoutResults: ', this.currentWorkoutResults);
 			}
 		});
 	}

@@ -21,10 +21,6 @@ export default class TwentytwoWrapper extends LightningElement {
     connectedCallback() {
 		this.getModel();
     }
-
-	consoleSomething() {
-		console.log('something');
-	}
 	
 	getModel() {
 		console.log('getting model');
@@ -316,26 +312,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	showSubmitPage = false;
 	showWorkoutPage = false;
 	showMonthlyPage = false;
-	pages = [
-		{
-			name: 'showLeaderboardPage',
-			active: true
-		},
-		{
-			name: 'showSubmitPage',
-			active: false
-		},
-		{
-			name: 'showWorkoutPage',
-			active: false
-		},
-		{
-			name: 'showMonthlyPage',
-			active: false
-		},
-	];
-
-
+	
     labels = {
         ComponentFooter: '2022 Vault',
     };
@@ -345,32 +322,23 @@ export default class TwentytwoWrapper extends LightningElement {
     nav_monthly = imageResource + '/monthly.png';
     nav_workout = imageResource + '/workout.png';
     nav_score = imageResource + '/score.png';
-    
-	addActiveClass() {
-		this.pages.forEach(page => {
-			// console.log('addActiveClass', page);
-		});
-	}
 
 	scrollToTop() {
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
 	}
 
     handleLeaderboardClick() {
-        // this.getModel();
-		this.showLeaderboardPage = true;
+        this.showLeaderboardPage = true;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
         this.headerTitle = '';
 		this.headerTitle = 'Leaderboard';
-		this.addActiveClass();
 		this.scrollToTop();
     }
 
     handleSubmitClick() {
-        // this.getModel();
-		this.showLeaderboardPage = false;
+        this.showLeaderboardPage = false;
         this.showSubmitPage = true;
         this.showWorkoutPage = false;
         this.showMonthlyPage = false;
@@ -380,8 +348,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	}
 
     handleWorkoutClick() {
-        // this.getModel();
-		this.showLeaderboardPage = false;
+        this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = true;
         this.showMonthlyPage = false;
@@ -391,8 +358,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	}
 
     handleMonthlyClick(){
-        // this.getModel();
-		this.showLeaderboardPage = false;
+        this.showLeaderboardPage = false;
         this.showSubmitPage = false;
         this.showWorkoutPage = false;
         this.showMonthlyPage = true;

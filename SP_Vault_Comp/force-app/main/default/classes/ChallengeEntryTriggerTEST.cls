@@ -1,5 +1,5 @@
 @isTest
-private class ChallengeEntryTriggerHelperTEST {
+private class ChallengeEntryTriggerTEST {
      
     // @isTest static void TestAddNewChallengeCompleted_HappyPath() {
     //     //! Test data setup

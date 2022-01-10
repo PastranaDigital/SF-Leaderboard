@@ -1,3 +1,7 @@
+/* https://help.salesforce.com/s/articleView?id=release-notes.rn_lwc_css_share.htm&type=5&release=226 */
+/* https://salesforce.stackexchange.com/questions/291394/importing-a-common-css-in-lwc */
+@import 'c/unicons';
+
 * {
 	--color1: #dec328;
 	--color2: #cc9900;
@@ -25,6 +29,8 @@ body {
 	color: white;
   	font-size: 3rem;
     font-weight: 600;
+	font-style: italic;
+	text-shadow: 3px 3px #1d1e2295;
     /* line-height: 2.5rem;
     margin-left: 4rem;
     max-width: 60%; */
@@ -135,7 +141,8 @@ body {
 	bottom: 0;
 	background: var(--color-dark-text);
 	width: 100%;
-	padding: 1rem 0;
+	/* padding: 1rem 0; */
+	padding: 0.25rem 0;
 	z-index: 1;
 	justify-content: center;
   }
@@ -157,7 +164,58 @@ body {
   } */
 
   lightning-spinner {
-	  top: 15rem !important;
+	top: 15rem !important;
   }
   
+
+  .nav-input {
+	position: absolute;
+	transform: scale(0);
+  }
+
+  .nav-button {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	color: white;
+	/* padding: 0.5rem; */
+  }
+
+  .nav-icon {
+	transition: all 0.35s;
+  }
   
+  .nav-text {
+	/* font-size: 10px; */
+	position: absolute;
+	left: 50%;
+	/* bottom: 0; */
+	transform: translateX(-50%);
+	color: #cc9900;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.35s;
+
+	font-weight: 800;
+	font-size: 20px;
+	bottom: -7px;
+  }
+
+  .nav-input:checked ~ 
+  .nav-button {
+	color: #cc9900;
+  }
+
+  .nav-input:checked ~
+  .nav-button .nav-text {
+	visibility: visible;
+	opacity: 1;
+  }
+
+  .nav-input:checked ~
+  .nav-button .nav-icon {
+	transform: translateY(-5px);
+  }
