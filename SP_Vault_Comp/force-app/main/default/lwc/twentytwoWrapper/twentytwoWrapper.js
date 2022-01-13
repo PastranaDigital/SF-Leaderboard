@@ -15,6 +15,7 @@ export default class TwentytwoWrapper extends LightningElement {
 	allAthleteOptions = [];
 	allWorkoutResults = [];
 	allChallengeEntries = [];
+	justChallengeEntries = [];
 	
 	loading = true;
 	
@@ -36,6 +37,7 @@ export default class TwentytwoWrapper extends LightningElement {
 				this.handleError(error);
 			})
 			.finally(() => {
+				this.buildJustChallengeEntries(this.outboundModel.allChallengeEntries);
 				this.buildAllAthleteInfo(this.outboundModel.allAthleteInfo);
 				this.buildAllScoreSubmissions(this.outboundModel.allScoreSubmissions);
 				this.buildAllAthleteScores(this.allAthleteInfo, this.allScoreSubmissions);
@@ -45,6 +47,33 @@ export default class TwentytwoWrapper extends LightningElement {
 
 				this.loading = false;
 			});
+	}
+
+	buildJustChallengeEntries(incomingEntries) {
+		// if (!incomingScores) return;
+		// let currentData = [];
+		// incomingScores.forEach((row) => {
+		// 	let rowData = {};
+		// 	rowData.Id = row.Id; // score submission Id
+		// 	rowData.WorkoutId = row.Vault_Workout__c;
+		// 	rowData.AthleteId = row.Athlete_Name__c;
+		// 	rowData.AthleteName = row.Athlete_Name__r.Name;
+		// 	rowData.WorkoutName = row.Vault_Workout__r.Name;
+		// 	rowData.Is_Score_Between_Goal__c = row.Is_Score_Between_Goal__c;
+		// 	rowData.Points_Based_on_Rank__c = row.Points_Based_on_Rank__c;
+		// 	rowData.Total_Points__c = row.Total_Workout_Points__c;
+
+		// 	rowData.Score_1st__c = row.Score_1st__c;
+		// 	rowData.First_Label__c = row.Vault_Workout__r.First_Label__c;
+		// 	rowData.Score_2nd__c = row.Score_2nd__c;
+		// 	rowData.Second_Label__c = row.Vault_Workout__r.Second_Label__c;
+		// 	rowData.Weight_Used__c = row.Weight_Used__c;
+		// 	rowData.RX_Weight_Male__c = row.Vault_Workout__r.RX_Weight_Male__c;
+
+		// 	currentData.push(rowData);
+		// });
+		// this.justChallengeEntries = currentData;
+		this.justChallengeEntries = incomingEntries;
 	}
 
 	buildAllAthleteInfo(incomingAthletes) {
@@ -270,6 +299,7 @@ export default class TwentytwoWrapper extends LightningElement {
 					athEntry.Entry_Total__c = entry.Entry_Total__c;
 					athEntry.Id = entry.Id;
 					athEntry.Movement_1__c = entry.Movement_1__c;
+					athEntry.CreatedDate = entry.CreatedDate;
 					
 					challengeEntries.push(athEntry);
                 }

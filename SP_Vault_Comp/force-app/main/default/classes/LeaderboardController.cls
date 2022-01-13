@@ -154,7 +154,7 @@ public without sharing class LeaderboardController {
 	@AuraEnabled
     public static List<Challenge_Entry__c> getAllChallengeEntries() {
         return [
-			SELECT Id, Name, Movement_1_Calc__c, Movement_2_Calc__c, Athlete__c, Athlete__r.Name, Challenge__c, Challenge__r.Name, Checkbox_Points__c, Daily_Checkbox__c, Entry_Total__c 
+			SELECT Id, Name, Movement_1_Calc__c, Movement_2_Calc__c, Athlete__c, Athlete__r.Name, Challenge__c, Challenge__r.Name, Checkbox_Points__c, Daily_Checkbox__c, Entry_Total__c, CreatedDate, Adjusted_CreatedDate__c 
 			FROM Challenge_Entry__c 
 			ORDER BY Challenge__r.Start_Date__c ASC];
     }
