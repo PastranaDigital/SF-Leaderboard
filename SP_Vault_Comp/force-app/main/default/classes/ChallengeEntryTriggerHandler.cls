@@ -13,6 +13,7 @@ public without sharing class ChallengeEntryTriggerHandler extends TriggerHandler
 	
 	protected override void afterInsert() {
 		System.debug('In the handler AFTER insert');
+		ChallengeEntryChallengeCompleted checkTotal = new ChallengeEntryChallengeCompleted(this.newList);
 		// ChallengeEntrySameDay sameDay = new ChallengeEntrySameDay(this.newList);
 	}
 	

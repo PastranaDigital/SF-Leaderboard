@@ -25,7 +25,7 @@ private class ChallengeTriggerTEST {
 		//? 1st challenge is active
 		//! Create a new Challenge 1 ----------------------------------------------------------
         Challenge__c challengeToInsert1 = new Challenge__c(
-        	Active__c = false,
+        	Active__c = true,
 			Name = 'February 2022',
         	Days_in_Month__c = 28,
 	        Movement_1__c = 'Burpees',
