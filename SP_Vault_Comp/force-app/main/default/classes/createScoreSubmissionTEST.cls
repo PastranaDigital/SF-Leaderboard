@@ -2,7 +2,7 @@
 private class createScoreSubmissionTEST {
     @isTest static void createScore_single() {
         //! Test data setup
-        // Create a new Workout (Time Based)
+        //! Create a new Workout (Time Based)
         Vault_Workout__c workoutsToInsert = new Vault_Workout__c(
         	Name = 'Workout_Time',
         	Goal_Low_Value__c = 600, // 10 mins
@@ -19,8 +19,28 @@ private class createScoreSubmissionTEST {
         insert workoutsToInsert;
         Vault_Workout__c workout = [SELECT Id, Name, Goal_Low_Value__c FROM Vault_Workout__c WHERE Name = 'Workout_Time' LIMIT 1];
         
+
+		//! Create a new Challenge
+        Challenge__c challengeToInsert = new Challenge__c(
+        	Active__c = true,
+			Name = 'February 2025',
+        	Days_in_Month__c = 28,
+	        Movement_1__c = 'Burpees',
+	        Movement_2__c = 'Box Jump Overs',
+            Start_Date__c = System.today().addMonths(1),
+            Subtitle__c = 'Lots of Work',
+            Total_Challenge_Count__c = 250
+        );
+        insert challengeToInsert;
         
-        // Create Athletes
+        Challenge__c challenge = [
+			SELECT Id, Name, Active__c, Total_Challenge_Count__c, Start_Date__c 
+			FROM Challenge__c WHERE Name = 'February 2025' LIMIT 1
+		];
+        System.debug('challenge: ' + challenge);
+		
+        
+        //! Create Athletes
         Athlete__c athletesToInsert = new Athlete__c(
             Name = 'Test Testerson',
             Age__c = 35,
@@ -30,7 +50,7 @@ private class createScoreSubmissionTEST {
         Athlete__c athlete = [SELECT Id, Name, Age__c, Location__c FROM Athlete__c LIMIT 1];
         
         
-        // Create a First Score Submissions for workout
+        //! Create a First Score Submissions for workout
         Score_Submission__c scoreSub = new Score_Submission__c(
             Athlete_Name__c = athlete.Id,
             Vault_Workout__c = workout.Id,
@@ -42,13 +62,13 @@ private class createScoreSubmissionTEST {
         // insert scoreSub;
         
         
-        // Perform test
+        //! Perform test
         Test.startTest();
         createScoreSubmission.createScore(scoreSub);
         Test.stopTest();
 
 
-        // Validate Expected Results
+        //! Validate Expected Results
         List<Score_Submission__c> subScores = [
             SELECT Id, Name, Athlete_Name__r.Name, Vault_Workout__r.Name, Score_1st__c, Score_2nd__c, Weight_Used__c, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
             FROM Score_Submission__c
@@ -59,12 +79,19 @@ private class createScoreSubmissionTEST {
         System.assertEquals(10, subScores[0].Score_1st__c);
         System.assertEquals(40, subScores[0].Weight_Used__c);
         System.assertEquals(100, subScores[0].Points_Based_on_Rank__c);
+
+		List<Challenge_Entry__c> entries = [
+			SELECT Id, Athlete__c
+			FROM Challenge_Entry__c
+		];
+		System.assertEquals(1, entries.size());
+		System.assertEquals(athlete.Id, entries[0].Athlete__c);
     }
 
 
     @isTest static void createScore_double_update() {
         //! Test data setup
-        // Create a new Workout (Time Based)
+        //! Create a new Workout (Time Based)
         Vault_Workout__c workoutsToInsert = new Vault_Workout__c(
         	Name = 'Workout_Time',
         	Goal_Low_Value__c = 600, // 10 mins
@@ -80,9 +107,29 @@ private class createScoreSubmissionTEST {
         );
         insert workoutsToInsert;
         Vault_Workout__c workout = [SELECT Id, Name, Goal_Low_Value__c FROM Vault_Workout__c WHERE Name = 'Workout_Time' LIMIT 1];
+
+		
+        //! Create a new Challenge
+        Challenge__c challengeToInsert = new Challenge__c(
+        	Active__c = true,
+			Name = 'February 2025',
+        	Days_in_Month__c = 28,
+	        Movement_1__c = 'Burpees',
+	        Movement_2__c = 'Box Jump Overs',
+            Start_Date__c = System.today().addMonths(1),
+            Subtitle__c = 'Lots of Work',
+            Total_Challenge_Count__c = 250
+        );
+        insert challengeToInsert;
         
+        Challenge__c challenge = [
+			SELECT Id, Name, Active__c, Total_Challenge_Count__c, Start_Date__c 
+			FROM Challenge__c WHERE Name = 'February 2025' LIMIT 1
+		];
+        System.debug('challenge: ' + challenge);
+		
         
-        // Create Athletes
+        //! Create Athletes
         Athlete__c athletesToInsert = new Athlete__c(
             Name = 'Test Testerson',
             Age__c = 35,
@@ -91,7 +138,7 @@ private class createScoreSubmissionTEST {
         insert athletesToInsert;
         Athlete__c athlete = [SELECT Id, Name, Age__c, Location__c FROM Athlete__c LIMIT 1];
         
-        // Create a First Score Submissions for workout
+        //! Create a First Score Submissions for workout
         Score_Submission__c scoreSub1 = new Score_Submission__c(
             Athlete_Name__c = athlete.Id,
             Vault_Workout__c = workout.Id,
@@ -101,7 +148,7 @@ private class createScoreSubmissionTEST {
         );
         insert scoreSub1;
         
-        // Create a Second Score Submissions for workout
+        //! Create a Second Score Submissions for workout
         Score_Submission__c scoreSub2 = new Score_Submission__c(
             Athlete_Name__c = athlete.Id,
             Vault_Workout__c = workout.Id,
@@ -113,13 +160,13 @@ private class createScoreSubmissionTEST {
         // insert scoreSub;
         
         
-        // Perform test
+        //! Perform test
         Test.startTest();
         createScoreSubmission.createScore(scoreSub2);
         Test.stopTest();
 
 
-        // Validate Expected Results
+        //! Validate Expected Results
         List<Score_Submission__c> subScores = [
             SELECT Id, Name, Athlete_Name__r.Name, Vault_Workout__r.Name, Score_1st__c, Score_2nd__c, Weight_Used__c, Calculated_Points__c, Calculated_Ranking_Points__c, Is_Score_Between_Goal__c, Points_Based_on_Rank__c, Total_Workout_Points__c
             FROM Score_Submission__c
