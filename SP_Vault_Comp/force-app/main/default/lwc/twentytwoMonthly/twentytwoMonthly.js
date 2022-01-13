@@ -64,10 +64,39 @@ export default class TwentytwoMonthly extends LightningElement {
     //     return this.optionsAthleteList;
     // }
     
-    // data = [];
+    // data = []; ejerhk
     // //? https://github.com/PastranaDigital/lwc-udemy-course/blob/feature/dev3/force-app/main/default/lwc/accountListViewer/accountListViewer.js
     // wireChallengeScores = []; //? used for refreshApex
 
+	todaysDate = Date.now() + (0*60*60*1000); //? hours adjustment for timezones
+	datetime = new Date(this.todaysDate);
+	day = (this.datetime.getDate() + '').padStart(2,'0');
+	month = (this.datetime.getMonth() + 1 + '').padStart(2,'0');
+	year = this.datetime.getFullYear();
+	date = this.year + "-" + this.month + "-" + this.day;
+	//? makes Jan 13 2022 => 2022-01-13
+	//? based on the UTC (6 hrs ahead of CST)
+	//? 2022-01-02T22:34:05.000Z               Thu Jan 13 2022 09:27:28 GMT-0600 (Central Standard Time)
+
+	compareSFDateToStringDate (sfdate, stringDate) {
+		const sfstringDate = String(sfdate);
+		const sfdatePart = sfstringDate.split('T', 1);
+		console.log(sfstringDate, sfdatePart == stringDate, sfdatePart[0], stringDate);
+		return sfdatePart == stringDate ? true : false;
+	}
+
+	checkForEnteredWodToday(athlete) {
+		console.log('--------------------------------------------');
+		console.log(athlete.Name);
+		console.log('-------------------------------');
+		const athletesEntries = this.challengeEntries.filter(entry => entry.Athlete__c == athlete.Id);
+		const loggedToday = [];
+		athletesEntries.forEach(entry => {
+			loggedToday.push(this.compareSFDateToStringDate(entry.Adjusted_CreatedDate__c, this.date));
+		});
+		console.log('loggedToday: ', loggedToday.includes(true));
+		return loggedToday.includes(true);
+	}
 
 	updateChallengeTotals(incomingTotals) {
 		let currentData = [];
@@ -83,8 +112,9 @@ export default class TwentytwoMonthly extends LightningElement {
 				rowData.Total_Movement_2__c = row.Total_Movement_2__c;
 				rowData.Challenge_Total__c = row.Challenge_Total__c;
 				rowData.Challenge_Total_String = this.numberWithCommas(row.Challenge_Total__c);
-
-				rowData.completed = row.Challenge_Total__c >= this.totalChallengeCount ? '★' : '';
+				// https://www.symbolcopy.com/weather-degree-symbols.html 🎯 ⭐🔑
+				rowData.completed = row.Challenge_Total__c >= this.totalChallengeCount ? '🎯' : '';
+				rowData.enteredWodToday = this.checkForEnteredWodToday(row) ? '🔑' : '';
 				
 				rowData.barFill = `width: ${row.Challenge_Total__c > this.totalChallengeCount ? 100 : Number(row.Challenge_Total__c / this.divisor * 100).toFixed(0)}%;`;
 
@@ -271,9 +301,10 @@ export default class TwentytwoMonthly extends LightningElement {
 		this.pacer.barFill = `width: ${((+date / this.daysInMonth * 100) > 100 ? 100 : (+date / this.daysInMonth * 100)).toFixed(1)}%;`;
 		// console.log('this.pacer.pace', this.pacer.barFill);
 		if(!this.buildDataComplete) {
+			console.log('challengeEntries: ', this.challengeEntries);
 			this.DisplayTotalCount = this.numberWithCommas(this.currentChallenge.Total_Challenge_Count__c);
-			console.log('this.currentChallenge.DisplayTotalCount: ', this.currentChallenge.DisplayTotalCount);
-			console.log('this.currentChallenge.Total_Challenge_Count__c: ', this.currentChallenge.Total_Challenge_Count__c.toString());
+			// console.log('this.currentChallenge.DisplayTotalCount: ', this.currentChallenge.DisplayTotalCount);
+			// console.log('this.currentChallenge.Total_Challenge_Count__c: ', this.currentChallenge.Total_Challenge_Count__c.toString());
 			this.updateChallengeTotals(this.challengeTotals);
 		}
 	}

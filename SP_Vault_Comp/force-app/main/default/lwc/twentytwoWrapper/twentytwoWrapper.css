@@ -3,9 +3,9 @@
 @import 'c/unicons';
 
 * {
-	--color1: #dec328;
+	--color1: #e9c50d;
 	--color2: #cc9900;
-	--color3: #946f00;
+	--color3: #b97112;
 	--color-dark-1-rgb: 0, 0, 0;
 	--box-shadow-opacity: 0.35;
 	--color-dark-text: #1d1e22; /* #28282b */
@@ -48,7 +48,7 @@ body {
   
   header {
 	width: 100vw;
-	background: linear-gradient(to top, var(--color2), var(--color1));
+	background: linear-gradient(to top, var(--color3), var(--color1));
 	border-bottom: 2px solid var(--color-dark-text);
 	text-transform: uppercase;
   /*   padding-bottom: 0.5rem; */
@@ -127,7 +127,7 @@ body {
 	
 	padding: 0.5rem;
 	border-radius: 50%;
-	background: #cc9900;
+	background: var(--color2);
   }
 
   
@@ -194,7 +194,7 @@ body {
 	left: 50%;
 	/* bottom: 0; */
 	transform: translateX(-50%);
-	color: #cc9900;
+	color: var(--color2);
 	visibility: hidden;
 	opacity: 0;
 	transition: all 0.35s;
@@ -206,7 +206,7 @@ body {
 
   .nav-input:checked ~ 
   .nav-button {
-	color: #cc9900;
+	color: var(--color2);
   }
 
   .nav-input:checked ~

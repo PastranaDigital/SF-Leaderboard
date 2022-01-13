@@ -33,7 +33,7 @@
 					<template for:each={updtdChallengeTotals} for:item="athlete">
 						<div key={athlete.Id} class="bar">
 							<div class="details-container">
-								<p class="bar-athlete-name">{athlete.Name} {athlete.completed}</p>
+								<p class="bar-athlete-name">{athlete.Name} {athlete.completed} {athlete.enteredWodToday}</p>
 								<div class="bar-athlete-percentage">
 									<p>{athlete.Did_SP_Workout__c} WPs</p>
 									<p>{athlete.Challenge_Total_String} / {totalChallengeCountString}</p>
@@ -46,6 +46,8 @@
 						</div>
 					</template>
 				</template>
+
+				<p class="key-legend">🔑 = You logged a workout today</p>
 				
             </div>
 			<template if:true={scoreSubmitted}>

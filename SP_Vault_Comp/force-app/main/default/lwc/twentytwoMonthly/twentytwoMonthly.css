@@ -190,6 +190,11 @@
 	line-height: 1.5rem;
   }
   
+  .key-legend {
+	padding-top: 1.5rem;
+	font-size: 0.75rem;
+	text-align: center;
+  }
 
   .buttonErrorMessage {
     color: #cc2900;
