@@ -89,7 +89,7 @@ export default class TwentytwoMonthly extends LightningElement {
 		console.log('--------------------------------------------');
 		console.log(athlete.Name);
 		console.log('-------------------------------');
-		const athletesEntries = this.challengeEntries.filter(entry => entry.Athlete__c == athlete.Id);
+		const athletesEntries = this.challengeEntries.filter(entry => entry.Athlete__c == athlete.Id && entry.Daily_Checkbox__c);
 		const loggedToday = [];
 		athletesEntries.forEach(entry => {
 			loggedToday.push(this.compareSFDateToStringDate(entry.Adjusted_CreatedDate__c, this.date));
