@@ -109,7 +109,20 @@
 						</template>
                     </tr>
                     <tr>
-                        <template if:true={labels.checkbox}>
+                        <template if:true={athleteAlreadyLogged}>
+							<td colspan="6">
+								<lightning-input 
+									type="checkbox" 
+									name='checkboxLabel'
+									value=''
+									onchange={handleCheckboxChange} 
+									label={labels.checkbox}
+									disabled=true
+									>
+								</lightning-input>
+							</td>
+						</template>
+                        <template if:false={athleteAlreadyLogged}>
 							<td colspan="6">
 								<lightning-input 
 									type="checkbox" 

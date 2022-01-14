@@ -85,16 +85,20 @@ export default class TwentytwoMonthly extends LightningElement {
 		return sfdatePart == stringDate ? true : false;
 	}
 
+	workoutEntries = [];
+
 	checkForEnteredWodToday(athlete) {
 		console.log('--------------------------------------------');
 		console.log(athlete.Name);
 		console.log('-------------------------------');
-		const athletesEntries = this.challengeEntries.filter(entry => entry.Athlete__c == athlete.Id);
+		const athletesEntries = this.challengeEntries.filter(entry => entry.Athlete__c == athlete.Id && entry.Daily_Checkbox__c);
+		//? collect athlete Ids that have logged a workout today
 		const loggedToday = [];
 		athletesEntries.forEach(entry => {
 			loggedToday.push(this.compareSFDateToStringDate(entry.Adjusted_CreatedDate__c, this.date));
 		});
 		console.log('loggedToday: ', loggedToday.includes(true));
+		if (loggedToday.includes(true)) this.workoutEntries.push(athlete.Id);
 		return loggedToday.includes(true);
 	}
 
@@ -127,6 +131,7 @@ export default class TwentytwoMonthly extends LightningElement {
 			sortArray(this.updtdChallengeTotals, 'Challenge_Total__c', true);
 		}
 		// console.log('this.updtdChallengeTotals: ', this.updtdChallengeTotals);
+		console.log('this.workoutEntries: ', this.workoutEntries);
 		this.buildDataComplete = true;
 	}
 
@@ -192,11 +197,17 @@ export default class TwentytwoMonthly extends LightningElement {
             });
     }
 
+	athleteAlreadyLogged = false;
+	checkIfAthleteAlreadyLogged(athleteId) {
+		this.workoutEntries.includes(athleteId) ? this.athleteAlreadyLogged = true : this.athleteAlreadyLogged = false;
+	}
+
 	handleAthleteChange(event) {
         this.newRecord.Athlete__c = event.detail.value;
         console.log(this.newRecord.Athlete__c);
 		this.newRecord.Challenge__c = this.currentChallenge.Id;
 		this.buttonErrorMessage = '';
+		this.checkIfAthleteAlreadyLogged(this.newRecord.Athlete__c);
     }
 
     handleScore1Change(event) {
