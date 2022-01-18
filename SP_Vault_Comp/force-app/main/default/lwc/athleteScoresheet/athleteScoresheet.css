@@ -1,38 +1,22 @@
-.athleteImage {
-    height: 2.5rem;
-    border-radius: 50%;
-    margin-right: 1rem;
-    border: 2px solid #cc9900;
-}
-
-  /* table {
-    border-collapse: collapse;
-  } */
-
-  tr {
-    /* border-top: 1px solid #4a4e57; */
+  .athleteScore {
+	display: grid;
     width: 100%;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-/* td {
-    padding: 0rem 1rem;
-  } */
+  .score-container {
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
 
-  
   .name {
     text-align: left;
     color: #cc9900;
     font-weight: 600;
     font-size: 1rem;
-    /* padding-left: 1rem; */
-    width: 30%;
-    /* width: 80%; */
-  }
-
-  .score {
-    /* font-size: .8rem; */
-    /* width: 6ch; */
-    width: 8%;
   }
   
   .rank,
@@ -41,34 +25,10 @@
   }
   
   .rank {
-    /* width: 10%; */
-    /* width: 4ch; */
-    /* padding-left: 1rem; */
     font-weight: 600;
   }
 
-  .filler {
-    width: 38%;
-  }
-
-  @media (max-width: 500px) { /* When in Mobile Portrait Mode */
-    .name {
-      width: 50%;
-    }
-    .score {
-      width: 12.5%;
-    }
-    .filler {
-      width: 0%;
-    }
-  }
-
   .athleteScore {
-      /* padding: .5rem 0; */
-      color: #999;
-      font-size: .75rem;
-  }
-
-  .hidden {
-    display: none;
+    color: #999;
+    font-size: .75rem;
   }

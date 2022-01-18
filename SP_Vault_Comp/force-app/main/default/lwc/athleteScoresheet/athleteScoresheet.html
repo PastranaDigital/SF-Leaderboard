@@ -1,28 +1,15 @@
 <template>
-    <template if:true={displayAthleteScore}>
-        <div class="athleteScore">
-            <!-- <h4>Chaos</h4>
-            <p>Athlete Workout Scores Information</p> -->
-            <table>
-                <!-- <thead>
-                    <tr>
-                        <th></th>
-                        <th class="score">Goal Pts</th>
-                        <th class="score">Rank Pts</th>
-                        <th class="score">Total Pts</th>
-                    </tr>
-                </thead> -->
-                <tbody>
-                    <tr>
-                        <td class="name">{athScore.WorkoutName}</td>
-                        <td class="rank">{athScore.RankNumber}</td>
-                        <td class="score">{athScore.Is_Score_Between_Goal__c}</td>
-                        <td class="score">{athScore.Points_Based_on_Rank__c}</td>
-                        <td class="score">{athScore.Total_Points__c}</td>
-                        <td class="filler"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </template>
+	<template if:true={displayAthleteScore}>
+		<div class="athleteScore">
+			<div class="workout-content name">
+				{athScore.WorkoutName}
+			</div>
+			<div class="score-container">
+				<div class="rank">{athScore.RankNumber}</div>
+				<div class="score">{athScore.Is_Score_Between_Goal__c}</div>
+				<div class="score">{athScore.Points_Based_on_Rank__c}</div>
+				<div class="score">{athScore.Total_Points__c}</div>
+			</div>
+		</div>
+	</template>
 </template>
