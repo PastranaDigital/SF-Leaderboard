@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import lblAthleteToggle from '@salesforce/label/c.AthleteToggle';
+import toggleRX from '@salesforce/apex/massAction_ToggleRX.toggleRX';
 
 export default class MassActionAthleteLwc extends LightningElement {
 	@api selectedIdsList;
@@ -8,6 +9,10 @@ export default class MassActionAthleteLwc extends LightningElement {
 	labels = {
 		lblAthleteToggle
 	};
+
+	message;
+	error;
+	
 
 	navigateToListView() {
 		let navDetail = ({listId: this.listId, objectName: 'Athlete__c'}); 
@@ -36,8 +41,8 @@ export default class MassActionAthleteLwc extends LightningElement {
 		}
 	}
 
-	showToast(variant, title, message, mode) {
-		let eventDetail = ({message: message, title: title, variant: variant, mode: mode});
+	showToast(message, type, title, mode) {
+		let eventDetail = ({message: message, type: type, title: title, mode: mode});
 		let toastEvent = new CustomEvent('showtoast', {detail: eventDetail});
 		this.dispatchEvent(toastEvent);
 	}
@@ -46,7 +51,21 @@ export default class MassActionAthleteLwc extends LightningElement {
 		this.navigate();
 	}
 
+	handleToggleClick() {
+		console.log('this.selectedIdsList: ', this.selectedIdsList);
+		toggleRX({ incomingIds : this.selectedIdsList })
+		.then(result => {
+			this.message = result;
+			this.error = undefined;
+		})
+		.catch(error => {
+			this.message = undefined;
+			this.error = error;
+			console.log("error", JSON.stringify(this.error));
+		})
+	}
+
 	handleToastTestClick() {
-		this.showToast('error', 'Error doing something!', 'Ape was supposed to run better.', 'dismissible');
+		this.showToast('Apex was supposed to run better.', 'error', 'Error doing something!', 'dismissible');
 	}
 }

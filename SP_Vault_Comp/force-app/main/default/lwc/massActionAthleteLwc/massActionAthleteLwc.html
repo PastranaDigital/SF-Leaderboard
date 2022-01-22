@@ -5,9 +5,10 @@
 			<p>
 				{selectedIdsList}<br>
 				{labels.lblAthleteToggle}<br>
-				{listId}
+				{listId}<br>
 			</p>
 
+			<lightning-button variant="brand" label="Execute Toggle" title="Execute Toggle" onclick={handleToggleClick} class="slds-m-around_medium"></lightning-button>
 			<lightning-button variant="brand" label="Test Toast" title="Test Toast" onclick={handleToastTestClick} class="slds-m-around_medium"></lightning-button>
 			<lightning-button variant="brand" label="Cancel" title="Cancel" onclick={handleCancelClick} class="slds-m-around_medium"></lightning-button>
 		</div>
