@@ -42,6 +42,8 @@ export default class MassActionAthleteLwc extends LightningElement {
 	}
 
 	showToast(message, type, title, mode) {
+		//! type: Valid values are: info (default), success, warning, and error.
+		//! mode: Valid values are: dismissible (default), pester & sticky
 		let eventDetail = ({message: message, type: type, title: title, mode: mode});
 		let toastEvent = new CustomEvent('showtoast', {detail: eventDetail});
 		this.dispatchEvent(toastEvent);
@@ -57,11 +59,15 @@ export default class MassActionAthleteLwc extends LightningElement {
 		.then(result => {
 			this.message = result;
 			this.error = undefined;
+			this.showToast(`${this.selectedIdsList.length} Records have been toggled`, 'success', 'Toggle Complete!', 'dismissible');
 		})
 		.catch(error => {
 			this.message = undefined;
 			this.error = error;
 			console.log("error", JSON.stringify(this.error));
+		})
+		.finally(() => {
+			this.navigate();
 		})
 	}
 
