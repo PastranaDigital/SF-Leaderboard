@@ -1,0 +1,65 @@
+<apex:page standardController="Athlete__c" recordSetVar="athletes" extensions="MassAction_Controller">
+	<apex:includeLightning />
+
+	<div id="lightningoutArea" />
+
+	<script type="text/javascript">
+		let encodedSelectedIds = '{!JSENCODE(selectedIds)}';
+		let idCount = JSON.parse(encodedSelectedIds).length;
+		let appName = '{!JSENCODE(namespace)}:massAction_App'; //? container for the LWC or Aura
+		let componentName = '{!JSENCODE(namespace)}:massAction_AthleteWrapper'; //? the LWC or Aura that does the work
+
+		$Lightning.use(appName, function () {
+
+			$Lightning.createComponent(componentName,
+				{
+					selectedIdsList: JSON.parse(encodedSelectedIds),
+					listId: '{!JSENCODE(filterId)}'
+				},
+				"lightningoutArea",
+				function (cmp) {
+					cmp.addEventHandler(
+						'force:navigateToList',
+						function (event) {
+							console.log('inside vfpage');
+							if (typeof sforce == 'undefined') {
+								window.location.href = "/500?fcf={!JSENCODE(filterId)}";
+								return;
+							}
+
+							sforce.one.navigateToList(
+								event.getParams().listViewId,
+								event.getParams().listViewName,
+								event.getParams().scope
+							);
+						}
+					);
+					cmp.addEventHandler(
+						'force:showToast',
+						function (event) {
+							//? throw errors
+							if (typeof sforce == 'undefined') {
+								return;
+							}
+
+							showToast(
+								event.getParams().type,
+								event.getParams().message,
+								event.getParams().title,
+								event.getParams().mode
+							);
+						}
+					);
+				});
+		});
+
+		function showToast(type, message, title, mode) {
+			sforce.one.showToast({
+				"message": message,
+				"type": type,
+				"title": title,
+				"mode": mode
+			});
+		}
+	</script>
+</apex:page>

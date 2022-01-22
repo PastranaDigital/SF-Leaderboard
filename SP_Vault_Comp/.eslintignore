@@ -9,6 +9,7 @@
 **/aura/**/*.design
 **/aura/**/*.evt
 **/aura/**/*.json
+**/aura/**/*.js
 **/aura/**/*.svg
 **/aura/**/*.tokens
 **/aura/**/*.xml

@@ -1,0 +1,15 @@
+<template>
+	<div class="container">
+		<div class="content">
+			<h1>Title will go here</h1>
+			<p>
+				{selectedIdsList}<br>
+				{labels.lblAthleteToggle}<br>
+				{listId}
+			</p>
+
+			<lightning-button variant="brand" label="Test Toast" title="Test Toast" onclick={handleToastTestClick} class="slds-m-around_medium"></lightning-button>
+			<lightning-button variant="brand" label="Cancel" title="Cancel" onclick={handleCancelClick} class="slds-m-around_medium"></lightning-button>
+		</div>
+	</div>
+</template>
