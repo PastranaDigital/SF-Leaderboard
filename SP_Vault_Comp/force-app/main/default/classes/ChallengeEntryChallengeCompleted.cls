@@ -15,6 +15,8 @@ public without sharing class ChallengeEntryChallengeCompleted {
 			athleteIds.add(entry.Athlete__c);
 		}
 
+		System.debug('athleteIds: ' + athleteIds);
+		
 		//? pull current challenge to check against
 		Challenge__c currentChallenge = [
 			SELECT Id, Name, Active__c, Total_Challenge_Count__c, Start_Date__c 
@@ -22,7 +24,8 @@ public without sharing class ChallengeEntryChallengeCompleted {
 			WHERE Active__c = true
 			ORDER BY Start_Date__c ASC LIMIT 1
 		];
-
+		System.debug('currentChallenge.Id: ' + currentChallenge.Id);
+			
 		Decimal totalChallengeCount = currentChallenge.Total_Challenge_Count__c;
 
 		//? pull entriesAthletes that match the incoming entry's athlete id 
@@ -40,8 +43,11 @@ public without sharing class ChallengeEntryChallengeCompleted {
 		List<Challenge_Entry__c> allCurrentChallengeEntries = [
 			SELECT Id, Athlete__c, Challenge__c, Movement_1__c, Movement_2__c
 			FROM Challenge_Entry__c
+			WHERE Challenge__c = :currentChallenge.Id
+			AND Athlete__c IN :athleteIds
 		];
 		System.debug('allCurrentChallengeEntries: ' + allCurrentChallengeEntries);
+		System.debug('allCurrentChallengeEntries (size): ' + allCurrentChallengeEntries.size());
 
 
 		//? collect specific the Ids for qualified athletes
@@ -51,9 +57,9 @@ public without sharing class ChallengeEntryChallengeCompleted {
 			Decimal total = 0;
 			if (athleteTotalsMap.containsKey(entry.Athlete__c)) {
 				System.debug('entry.Movement_1__c: ' + entry.Movement_1__c);
-				System.debug('entry.Athlete__c: ' + entry.Athlete__c);
+				// System.debug('entry.Athlete__c: ' + entry.Athlete__c);
 				if (entry.Movement_1__c == null && entry.Movement_2__c == null) {
-					total = 0;
+					total = athleteTotalsMap.get(entry.Athlete__c);
 				} else if (entry.Movement_1__c == null) {
 					total = entry.Movement_2__c + athleteTotalsMap.get(entry.Athlete__c);
 				} else if (entry.Movement_2__c == null) {
@@ -73,6 +79,7 @@ public without sharing class ChallengeEntryChallengeCompleted {
 					athleteTotalsMap.put(entry.Athlete__c, (entry.Movement_1__c + entry.Movement_2__c));
 				}
 			}
+			System.debug('Map: ' + athleteTotalsMap.values());
 		}
 		System.debug('Map: ' + athleteTotalsMap.values());
 		System.debug('Map: ' + athleteTotalsMap);
@@ -114,7 +121,7 @@ public without sharing class ChallengeEntryChallengeCompleted {
 			);
 			recordsToInsert.add(newRecord);
 		}
-		System.debug(recordsToInsert);
+		System.debug('recordsToInsert: ' + recordsToInsert);
 
 		try {
 			if (recordsToInsert.size() > 0) insert recordsToInsert;

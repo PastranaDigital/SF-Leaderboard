@@ -3,12 +3,12 @@ private class ChallengeEntryTriggerTEST {
      
     @isTest static void TestAddNewChallengeCompleted_HappyPath() {
         //! Test data setup
-        List<Integer> scores1 = new List<Integer>{50, 50,  100, 100, null, 150};
-        List<Integer> scores2 = new List<Integer>{25, 75, null,  50,  150,  50};
-		//? EXPECTED TOTALS						  75 125   100  150   150  200
-		//? ATHLETE 1							  75 125                        = 200
-		//? ATHLETE 2							           100  150             = 250
-		//? ATHLETE 3							                      150  200  = 350
+        List<Integer> scores1 = new List<Integer>{125, null,  100, 100, null, 150};
+        List<Integer> scores2 = new List<Integer>{ 75, null, null,  50,  150,  50};
+		//? EXPECTED TOTALS						  200         100  150   150  200
+		//? ATHLETE 1							  200                              = 200
+		//? ATHLETE 2							              100  150             = 250
+		//? ATHLETE 3							                         150  200  = 350
         
         //! Create a new Challenge
         Challenge__c challengeToInsert = new Challenge__c(

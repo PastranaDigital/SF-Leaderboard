@@ -34,6 +34,46 @@ public without sharing class LeaderboardController {
             System.debug('allScoreSubs: ' + allScoreSubs);
             insert score;
         }
+
+
+		//? Create a Challenge Entry for Vault
+		List<Challenge__c> currentChallenge = [
+			SELECT Id, Name, Active__c, Movement_1__c, Movement_2__c, Subtitle__c, Total_Challenge_Count__c, Days_in_Month__c, Start_Date__c 
+			FROM Challenge__c 
+			WHERE Active__c = true
+			ORDER BY Start_Date__c ASC
+			LIMIT 1
+		];
+		System.debug(currentChallenge);
+
+		
+		Challenge_Entry__c entry = new Challenge_Entry__c(
+			Athlete__c = score.Athlete_Name__c,
+			Challenge__c = currentChallenge[0].Id,
+			Is_Challenge_Active__c = true,
+			Daily_Checkbox__c = true
+		);
+		System.debug(entry);
+			
+		//? check to see if an entry already exists for today
+		List<Challenge_Entry__c> todaysEntries = [
+			SELECT Id, Athlete__c, Movement_1__c, Daily_Checkbox__c
+			FROM Challenge_Entry__c
+			WHERE Athlete__c = :score.Athlete_Name__c AND CreatedDate = TODAY AND Daily_Checkbox__c = true
+		];
+
+		Boolean alreadyAnEntryForToday = todaysEntries.size() > 0 ? true : false;
+
+		//? exit without inserting entry
+		if (alreadyAnEntryForToday) return score; 
+		
+		//? try to insert the entry
+		try {
+			insert entry;
+		} catch (DmlException e) {
+			System.debug('The following exception has occurred: ' + e.getMessage());
+		}
+
         return score;
     }
 
